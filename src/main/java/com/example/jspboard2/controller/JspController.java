@@ -4,11 +4,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/hello")
+@RequestMapping("/list")
 public class JspController {
 
     @GetMapping
-    public String chkhellojsp(){
-        return "hello";
+    public String main(){
+        return "list";
     }
 }
