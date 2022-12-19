@@ -1,5 +1,4 @@
 package com.example.jspboard2.controller;
-import org.springframework.boot.autoconfigure.cassandra.CassandraProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,5 +25,15 @@ public class JspController {
             case "Login" : return "what";
             default : return "search";
         }
+    }
+
+    @GetMapping("/list")
+    public  String list(){
+        return "list";
+    }
+
+    @GetMapping("/login")
+    public  String login() {
+        return "login";
     }
 }
