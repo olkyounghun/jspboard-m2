@@ -1,11 +1,20 @@
 package com.example.jspboard2.controller;
+import com.example.jspboard2.domain.Board;
+import com.example.jspboard2.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
 public class JspController {
+
+    @Autowired
+    private BoardService boardservice;
 
     @GetMapping("/Home")
     public String main(){
@@ -28,8 +37,14 @@ public class JspController {
     }
 
     @GetMapping("/list")
-    public  String list(){
-        return "list";
+    public ModelAndView getBoardList(){
+
+        ModelAndView mv = new ModelAndView();
+        List<Board> list = null;
+        list = boardservice.getBoardList();
+        mv.addObject("list", list);
+        mv.setViewName("list");
+        return mv;
     }
 
     @GetMapping("/login")
