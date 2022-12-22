@@ -6,6 +6,28 @@
     <select id="getBoardList" resultType="com.example.jspboard2.domain.Board">
         SELECT * FROM BOARD;
     </select>
-
+    <select id="getSearchResult" resultType="com.example.jspboard2.domain.Board">
+        SELECT
+        *
+        FROM BOARD
+        <choose>
+            <when test=' == "JAVA"'>
+                WHERE category_type = 'JAVA'
+            </when>
+            <when test="#{} == 'JavaScript'">
+                WHERE category_type = 'JavaScript'
+            </when>
+            <when test="#{searchType} == 'Database'">
+                WHERE category_type = 'Database'
+            </when>
+            <otherwise>
+                WHERE category_type = 'JAVA' OR category_type = 'JavaScript' OR category_type = 'Database'
+            </otherwise>
+        </choose>
+        AND regdate BETWEEN CONVERT(DATE, #{startDate}) AND CONVERT(DATE, #{endDate})
+        <if test="#{searchName} != NULL">
+            AND board_user.search(#{searchName}) OR board_title.search(#{searchName}) OR board_content.search(#{searchName})
+        </if>
+    </select>
 
 </mapper>
