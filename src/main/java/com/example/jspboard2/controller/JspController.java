@@ -5,7 +5,9 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -17,38 +19,31 @@ public class JspController {
     @Autowired
     private BoardService boardservice;
 
-    @GetMapping("/Home")
+    @GetMapping("/home")
     public String main(){
         return "home";
     }
 
-    @GetMapping("/search")
-    public String search(){
-        String search = "";
-        switch (search){
-            case "List" : return "list";
-            case "list" : return "list";
-            case "목록" : return "list";
-            case "리스트" : return "list";
-            case "로그인" : return "login";
-            case "login" : return "what";
-            case "Login" : return "what";
-            default : return "search";
-        }
+    @RequestMapping(value = "/searchworld", method = RequestMethod.POST)
+    public String start(@Param("homesearch") String search){
+
+        /** Mapper에서 검색된 내용에 따라 이동하는 경로를 전해주는 것을 만드는게 좋을거 같다. */
+
+        return "";
     }
 
     @GetMapping("/list")
     public ModelAndView getBoardList(){
 
         ModelAndView mv = new ModelAndView();
-        List<Board> list = null;
+        List<Board> list;
         list = boardservice.getBoardList();
         mv.addObject("list", list);
         mv.setViewName("list");
         return mv;
     }
 
-    @GetMapping(value = "/list")
+    @GetMapping(value = "/searchlist")
     public ModelAndView getSearchResult(@Param("startDate") String startDate,
                                         @Param("endDate") String endDate,
                                         @Param("searchType") String searchType,

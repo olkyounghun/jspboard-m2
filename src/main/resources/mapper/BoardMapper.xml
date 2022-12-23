@@ -4,29 +4,29 @@
 <mapper namespace="com.example.jspboard2.domain.Board">
 
     <select id="getBoardList" resultType="com.example.jspboard2.domain.Board">
-        SELECT * FROM BOARD;
+        SELECT * FROM BOARD_TB;
     </select>
     <select id="getSearchResult" resultType="com.example.jspboard2.domain.Board">
         SELECT
         *
-        FROM BOARD
+        FROM BOARD_TB
         <choose>
             <when test=' == "JAVA"'>
-                WHERE category_type = 'JAVA'
+                WHERE TYPE_BOARD = 'JAVA'
             </when>
-            <when test="#{} == 'JavaScript'">
-                WHERE category_type = 'JavaScript'
+            <when test="#{searchType} == 'JavaScript'">
+                WHERE TYPE_BOARD = 'JavaScript'
             </when>
             <when test="#{searchType} == 'Database'">
-                WHERE category_type = 'Database'
+                WHERE TYPE_BOARD = 'Database'
             </when>
             <otherwise>
-                WHERE category_type = 'JAVA' OR category_type = 'JavaScript' OR category_type = 'Database'
+                WHERE TYPE_BOARD = 'JAVA' OR TYPE_BOARD = 'JavaScript' OR TYPE_BOARD = 'Database'
             </otherwise>
         </choose>
-        AND regdate BETWEEN CONVERT(DATE, #{startDate}) AND CONVERT(DATE, #{endDate})
+        AND REGDATE_BOARD BETWEEN CONVERT(DATE, #{startDate}) AND CONVERT(DATE, #{endDate})
         <if test="#{searchName} != NULL">
-            AND board_user.search(#{searchName}) OR board_title.search(#{searchName}) OR board_content.search(#{searchName})
+            AND USER_BOARD.search(#{searchName}) OR TITLE_BOARD.search(#{searchName}) OR CONTENT_BOARD.search(#{searchName})
         </if>
     </select>
 
