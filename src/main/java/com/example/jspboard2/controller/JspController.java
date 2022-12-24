@@ -28,8 +28,13 @@ public class JspController {
     public String start(@Param("homesearch") String search){
 
         /** Mapper에서 검색된 내용에 따라 이동하는 경로를 전해주는 것을 만드는게 좋을거 같다. */
+        /** search 를 통해 받은 내용을 'search' 라는 테이블을 통해 해당 경로일경우 출력되는 페이지를 돌려주는것으로
+         * 활용이 가능할꺼 같다.
+         */
+        String result;
+        result = boardservice.start(search);
 
-        return "";
+        return result;
     }
 
     @GetMapping("/list")

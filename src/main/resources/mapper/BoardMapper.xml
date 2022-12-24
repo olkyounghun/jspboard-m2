@@ -29,5 +29,10 @@
             AND USER_BOARD.search(#{searchName}) OR TITLE_BOARD.search(#{searchName}) OR CONTENT_BOARD.search(#{searchName})
         </if>
     </select>
-
+    <select id="start" resultType="com.example.jspboard2.domain.Search">
+        SELECT
+            SEARCH_RESULT
+        FROM SEARCH_TB
+        WHERE SEARCH_CONTENT.search(#{search})
+    </select>
 </mapper>

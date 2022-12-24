@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface BoardService {
 
+    String start(@Param("search") String search);
+
     List<Board> getBoardList();
 
     List<Board> getSearchResult(@Param("startDate") String startDate,

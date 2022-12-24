@@ -18,6 +18,8 @@ public class BoardServiceImpl implements BoardService{
         this.boardMapper = boardMapper;
     }
 
+    public String start(@Param("search") String search){ return boardMapper.start(search);};
+
     public List<Board> getBoardList(){return boardMapper.getBoardList();}
 
     public List<Board> getSearchResult(@Param("startDate") String startDate,
