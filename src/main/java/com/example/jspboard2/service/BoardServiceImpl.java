@@ -18,11 +18,11 @@ public class BoardServiceImpl implements BoardService{
         this.boardMapper = boardMapper;
     }
 
-    public String start(@Param("search") String search){ return boardMapper.start(search);};
+    public String start(@Param("search") String search){ return boardMapper.start(search);}; // 메인 화면에서 검색시 동작
 
-    public List<Board> getBoardList(){return boardMapper.getBoardList();}
+    public List<Board> getBoardList(){return boardMapper.getBoardList();} // 목록 화면에서 게시물들 출력
 
-    public List<Board> getSearchResult(@Param("startDate") String startDate,
+    public List<Board> getSearchResult(@Param("startDate") String startDate, // 목록화면의 검색창에서 검색시 검색된 내용들 출력
                                        @Param("endDate") String endDate,
                                        @Param("searchType") String searchType,
                                        @Param("searchName") String searchName){

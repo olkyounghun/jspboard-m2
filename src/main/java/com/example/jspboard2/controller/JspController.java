@@ -27,10 +27,10 @@ public class JspController {
     @RequestMapping(value = "/searchworld", method = RequestMethod.POST)
     public String start(@Param("homesearch") String search){
 
-        /** Mapper에서 검색된 내용에 따라 이동하는 경로를 전해주는 것을 만드는게 좋을거 같다. */
-        /** search 를 통해 받은 내용을 'search' 라는 테이블을 통해 해당 경로일경우 출력되는 페이지를 돌려주는것으로
-         * 활용이 가능할꺼 같다.
-         */
+       /** 첫 시도는 클래스내에 'switch'를 활용하여 검색하는 내용에 따라 페이지 리턴을 목표했었는데
+        * DB를 활용하여 해당 내용의 리턴칼럼에 페이지내용을 담아 돌려주는것이 더 좋은활용방법인거 같아
+        * Mapper를 활용하여 페이지를 돌려주는 테이블을 만들었습니다.*/
+
         String result;
         result = boardservice.start(search);
 

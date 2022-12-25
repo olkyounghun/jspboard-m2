@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface BoardService {
 
-    String start(@Param("search") String search);
+    String start(@Param("search") String search); // 메인 화면에서 검색시 동작
 
-    List<Board> getBoardList();
+    List<Board> getBoardList(); // 목록 화면에서 게시물들 출력
 
-    List<Board> getSearchResult(@Param("startDate") String startDate,
+    List<Board> getSearchResult(@Param("startDate") String startDate, // 목록화면의 검색창에서 검색시 검색된 내용들 출력
                                 @Param("endDate") String endDate,
                                 @Param("searchType") String searchType,
                                 @Param("searchName") String searchName);
