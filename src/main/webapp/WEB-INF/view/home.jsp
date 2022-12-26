@@ -23,10 +23,10 @@
 </head>
 <body>
     <div class="maincontainer">
-        <form id="form" method="post" action="searchworld">
+        <form id="form" name="form" method="post" action="searchworld">
             <div class="input-group">
                 <span class="input-group-text" id="basic-addon1">Let's</span>
-                <input type="text" id="homesearch" class="form-control" placeholder="Where We Go?" aria-label="Where We Go?" aria-describedby="basic-addon1">
+                <input type="text" id="startword" name="startword" class="form-control" placeholder="Where We Go?">
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">start</button>
             </div>
         </form>

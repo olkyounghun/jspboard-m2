@@ -14,11 +14,9 @@ public class BoardServiceImpl implements BoardService{
     private final BoardMapper boardMapper;
 
     @Autowired
-    public BoardServiceImpl(BoardMapper boardmapper, BoardMapper boardMapper) {
+    public BoardServiceImpl(BoardMapper boardMapper) {
         this.boardMapper = boardMapper;
     }
-
-    public String start(@Param("search") String search){ return boardMapper.start(search);}; // 메인 화면에서 검색시 동작
 
     public List<Board> getBoardList(){return boardMapper.getBoardList();} // 목록 화면에서 게시물들 출력
 
