@@ -3,12 +3,14 @@ package com.example.jspboard2.service;
 import com.example.jspboard2.domain.Board;
 import com.example.jspboard2.mapper.BoardMapper;
 import org.apache.ibatis.annotations.Param;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@MapperScan(value = "com.example.jspboard2.mapper.BoardMapper")
 public class BoardServiceImpl implements BoardService{
 
     private final BoardMapper boardMapper;
