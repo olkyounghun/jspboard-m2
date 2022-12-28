@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.jspboard2.domain.Search">
-    <select id="start" resultType="String" parameterType="String" >
-        SELECT
-        SEARCH_RESULT
+<mapper namespace="com.example.jspboard2.mapper.SearchMapper">
+    <select id="getSearchContent" resultType="String" parameterType="String" >
+        SELECT RESULT_SEARCH
         FROM SEARCH_TB
-        WHERE SEARCH_CONTENT = ${startword}
+            <where>
+                CONTENT_SEARCH = #{startword}
+            </where>
     </select>
 </mapper>

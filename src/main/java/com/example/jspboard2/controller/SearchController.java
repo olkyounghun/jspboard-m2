@@ -16,7 +16,7 @@ public class SearchController {
     private SearchService searchService;
 
     @RequestMapping(value = "/searchworld", method = RequestMethod.POST)
-    public String start(@Param("startword") String startword){
+    public String getSearchContent(@Param("startword") String startword){
 
         /** 첫 시도는 클래스내에 'switch'를 활용하여 검색하는 내용에 따라 페이지 리턴을 목표했었는데
          * DB를 활용하여 해당 내용의 리턴칼럼에 페이지내용을 담아 돌려주는것이 더 좋은활용방법인거 같아
@@ -29,7 +29,7 @@ public class SearchController {
          * 여러 수정을 거치며 이해하는 과정을 겪고있음.
          */
         String result = "";
-        String sql = searchService.start(startword);
+        String sql = searchService.getSearchContent(startword);
         if(sql != null){
             result = sql;
         }
