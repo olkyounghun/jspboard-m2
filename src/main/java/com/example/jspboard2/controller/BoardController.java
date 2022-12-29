@@ -2,7 +2,6 @@ package com.example.jspboard2.controller;
 import com.example.jspboard2.domain.Board;
 import com.example.jspboard2.service.BoardService;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -52,6 +51,11 @@ public class BoardController {
     @GetMapping("/login")
     public  String login() {
         return "login";
+    }
+
+    @GetMapping("/signup")
+    public  String signup() {
+        return "signup";
     }
 
 

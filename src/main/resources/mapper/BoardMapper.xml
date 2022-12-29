@@ -3,12 +3,13 @@
 
 <mapper namespace="com.example.jspboard2.mapper.BoardMapper">
     <select id="getBoardList" resultType="com.example.jspboard2.domain.Board">
-        SELECT * FROM BOARD_TB;
+        SELECT * FROM BOARD_TB Limit 10;
     </select>
     <select id="getSearchResult" resultType="com.example.jspboard2.domain.Board">
         SELECT
         *
         FROM BOARD_TB
+
         <choose>
             <when test=' == "JAVA"'>
                 WHERE TYPE_BOARD = 'JAVA'

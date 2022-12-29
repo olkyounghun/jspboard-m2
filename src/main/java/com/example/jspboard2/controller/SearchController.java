@@ -28,10 +28,10 @@ public class SearchController {
          * 페이지를 보여주는 형식을 생각했는데 진행에있어서 차질이 생긴다.
          * 여러 수정을 거치며 이해하는 과정을 겪고있음.
          */
-        String result = "";
+        String result = "redirect:/";
         String sql = searchService.getSearchContent(startword);
         if(sql != null){
-            result = sql;
+            result += sql;
         }
         return result;
     }
