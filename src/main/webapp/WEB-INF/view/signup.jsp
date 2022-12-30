@@ -25,21 +25,9 @@
 </head>
 <body>
 <div>
-  <form method="post" action="home.jsp">
-    <div class="input-group" >
-      <span class="input-group-text" id="basic-addon1">ID</span>
-      <input id="loginID" type="text" class="form-control">
-    </div>
-    <div class="input-group" style=>
-      <span class="input-group-text" id="basic-addon2">PW</span>
-      <input type="password" id="loginPW" class="form-control">
-    </div>
-    <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-outline-secondary" onclick="location='home.jsp'">메인</button>
-      <button type="button" class="btn btn-outline-secondary" onclick="location='home.jsp'">가입</button>
-      <button type="button" class="btn btn-outline-secondary" onclick="location='home.jsp'">시작</button>
-    </div>
-  </form>
+  <div>
+
+  </div>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
