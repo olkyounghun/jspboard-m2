@@ -3,7 +3,17 @@
 
 <mapper namespace="com.example.jspboard2.mapper.BoardMapper">
     <select id="getBoardList" resultType="com.example.jspboard2.domain.Board">
-        SELECT * FROM BOARD_TB Limit 10;
+        SELECT @ROWNUM:=@ROWNUM+1 AS RNUM
+            ,BOARD_TB.*
+        FROM (
+            SELECT ID_BOARD
+            FROM BOARD_TB
+                ,(
+                SELECT @ROWNUM := 0
+                ) R
+            ORDER BY ID_BOARD ASC
+            ) BOARD_TB
+        LIMIT 0, 10;
     </select>
     <select id="getSearchResult" resultType="com.example.jspboard2.domain.Board">
         SELECT

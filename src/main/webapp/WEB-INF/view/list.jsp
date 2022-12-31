@@ -71,7 +71,7 @@
         </div>
         <div id="paging">
             <!-- 1~10까지 있는 페이지의 페이징 -->
-            <c:url var="action" value="/"/>
+            <c:url var="action" value="list.jsp?page=1"/>
             <c:if test="${param.prev}">
                 <a href="${action}?page=${param.beginPage-1}">prev</a>
             </c:if>
