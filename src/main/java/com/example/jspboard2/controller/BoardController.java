@@ -1,5 +1,6 @@
 package com.example.jspboard2.controller;
 import com.example.jspboard2.domain.Board;
+import com.example.jspboard2.domain.Paging;
 import com.example.jspboard2.service.BoardService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -22,13 +23,23 @@ public class BoardController {
     }
 
     @GetMapping("/list")
-    public ModelAndView getBoardList(){
+    public ModelAndView getBoardList(@Param("page") int page){
+
+        int goPage = 1;
+        if(page != null){
+            goPage = page;
+        }
+        Paging paging = new Paging();
+        paging.setPage(page);
+        paging.setTotalCount("게시글총 수");
 
         ModelAndView mv = new ModelAndView();
         List<Board> list;
-        list = boardService.getBoardList();
+        list = boardService.getBoardList(page);
         mv.addObject("list", list);
+        mv.addObject("pageing", paging);
         mv.setViewName("list");
+        mv.setViewName("paging");
         return mv;
     }
 

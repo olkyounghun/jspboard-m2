@@ -18,7 +18,7 @@ public class BoardServiceImpl implements BoardService{
         this.boardMapper = boardMapper;
     }
 
-    public List<Board> getBoardList(){return boardMapper.getBoardList();} // 목록 화면에서 게시물들 출력
+    public List<Board> getBoardList(@Param("page") int page){return boardMapper.getBoardList(page);} // 목록 화면에서 게시물들 출력
 
     public List<Board> getSearchResult(@Param("startDate") String startDate, // 목록화면의 검색창에서 검색시 검색된 내용들 출력
                                        @Param("endDate") String endDate,
