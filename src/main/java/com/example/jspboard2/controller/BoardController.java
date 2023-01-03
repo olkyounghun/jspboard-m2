@@ -25,13 +25,16 @@ public class BoardController {
     @GetMapping("/list")
     public ModelAndView getBoardList(@Param("page") int page){
 
+
+        Paging paging = new Paging();
+        int count = boardService.getAllCount();
         int goPage = 1;
-        if(page != null){
+        if(page != 0){
             goPage = page;
         }
-        Paging paging = new Paging();
+
         paging.setPage(page);
-        paging.setTotalCount("게시글총 수");
+        paging.setTotalCount(count);
 
         ModelAndView mv = new ModelAndView();
         List<Board> list;
