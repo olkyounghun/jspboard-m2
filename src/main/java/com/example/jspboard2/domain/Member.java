@@ -13,8 +13,10 @@ public class Member {
     private String name_member; // 멤버 이름
     private String email_member; // 멤버 이메일
     private boolean emailcheck_member; // 이메일 수신 체크여부
-    private int sex_member; // 멤버 성별
+    private boolean gender_member; // 멤버 성별
     private Date regdate_member; // 멤버 회원가입날짜
+    private int rating_member; // 멤버 등급 기본회원일겨우 '2' default
+
 
 
 }
