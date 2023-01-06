@@ -50,7 +50,7 @@
     <div class="row">
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon4">닉네임</span>
-        <input type="text" name="userMember" class="form-control" placeholder="닉네임">
+        <input type="text" name="userName" class="form-control" placeholder="닉네임">
       </div>
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon5">성별</span>
@@ -69,9 +69,9 @@
     </div>
     <div class="row">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Username" aria-label="Username">
+        <input type="text" class="form-control" id="userEmail1" name="userEmail1" placeholder="Username" aria-label="Username">
         <span class="input-group-text">@</span>
-        <input type="text" class="form-control" placeholder="Server" aria-label="Server">
+        <input type="text" class="form-control" id="userEmail2" name="userEmail2" placeholder="Server" aria-label="Server">
       </div>
       <div class="input-group mb-3">
         <div class="form-check">
