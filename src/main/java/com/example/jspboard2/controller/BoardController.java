@@ -67,19 +67,7 @@ public class BoardController {
         return "login";
     }
 
-    @GetMapping("/signup")
-    public  String signup(@Param("userMember") String userMember,
-                          @Param("userPw") String userPw,
-                          @Param("userName") String userName,
-                          @Param("userGender") Integer userGender,
-                          @Param("userEmail1") String userEmail1,
-                          @Param("userEmail2") String userEmail2,
-                          @Param("emailChk") Integer emailChk) {
 
-
-
-        return "signup";
-    }
 
 
 }
