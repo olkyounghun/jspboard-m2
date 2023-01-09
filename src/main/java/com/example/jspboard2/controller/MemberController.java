@@ -23,7 +23,9 @@ public class MemberController {
                               @Param("emailChk") Integer emailChk) {
 
         Member member = new Member();
-        memberService.getMembership(userMember,userPw,userName,userGender,userEmail1,userEmail2,emailChk);
+
+        String userEmailComplet = userEmail1 + "@" + userEmail2;
+        memberService.getMembership(userMember,userPw,userName,userGender,userEmailComplet,emailChk);
 
 
         return member;

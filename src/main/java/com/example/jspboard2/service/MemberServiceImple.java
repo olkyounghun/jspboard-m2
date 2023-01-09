@@ -16,10 +16,10 @@ public class MemberServiceImple implements MemberService {
                                 @Param("userPw") String userPw,
                                 @Param("userName") String userName,
                                 @Param("userGender") Integer userGender,
-                                @Param("userEmail1") String userEmail1,
-                                @Param("userEmail2") String userEmail2,
+                                @Param("userEmailComplet") String userEmailComplet,
                                 @Param("emailChk") Integer emailChk){
-        return memberMapper.getMembership(userMember, userPw, userName, userGender, userEmail1, userEmail2, emailChk);
+
+        return memberMapper.getMembership(userMember, userPw, userName, userGender, userEmailComplet, emailChk);
     }
 
 }
