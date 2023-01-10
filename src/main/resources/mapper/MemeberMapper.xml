@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.jspboard2.mapper.MemberMapper">
-    <insert id="getMembership" parameterType="com.example.jspboard2.domain.Member">
+    <insert id="getMembership" parameterType="String">
         INSERT INTO
-            MEMBER (USER_MEMBER,PASSWORD_MEMBER,NAME_MEMBER, EMAIL_MEMBER, EMAILCHECK_MEMBER, GENDER_MEMBER, REGDATE_MEMBER,RATING_MEMBER)
+            MEMBER_TB (USER_MEMBER,PASSWORD_MEMBER,NAME_MEMBER, EMAIL_MEMBER, EMAILCHECK_MEMBER, GENDER_MEMBER, REGDATE_MEMBER,RATING_MEMBER)
         VALUES (#{userMember},#{userPw},#{userName},#{userEmailComplet},#{emailChk},#{userGender},curdate(),2)
     </insert>
 </mapper>

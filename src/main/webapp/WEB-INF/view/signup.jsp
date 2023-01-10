@@ -29,68 +29,70 @@
   <title>Model-2 게시판</title>
 </head>
 <body>
-<div>
-  <div class="container">
-    <div class="row">
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">아이디</span>
-        <input type="text" name="userMember" class="form-control" placeholder="USER ID">
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon2">비밀번호</span>
-        <input type="password" name="userPw" class="form-control" placeholder="비밀번호">
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">재확인</span>
-        <input type="password" name="userPw2" class="form-control" placeholder="작성하신 비밀번호를 다시 한번 입력해주세요.">
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon4">닉네임</span>
-        <input type="text" name="userName" class="form-control" placeholder="닉네임">
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon5">성별</span>
-        &nbsp;
-        <div class="form-check-label">
-          <input class="form-check-input" type="radio" name="userGender" id="userGender1">
-          <label class="form-check-label" for="userGender1">
-            남자
-          </label>
-          <input class="form-check-input" type="radio" name="userGender" id="userGender2">
-          <label class="form-check-label" for="userGender2">
-            여자
-          </label>
+<form id="formsighup" name="formsighup" method="post" action="signupchk" >
+  <div>
+    <div class="container">
+      <div class="row">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">아이디</span>
+          <input type="text" id="userMember" name="userMember" class="form-control" placeholder="USER ID">
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" id="userEmail1" name="userEmail1" placeholder="Username" aria-label="Username">
-        <span class="input-group-text">@</span>
-        <input type="text" class="form-control" id="userEmail2" name="userEmail2" placeholder="Server" aria-label="Server">
-      </div>
-      <div class="input-group mb-3">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="emailChk" id="emailChk">
-          <label class="form-check-label" for="emailChk">
-            이메일 수신 거부
-          </label>
+      <div class="row">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon2">비밀번호</span>
+          <input type="password" id="userPw" name="userPw" class="form-control" placeholder="비밀번호">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon3">재확인</span>
+          <input type="password" id="userPw2" name="userPw2" class="form-control" placeholder="작성하신 비밀번호를 다시 한번 입력해주세요.">
         </div>
       </div>
-    </div>
-    <div class="row align-items-end">
-      <div class="input mb-3" style="margin: auto;">
-        <button type="button" class="btn btn-secondary">가입하기</button>
-        &nbsp;
-        <button type="button" class="btn btn-secondary"> 목록 </button>
+      <div class="row">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon4">닉네임</span>
+          <input type="text" id="userName" name="userName" class="form-control" placeholder="닉네임">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon5">성별</span>
+          &nbsp;
+          <div class="form-check-label">
+            <input class="form-check-input" type="radio" name="userGender" id="userGender1" value="1">
+            <label class="form-check-label" for="userGender1">
+              남자
+            </label>
+            <input class="form-check-input" type="radio" name="userGender" id="userGender2" value="2">
+            <label class="form-check-label" for="userGender2">
+              여자
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="userEmail1" name="userEmail1" placeholder="Username" aria-label="Username">
+          <span class="input-group-text">@</span>
+          <input type="text" class="form-control" id="userEmail2" name="userEmail2" placeholder="Server" aria-label="Server">
+        </div>
+        <div class="input-group mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="emailChk" id="emailChk">
+            <label class="form-check-label" for="emailChk">
+              이메일 수신 거부
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-end">
+        <div class="input mb-3" style="margin: auto;">
+          <button type="submit" class="btn btn-secondary">가입하기</button>
+          &nbsp;
+          <button type="button" class="btn btn-secondary"> 목록 </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</form>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </html>
