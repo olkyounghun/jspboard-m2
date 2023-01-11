@@ -12,8 +12,8 @@ public class Member {
     private String password_member; // 멤버 비밀번호
     private String name_member; // 멤버 이름
     private String email_member; // 멤버 이메일
-    private Integer emailcheck_member; // 이메일 수신 체크여부
-    private Integer gender_member; // 멤버 성별
+    private String emailcheck_member; // 이메일 수신 체크여부 true default
+    private String gender_member; // 멤버 성별
     private Date regdate_member; // 멤버 회원가입날짜
     private Integer rating_member; // 멤버 등급 기본회원일겨우 '2' default
 

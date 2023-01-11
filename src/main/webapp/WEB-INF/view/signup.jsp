@@ -29,7 +29,7 @@
   <title>Model-2 게시판</title>
 </head>
 <body>
-<form id="formsighup" name="formsighup" method="post" action="signupchk" >
+<form id="formsighup" name="formsighup" method="post" action="signup" >
   <div>
     <div class="container">
       <div class="row">
@@ -57,12 +57,12 @@
           <span class="input-group-text" id="basic-addon5">성별</span>
           &nbsp;
           <div class="form-check-label">
-            <input class="form-check-input" type="radio" name="userGender" id="userGender1" value="1">
-            <label class="form-check-label" for="userGender1">
+            <input class="form-check-input" type="radio" name="userGender" id="userGenderM" value="male">
+            <label class="form-check-label" for="userGenderM">
               남자
             </label>
-            <input class="form-check-input" type="radio" name="userGender" id="userGender2" value="2">
-            <label class="form-check-label" for="userGender2">
+            <input class="form-check-input" type="radio" name="userGender" id="userGenderF" value="female">
+            <label class="form-check-label" for="userGenderF">
               여자
             </label>
           </div>
@@ -76,7 +76,7 @@
         </div>
         <div class="input-group mb-3">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="emailChk" id="emailChk">
+            <input class="form-check-input" type="checkbox" name="emailChk" id="emailChk" value="False">
             <label class="form-check-label" for="emailChk">
               이메일 수신 거부
             </label>
@@ -96,3 +96,6 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </html>
+<script type="text/javascript">
+
+</script>
