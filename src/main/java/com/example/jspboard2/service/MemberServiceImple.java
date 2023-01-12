@@ -20,5 +20,6 @@ public class MemberServiceImple implements MemberService {
                                       @Param("userEmailComplet") String userEmailComplet,
                                       @Param("emailChk") String emailChk){
     }
+    insideLogin(loginID,loginPw);
 
 }

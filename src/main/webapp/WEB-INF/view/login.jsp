@@ -18,14 +18,14 @@
 </head>
 <body>
     <div>
-        <form method="post" action="home.jsp">
+        <form method="post" action="login.jsp">
             <div class="input-group" >
                 <span class="input-group-text" id="basic-addon1">ID</span>
-                <input id="loginID" type="text" class="form-control">
+                <input id="loginID" name="loginID" type="text" class="form-control">
             </div>
             <div class="input-group" style=>
                 <span class="input-group-text" id="basic-addon2">PW</span>
-                <input type="password" id="loginPW" class="form-control">
+                <input type="password" id="loginPW" name="loginPw" class="form-control">
             </div>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-outline-secondary" onclick="location='home'">메인</button>

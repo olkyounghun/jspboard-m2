@@ -15,7 +15,7 @@ public interface MemberMapper {
                                @Param("userEmailComplet") String userEmailComplet,
                                @Param("emailChk") String emailChk);
 
-
+    insideLogin(loginID,loginPw);
 
 
 }

@@ -62,12 +62,4 @@ public class BoardController {
         return mv;
     }
 
-    @GetMapping("/login")
-    public  String login() {
-        return "login";
-    }
-
-
-
-
 }
