@@ -7,4 +7,8 @@
             MEMBER_TB (USER_MEMBER,PASSWORD_MEMBER,NAME_MEMBER, EMAIL_MEMBER, EMAILCHECK_MEMBER, GENDER_MEMBER, REGDATE_MEMBER,RATING_MEMBER)
         VALUES (#{userMember},#{userPw},#{userName},#{userEmailComplet},#{emailChk},#{userGender},curdate(),2)
     </insert>
+
+    <select id="insideLogin">
+
+    </select>
 </mapper>
