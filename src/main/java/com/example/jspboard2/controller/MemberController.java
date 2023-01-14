@@ -1,21 +1,26 @@
 package com.example.jspboard2.controller;
 
 import com.example.jspboard2.domain.Member;
+import com.example.jspboard2.domain.MemberRepository;
 import com.example.jspboard2.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 @Controller
+@RequiredArgsConstructor
 public class MemberController {
+
+    private final MemberRepository memberRepository;
 
     @Resource
     private MemberService memberService;
+
+
 
     @RequestMapping(value = "/signup", method = {RequestMethod.GET})
     public String movesignup(){
@@ -54,6 +59,21 @@ public class MemberController {
 
 
         return "";
+    }
+
+    @GetMapping("/add")
+    public String addForm(@ModelAttribute("member") Member member) {
+        return "/members/addMemberForm";
+    }
+
+    @PostMapping("/add")
+    public String save(@Valid @ModelAttribute Member member, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "/members/addMemberForm";
+        }
+
+        memberRepository.save(member);
+        return "redirect:/";
     }
 
 }
