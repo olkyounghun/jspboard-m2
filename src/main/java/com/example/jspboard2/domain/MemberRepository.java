@@ -13,9 +13,9 @@ public class MemberRepository {
     private static long sequence = 0L; // static 사용
 
     public Member save(Member member) {
-        member.setId(++sequence);
+        member.setId_member(++sequence);
         log.info("save : member={}", member);
-        store.put(member.getId(), member);
+        store.put(member.getId_member(), member);
         return member;
     }
 
@@ -32,7 +32,7 @@ public class MemberRepository {
         }
         return Optional.empty();*/
         return findAll().stream()
-                .filter(m -> m.getLoginId().equals(loginId)).findFirst();
+                .filter(m -> m.getUser_member().equals(loginId)).findFirst();
     }
 
     public List<Member> findAll() {

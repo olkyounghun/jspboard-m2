@@ -7,7 +7,7 @@ import java.sql.Date;
 @Data
 public class Member {
 
-    private Integer id_member; // 멤버 ID
+    private Long id_member; // 멤버 ID
     private String user_member; // 멤버 작성되는 아이디정보(아이디)
     private String password_member; // 멤버 비밀번호
     private String name_member; // 멤버 이름

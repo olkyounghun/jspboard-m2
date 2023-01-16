@@ -17,7 +17,7 @@ public class LoginService {
             return member;
         } else return null;*/
         return memberRepository.findByLoginId(loginId)
-                .filter(m -> m.getPassword().equals(password))
+                .filter(m -> m.getPassword_member().equals(password))
                 .orElse(null);
     }
 }
