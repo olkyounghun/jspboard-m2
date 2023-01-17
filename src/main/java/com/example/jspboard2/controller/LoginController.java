@@ -22,20 +22,20 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
-        return "login/loginForm";
+        return "login";
     }
 
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "login/loginForm";
+            return "login";
         }
 
         Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
 
         if(loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
-            return "login/loginForm";
+            return "login";
         }
 
         // 로그인 성공 처리 TODO
