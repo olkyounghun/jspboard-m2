@@ -1,16 +1,16 @@
 package com.example.jspboard2.controller;
 
-import com.example.jspboard2.domain.Member;
 import com.example.jspboard2.domain.MemberRepository;
 import com.example.jspboard2.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
@@ -62,19 +62,19 @@ public class MemberController {
         return "";
     }
 
-    @GetMapping("/add")
-    public String addForm(@ModelAttribute("member") Member member) {
-        return "/members/addMemberForm";
-    }
-
-    @PostMapping("/add")
-    public String save(@Valid @ModelAttribute Member member, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "/members/addMemberForm";
-        }
-
-        memberRepository.save(member);
-        return "redirect:/";
-    }
-
+//    @GetMapping("/add")
+//    public String addForm(@ModelAttribute("member") Member member) {
+//        return "/members/addMemberForm";
+//    }
+//
+//    @PostMapping("/add")
+//    public String save(@Valid @ModelAttribute Member member, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            return "/members/addMemberForm";
+//        }
+//
+//        memberRepository.save(member);
+//        return "redirect:/";
+//    }
+/** 세션 어노테이션을 확인해서 다시 시도해보자 */
 }
