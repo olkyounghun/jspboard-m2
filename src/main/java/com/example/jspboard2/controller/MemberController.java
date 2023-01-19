@@ -68,8 +68,8 @@ public class MemberController {
 //    }
 //
 //    @PostMapping("/add")
-//    public String save(@Valid @ModelAttribute Member member, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
+//    public String save(@Valid @ModelAttribute Member member, BindingResult bindingResult) { // BindingResult ??
+//        if (bindingResult.hasErrors()) { // hasErroes ??
 //            return "/members/addMemberForm";
 //        }
 //
@@ -77,4 +77,5 @@ public class MemberController {
 //        return "redirect:/";
 //    }
 /** 세션 어노테이션을 확인해서 다시 시도해보자 */
+
 }

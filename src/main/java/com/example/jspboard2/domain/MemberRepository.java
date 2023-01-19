@@ -10,12 +10,12 @@ import java.util.*;
 public class MemberRepository {
 
     private static Map<Long, Member> store = new HashMap<>(); // static 사용
-    private static long sequence = 0L; // static 사용
+    private static long sequence = 0L; // static 사용 // 0L 는 무엇인가??
 
     public Member save(Member member) {
         member.setId_member(++sequence);
         log.info("save : member={}", member);
-        store.put(member.getId_member(), member);
+        store.put(member.getId_member(), member); // store의 사용하는 이유와 시퀀스를 새롭게 주는 이유는??
         return member;
     }
 
@@ -31,13 +31,13 @@ public class MemberRepository {
             }
         }
         return Optional.empty();*/
-        return findAll().stream()
-                .filter(m -> m.getUser_member().equals(loginId)).findFirst();
+        return findAll().stream() // stream ??
+                .filter(m -> m.getUser_member().equals(loginId)).findFirst();  // findFirst ??
     }
 
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
-    }
+    } // store 를 사용해서 리턴 해주는 이유??
 
     public void clearStore() {
         store.clear();
