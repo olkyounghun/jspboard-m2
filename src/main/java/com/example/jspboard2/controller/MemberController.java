@@ -5,8 +5,6 @@ import com.example.jspboard2.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -50,7 +48,7 @@ public class MemberController {
         return "login";
     }
 
-    @GetMapping("/login")
+    /*@GetMapping("/login")
     public  String goLogin() {return "login";}
 
     @PostMapping("/login")
@@ -60,7 +58,7 @@ public class MemberController {
 
 
         return "";
-    }
+    }*/
 
 //    @GetMapping("/add")
 //    public String addForm(@ModelAttribute("member") Member member) {
