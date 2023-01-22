@@ -37,7 +37,7 @@ public class BoardController {
         int count = boardService.getAllCount();
         int goPage = 1;
         if(page != 0){
-            goPage = page;
+            page = goPage;
         }
 
         paging.setPage(page);
