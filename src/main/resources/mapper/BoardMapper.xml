@@ -10,11 +10,11 @@
         FROM(
             SELECT *
             FROM (
-                 SELECT ROW_NUM as row_num, board_tb.*
-                 FROM board_tb
-                 )
+                 SELECT @rownum := @rownum + 1 as row_num, board_tb.*
+                 FROM board_tb , (SELECT @rownum := 0) r
+                 ) a
             WHERE row_num >= 1
-            )
+            ) b
         WHERE row_num <![CDATA[<=]]> 10;
     </select>
     <select id="getSearchResult" resultType="com.example.jspboard2.domain.Board">
