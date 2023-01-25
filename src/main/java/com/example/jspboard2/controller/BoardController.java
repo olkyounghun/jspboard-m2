@@ -46,11 +46,10 @@ public class BoardController {
 
         ModelAndView mv = new ModelAndView();
         List<Board> list;
-        list = boardService.getBoardList(page);
+        list = boardService.getBoardList();
         mv.addObject("list", list);
         mv.addObject("pageing", paging);
         mv.setViewName("list");
-        mv.setViewName("paging");
         return mv;
     }
 
