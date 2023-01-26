@@ -36,10 +36,6 @@ public class BoardController {
 
         Paging paging = new Paging();
         int count = boardService.getAllCount();
-        int goPage = 1;
-        if(page != 0){
-            page = goPage;
-        }
 
         paging.setPage(page);
         paging.setTotalCount(count);
@@ -48,7 +44,7 @@ public class BoardController {
         List<Board> list;
         list = boardService.getBoardList();
         mv.addObject("list", list);
-        mv.addObject("pageing", paging);
+        mv.addObject("paging", paging);
         mv.setViewName("list");
         return mv;
     }
