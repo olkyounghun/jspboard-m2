@@ -49,14 +49,6 @@ public class BoardController {
         return mv;
     }
 
-    @GetMapping("/list/page")
-    public ModelAndView getPage(@Param("page") int page){
-
-        ModelAndView mv = new ModelAndView();
-
-        return mv;
-    }
-
     @GetMapping(value = "/searchlist")
     public ModelAndView getSearchResult(@Param("startDate") String startDate,
                                         @Param("endDate") String endDate,
