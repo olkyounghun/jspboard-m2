@@ -8,9 +8,7 @@ import com.example.jspboard2.service.SessionConst;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -30,8 +28,8 @@ public class BoardController {
         return "home";
     }
 
-    @GetMapping("/list")
-    public ModelAndView getBoardList(@RequestParam(value="page",required=false, defaultValue="1") int page){
+    @RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView getBoardList(@RequestParam(value = "page", required = false,defaultValue = "1") int page){
 
 
         Paging paging = new Paging();

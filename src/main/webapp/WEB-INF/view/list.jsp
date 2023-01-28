@@ -70,9 +70,8 @@
     </div>
     <div id="paging">
         <!-- 1~10까지 있는 페이지의 페이징 -->
-        <c:url var="action" value="list.jsp"/>
         <c:if test="${paging.prev}">
-            <a href="${action}?page=${paging.beginPage-1}">prev</a>
+            <a href=list?page=${paging.beginPage-1}">prev</a>
         </c:if>
         <c:forEach begin="${paging.beginPage}" end="${paging.endPage}" step="1" var="index">
             <c:choose>
@@ -80,12 +79,12 @@
                     ${index}
                 </c:when>
                 <c:otherwise>
-                    <a href="${action}?page=${index}">${index}</a>
+                    <a href="list?page=${index}">${index}</a>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
         <c:if test="${paging.next}">
-            <a href="${action}?page=${paging.endPage+1}">next</a>
+            <a href="list?page=${paging.endPage+1}">next</a>
         </c:if>
     </div>
 </body>
