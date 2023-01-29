@@ -37,10 +37,12 @@ public class BoardController {
 
         paging.setPage(page);
         paging.setTotalCount(count);
+        int beginpage = paging.getBeginPage();
+        int endpage = paging.getEndPage();
 
         ModelAndView mv = new ModelAndView();
         List<Board> list;
-        list = boardService.getBoardList();
+        list = boardService.getBoardList(beginpage,endpage,page);
         mv.addObject("list", list);
         mv.addObject("paging", paging);
         mv.setViewName("list");

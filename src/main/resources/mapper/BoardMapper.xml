@@ -5,7 +5,7 @@
     <select id="getAllCount" resultType="int">
         SELECT COUNT(*) as count FROM BOARD_TB;
     </select>
-    <select id="getBoardList" resultType="com.example.jspboard2.domain.Board">
+    <select id="getBoardList" resultType="com.example.jspboard2.domain.Board" parameterType="int">
         SELECT *
         FROM(
             SELECT *
