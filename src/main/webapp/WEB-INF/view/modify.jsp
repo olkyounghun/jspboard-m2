@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -33,11 +34,10 @@
             <tr>
                 <td> 수정일자 </td>
                 <td>
-                    <%  if(board.getBoard_moddate()==null){ %>
-                    --
-                    <%  }else{%>
-                    ${list.moddate_board}
-                    <%  }%>
+                    <c:choose>
+                        <c:when test="${list.moddate_board} eq null">${list.moddate_board}</c:when>
+                        <c:when test="!${list.moddate_board} eq null">${list.regdate_board}</c:when>
+                    </c:choose>
                 </td>
             </tr>
             <tr>

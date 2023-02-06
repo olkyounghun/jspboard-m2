@@ -86,4 +86,22 @@ public class BoardController {
         return "loginHome";
     }
 
+    @GetMapping("/posting")
+    public String movePosting(){
+
+        return "posting";
+    }
+    @PostMapping("/postingAction")
+    public ModelAndView boardPosting(){
+        ModelAndView mv = new ModelAndView();
+        return mv;
+    }
+
+    @GetMapping("/modify")
+    public ModelAndView boardModify(){
+        ModelAndView mv = new ModelAndView();
+        return mv;
+    }
+
+
 }
