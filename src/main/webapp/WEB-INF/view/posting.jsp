@@ -28,7 +28,7 @@
     }
 </style>
 <body>
-<form method="post" name="frm" onsubmit="return writeform_check(this)" action="writeForm.jsp" enctype="multipart/form-data"  >
+<form method="post" name="frm" action="postingAction" enctype="multipart/form-data"  >
     <div id="wrapper">
         <div>
             <div class="form-check" style= "text-align : center;">
@@ -37,7 +37,7 @@
             <div class="form-check">
                 <label>카테고리</label>
                 <label>
-                    <select id="categoryType" name="categoryType" class="form-control">
+                    <select id="typeBoard" name="typeBoard" class="form-control">
                         <option value="All" selected>전체 카테고리</option>
                         <option value="JAVA" >JAVA</option>
                         <option value="Javascript" >Javascript</option>
@@ -47,46 +47,20 @@
                 <div id="type_ck"></div>
             </div>
             <div class="form-check">
-                <label> 작성자 </label>
-                <label>
-                    <input type="text" id="boardUser" name="boardUser" class="form-control">
-                </label>
-            </div>
-            <div class="form-check" style="float: left;width: 50%;">
-                <label> 비밀번호 </label>
-                <label>
-                    <input type="password" id="boardPw" name="boardPw" class="form-control">
-                </label>
-            </div>
-            <div class="form-check" style="float: right;width: 50%;">
-                <label> 비밀번호 확인 </label>
-                <label>
-                    <input type="password" id="boardRepw" class="form-control">
-                </label>
-                <small class="form-text text-muted">We'll naver share your password with anyone else</small>
-            </div>
-            <div class="form-check">
                 <label> 제목 </label>
                 <label>
-                    <input type="text" id="boardTitle" name="boardTitle" class="form-control">
+                    <input type="text" id="titleBoard" name="titleBoard" class="form-control">
                 </label>
             </div>
             <div class="form-check">
                 <label> 내용 </label>
                 <label>
-                    <textarea id="boardContent" name="boardContent" class="form-control"></textarea>
+                    <textarea id="contentboard" name="contentboard" class="form-control"></textarea>
                 </label>
-            </div>
-            <div class="form-check">
-                <label> 파일 </label>
-                <div class="fileSelect">
-                    <input type="file" id="boardFile" name="boardFile" class="form-control">
-                </div>
-                <input type="button" class="removeFile" value="삭제">
             </div>
             <div id="wrapper1" class="form-check">
                 <button type="submit" class="btn btn-secondary">저장</button>
-                <button type="button" class="btn btn-secondary" onclick="location.href='index.jsp'">목록</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href='list.jsp'">목록</button>
             </div>
         </div>
     </div>

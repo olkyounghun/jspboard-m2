@@ -92,7 +92,10 @@ public class BoardController {
         return "posting";
     }
     @PostMapping("/postingAction")
-    public ModelAndView boardPosting(){
+    public ModelAndView boardPosting(@Param("typeBoard") String typeBoard,
+                                     @Param("titleBoard") String titleBoard,
+                                     @Param("contentBoard") String contentBoard){
+        
         ModelAndView mv = new ModelAndView();
         return mv;
     }

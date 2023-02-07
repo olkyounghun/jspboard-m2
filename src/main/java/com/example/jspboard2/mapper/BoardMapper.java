@@ -20,4 +20,8 @@ public interface BoardMapper {
                                 @Param("searchType") String searchType,
                                 @Param("searchName") String searchName);
 
+    List<Board> postingUpload(@Param("typeBoard") String typeBoard,
+                              @Param("titleBoard") String titleBoard,
+                              @Param("contentBoard") String contentBoard);
+
 }

@@ -30,4 +30,8 @@ public class BoardServiceImpl implements BoardService{
                                        @Param("searchName") String searchName){
         return boardMapper.getSearchResult(startDate, endDate, searchType,searchName);
     }
+
+    public List<Board> postingUpload(@Param("typeBoard") String typeBoard,
+                                     @Param("titleBoard") String titleBoard,
+                                     @Param("contentBoard") String contentBoard){return boardMapper.postingUpload(typeBoard,titleBoard,contentBoard);}
 }
