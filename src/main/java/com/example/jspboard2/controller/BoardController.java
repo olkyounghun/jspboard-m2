@@ -92,18 +92,26 @@ public class BoardController {
         return "posting";
     }
     @PostMapping("/postingAction")
-    public ModelAndView boardPosting(@Param("typeBoard") String typeBoard,
+    public String boardPosting(@Param("typeBoard") String typeBoard,
                                      @Param("titleBoard") String titleBoard,
                                      @Param("contentBoard") String contentBoard){
+
+        boardService.postingUpload(typeBoard,titleBoard,contentBoard);
         
         ModelAndView mv = new ModelAndView();
-        return mv;
+        return "detail";
     }
 
     @GetMapping("/modify")
     public ModelAndView boardModify(){
         ModelAndView mv = new ModelAndView();
         return mv;
+    }
+
+    @GetMapping("/detail")
+    public String boardDetail(){
+
+        return "detail";
     }
 
 
