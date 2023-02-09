@@ -34,4 +34,6 @@ public class BoardServiceImpl implements BoardService{
     public List<Board> postingUpload(@Param("typeBoard") String typeBoard,
                                      @Param("titleBoard") String titleBoard,
                                      @Param("contentBoard") String contentBoard){return boardMapper.postingUpload(typeBoard,titleBoard,contentBoard);}
+
+    public List<Board> getDetailBoard(@Param("idBoard") int idBoard){return boardMapper.getDetailBoard(idBoard);}
 }

@@ -24,4 +24,5 @@ public interface BoardMapper {
                               @Param("titleBoard") String titleBoard,
                               @Param("contentBoard") String contentBoard);
 
+    List<Board> getDetailBoard(@Param("idBoard") int idBoard);
 }

@@ -45,4 +45,11 @@
         INSERT INTO BOARD_TB (TYPE_BOARD,TITLE_BOARD,CONTENT_BOARD,USER_BOARD,VIEWS_BOARD,REGDATE_BOARD,MODDATE_BOARD)
             VALUES (${typeBoard},${titleBoard},${contentBoard},"TEST",0,DEFAULT,NULL)
     </select>
+    <select id="getDetailBoard" resultType="com.example.jspboard2.domain.Board" parameterType="int">
+        SELECT *
+        FROM BOARD_TB
+        <where>
+            WHERE ID_BOARD == ${idBoard}
+        </where>
+    </select>
 </mapper>

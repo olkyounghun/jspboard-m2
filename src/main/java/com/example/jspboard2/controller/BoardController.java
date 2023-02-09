@@ -97,21 +97,32 @@ public class BoardController {
                                      @Param("contentBoard") String contentBoard){
 
         boardService.postingUpload(typeBoard,titleBoard,contentBoard);
-        
-        ModelAndView mv = new ModelAndView();
+
         return "detail";
     }
 
     @GetMapping("/modify")
-    public ModelAndView boardModify(){
-        ModelAndView mv = new ModelAndView();
-        return mv;
+    public String boardModify(){
+
+        return "modify";
+    }
+
+    @PostMapping("/modifyAction")
+    public String boardModifyAction(){
+
+        return "detail";
     }
 
     @GetMapping("/detail")
-    public String boardDetail(){
+    public ModelAndView boardDetail(@Param("idBoard") int idBoard){
 
-        return "detail";
+        ModelAndView mv = new ModelAndView();
+        List<Board> list;
+        list = boardService.getDetailBoard(idBoard);
+        mv.addObject("list", list);
+        mv.setViewName("detail");
+
+        return mv;
     }
 
 
