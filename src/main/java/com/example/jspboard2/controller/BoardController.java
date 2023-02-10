@@ -108,9 +108,19 @@ public class BoardController {
     }
 
     @PostMapping("/modifyAction")
-    public String boardModifyAction(){
+    public ModelAndView boardModifyAction(@Param("idBoard") int idBoard,
+                                    @Param("typeBoard") String typeBoard,
+                                    @Param("titleBoard") String titleBoard,
+                                    @Param("contentBoard") String contentBoard){
 
-        return "detail";
+        List<Board> list;
+        ModelAndView mv = new ModelAndView();
+        list = boardService.postModifyBoard(idBoard,typeBoard,titleBoard,contentBoard);
+
+        mv.addObject("list",list);
+        mv.setViewName("detail");
+
+        return mv;
     }
 
     @GetMapping("/detail")

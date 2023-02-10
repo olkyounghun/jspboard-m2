@@ -45,10 +45,6 @@
                 <td> ${list.user_board} </td>
             </tr>
             <tr>
-                <td> 비밀번호 </td>
-                <td> <label><input type="password" id="boardPw" name="boardPw"></label></td>
-            </tr>
-            <tr>
                 <td> 제목 </td>
                 <td> <label><input type="text" id="boardTitle" name="boardTitle" value="${list.title_board}"></label></td>
             </tr>
