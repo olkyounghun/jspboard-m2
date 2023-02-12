@@ -119,7 +119,7 @@ public class BoardController {
     }
 
     @GetMapping("/detail")
-    public ModelAndView boardDetail(@Param("idBoard") int idBoard){
+    public ModelAndView boardDetail(@Param("id_board") int idBoard){
 
         ModelAndView mv = new ModelAndView();
         List<Board> list;
