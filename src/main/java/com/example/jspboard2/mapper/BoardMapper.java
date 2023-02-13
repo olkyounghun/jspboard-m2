@@ -24,7 +24,7 @@ public interface BoardMapper {
                               @Param("titleBoard") String titleBoard,
                               @Param("contentBoard") String contentBoard);
 
-    List<Board> getDetailBoard(@Param("idBoard") int idBoard);
+    List<Board> getDetailBoard(@Param("id_board") int id_board);
 
     List<Board> postModifyBoard(@Param("idBoard") int idBoard, @Param("typeBoard") String typeBoard,
                                 @Param("titleBoard") String titleBoard,

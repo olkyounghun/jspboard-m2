@@ -103,7 +103,7 @@ public class BoardController {
     }
 
     @PostMapping("/modifyAction")
-    public ModelAndView boardModifyAction(@Param("idBoard") int idBoard,
+    public ModelAndView boardModifyAction(@Param("id_board") int idBoard,
                                     @Param("typeBoard") String typeBoard,
                                     @Param("titleBoard") String titleBoard,
                                     @Param("contentBoard") String contentBoard){
@@ -119,11 +119,11 @@ public class BoardController {
     }
 
     @GetMapping("/detail")
-    public ModelAndView boardDetail(@Param("id_board") int idBoard){
+    public ModelAndView boardDetail(@RequestParam(value = "id_board", required = false) int id_board){
 
         ModelAndView mv = new ModelAndView();
         List<Board> list;
-        list = boardService.getDetailBoard(idBoard);
+        list = boardService.getDetailBoard(id_board);
         mv.addObject("list", list);
         mv.setViewName("detail");
 

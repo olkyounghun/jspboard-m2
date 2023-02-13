@@ -49,13 +49,13 @@
         SELECT *
         FROM BOARD_TB
         <where>
-            WHERE ID_BOARD == ${idBoard}
+            ID_BOARD = ${id_board}
         </where>
     </select>
     <select id="postModifyBoard" resultType="com.example.jspboard2.domain.Board">
         UPDATE BOARD_TB SET TYPE_BOARD = ${typeBoard} , TITLE_BOARD = ${titleBoard} , CONTENT_BOARD = ${contentBoard}
         <where>
-            WHERE ID_BOARD == ${idBoard}
+            ID_BOARD = ${id_board}
         </where>
     </select>
 </mapper>

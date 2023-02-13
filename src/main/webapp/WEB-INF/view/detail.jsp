@@ -21,17 +21,17 @@
     <div class="col-sm-3"></div>
     <div class="col-sm-6">
       <div class="row" style="padding-top: 20px;" >
-        <h1> ${list.title_board} </h1>
+        <h1> #{list.title_board} </h1>
       </div>
       <div class="row">
         <div class="col-sm-6">
-          카테고리 : ${list.type_board}
+          카테고리 : #{list.type_board}
         </div>
         <div class="col-sm-6">
           <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-4">
-              <div>${list.user_board} </div>
+              <div>#{list.user_board} </div>
             </div>
             <div class="col-sm-6">
               <div>
@@ -48,7 +48,7 @@
       <div class="row" style="padding-top: 10px;">
         <div class="com-sm-12">
                         <textarea style="outline: 1px solid gray; width: 100%; height: 6.25em; border: none; resize: none;" disabled>
-                            ${list.context_board}
+                            #{list.context_board}
                         </textarea>
         </div>
       </div>
