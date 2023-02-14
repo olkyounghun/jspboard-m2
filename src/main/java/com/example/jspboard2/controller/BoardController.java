@@ -97,9 +97,15 @@ public class BoardController {
     }
 
     @GetMapping("/modify")
-    public String boardModify(){
+    public ModelAndView boardModify(@Param("id_board") int id_board){
 
-        return "modify";
+        ModelAndView mv = new ModelAndView();
+        List<Board> list;
+        list = boardService.getDetailBoard(id_board);
+        mv.addObject("list", list);
+        mv.setViewName("modify");
+
+        return mv;
     }
 
     @PostMapping("/modifyAction")
