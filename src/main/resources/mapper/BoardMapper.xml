@@ -5,6 +5,9 @@
     <select id="getAllCount" resultType="int">
         SELECT COUNT(*) as count FROM BOARD_TB;
     </select>
+    <select id="getNewBoardId">
+        SELECT ID_BOARD FROM BOARD_TB ORDER BY ID_BOARD DESC LIMIT 1;
+    </select>
     <select id="getBoardList" resultType="com.example.jspboard2.domain.Board" parameterType="int">
         SELECT *
         FROM(

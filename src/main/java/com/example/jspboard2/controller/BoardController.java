@@ -87,13 +87,18 @@ public class BoardController {
         return "posting";
     }
     @PostMapping("/postingAction")
-    public String boardPosting(@Param("typeBoard") String typeBoard,
+    public ModelAndView boardPosting(@Param("typeBoard") String typeBoard,
                                      @Param("titleBoard") String titleBoard,
                                      @Param("contentBoard") String contentBoard){
 
-        boardService.postingUpload(typeBoard,titleBoard,contentBoard);
+        ModelAndView mv = new ModelAndView();
+        List<Board> list;
+        list = boardService.postingUpload(typeBoard,titleBoard,contentBoard);
+        int newNumber = boardService.getNewBoardId();
+        mv.addObject("list", list);
+        mv.setViewName("detail?id_board="+newNumber);
 
-        return "detail";
+        return mv;
     }
 
     @GetMapping("/modify")

@@ -9,6 +9,8 @@ public interface BoardService {
 
     int getAllCount();
 
+    int getNewBoardId();
+
     List<Board> getBoardList(@Param("beginpage")int beginpage,
                              @Param("endpage") int endpage,
                              @Param("page") int page); // 목록 화면에서 게시물들 출력

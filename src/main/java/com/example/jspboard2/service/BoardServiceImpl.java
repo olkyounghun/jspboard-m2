@@ -20,6 +20,8 @@ public class BoardServiceImpl implements BoardService{
 
     public int getAllCount(){return boardMapper.getAllCount();}
 
+    public int getNewBoardId(){return  boardMapper.getNewBoardId();}
+
     public List<Board> getBoardList(@Param("beginpage")int beginpage,
                                     @Param("endpage") int endpage,
                                     @Param("page") int page){return boardMapper.getBoardList(beginpage,endpage,page);} // 목록 화면에서 게시물들 출력
