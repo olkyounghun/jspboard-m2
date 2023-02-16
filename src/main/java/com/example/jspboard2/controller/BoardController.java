@@ -1,14 +1,18 @@
 package com.example.jspboard2.controller;
 
 import com.example.jspboard2.domain.Board;
+import com.example.jspboard2.domain.LoginForm;
 import com.example.jspboard2.domain.Paging;
 import com.example.jspboard2.service.BoardService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -82,7 +86,11 @@ public class BoardController {
 //    }
 
     @GetMapping("/posting")
-    public String movePosting(){
+    public String movePosting(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request){
+
+        if (bindingResult.hasErrors()) {
+            return "login";
+        }
 
         return "posting";
     }
