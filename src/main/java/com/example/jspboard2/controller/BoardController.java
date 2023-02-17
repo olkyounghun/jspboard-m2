@@ -1,9 +1,8 @@
 package com.example.jspboard2.controller;
 
-import com.example.jspboard2.domain.Board;
-import com.example.jspboard2.domain.LoginForm;
-import com.example.jspboard2.domain.Paging;
+import com.example.jspboard2.domain.*;
 import com.example.jspboard2.service.BoardService;
+import com.example.jspboard2.service.SessionConst;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -21,6 +21,9 @@ public class BoardController {
 
     @Resource
     private BoardService boardService;
+
+    @Resource
+    private LoginService loginService;
 
     @GetMapping("/home")
     public String main(){
@@ -92,14 +95,24 @@ public class BoardController {
             return "login";
         }
 
+        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
+        HttpSession session = request.getSession();
+        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+
         return "posting";
     }
     @PostMapping("/postingAction")
     public ModelAndView boardPosting(@Param("typeBoard") String typeBoard,
                                      @Param("titleBoard") String titleBoard,
-                                     @Param("contentBoard") String contentBoard){
+                                     @Param("contentBoard") String contentBoard,
+                                     BindingResult bindingResult){
 
         ModelAndView mv = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+            mv.setViewName("login");
+            return mv;
+        }
+
         List<Board> list;
         list = boardService.postingUpload(typeBoard,titleBoard,contentBoard);
         int newNumber = boardService.getNewBoardId();
@@ -110,9 +123,15 @@ public class BoardController {
     }
 
     @GetMapping("/modify")
-    public ModelAndView boardModify(@Param("id_board") int id_board){
+    public ModelAndView boardModify(@Param("id_board") int id_board,
+                                    BindingResult bindingResult){
 
         ModelAndView mv = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+            mv.setViewName("login");
+            return mv;
+        }
+
         List<Board> list;
         list = boardService.getDetailBoard(id_board);
         mv.addObject("list", list);
@@ -125,10 +144,16 @@ public class BoardController {
     public ModelAndView boardModifyAction(@Param("id_board") int idBoard,
                                     @Param("typeBoard") String typeBoard,
                                     @Param("titleBoard") String titleBoard,
-                                    @Param("contentBoard") String contentBoard){
+                                    @Param("contentBoard") String contentBoard,
+                                          BindingResult bindingResult){
+
+        ModelAndView mv = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+            mv.setViewName("login");
+            return mv;
+        }
 
         List<Board> list;
-        ModelAndView mv = new ModelAndView();
         list = boardService.postModifyBoard(idBoard,typeBoard,titleBoard,contentBoard);
 
         mv.addObject("list",list);
@@ -138,9 +163,14 @@ public class BoardController {
     }
 
     @GetMapping("/detail")
-    public ModelAndView boardDetail(@RequestParam(value = "id_board", required = false) int id_board){
+    public ModelAndView boardDetail(@RequestParam(value = "id_board", required = false) int id_board,
+                                    BindingResult bindingResult){
 
         ModelAndView mv = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+            mv.setViewName("login");
+            return mv;
+        }
         List<Board> list;
         list = boardService.getDetailBoard(id_board);
         mv.addObject("list", list);
