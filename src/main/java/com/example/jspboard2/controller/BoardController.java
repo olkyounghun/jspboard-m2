@@ -131,11 +131,10 @@ public class BoardController {
             mv.setViewName("login");
             return mv;
         }
-
         List<Board> list;
         list = boardService.getDetailBoard(id_board);
         mv.addObject("list", list);
-        mv.setViewName("modify");
+        mv.setViewName("modify?id_board="+id_board );
 
         return mv;
     }
@@ -157,7 +156,7 @@ public class BoardController {
         list = boardService.postModifyBoard(idBoard,typeBoard,titleBoard,contentBoard);
 
         mv.addObject("list",list);
-        mv.setViewName("detail");
+        mv.setViewName("detail?id_board="+idBoard);
 
         return mv;
     }
@@ -174,7 +173,7 @@ public class BoardController {
         List<Board> list;
         list = boardService.getDetailBoard(id_board);
         mv.addObject("list", list);
-        mv.setViewName("detail");
+        mv.setViewName("detail?id_board="+id_board);
 
         return mv;
     }
