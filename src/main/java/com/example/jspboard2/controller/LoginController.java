@@ -77,4 +77,26 @@ public class LoginController {
         return "redirect:/";
     }
 
+    @GetMapping("/manager")
+    public String managerLogin(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request){
+
+        String moveHere;
+
+        if (bindingResult.hasErrors()) {
+            return "login";
+        }
+
+        Member loginMember = loginService.login(form.getLoginId(),form.getPassword());
+        HttpSession session = request.getSession();
+        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+
+        if(loginMember.getRating_member() == 1){
+            moveHere = "manager";
+        }else{
+            moveHere = "login";
+        }
+
+        return moveHere;
+    }
+
 }
