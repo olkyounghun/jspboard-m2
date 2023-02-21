@@ -89,7 +89,9 @@ public class BoardController {
 //    }
 
     @GetMapping("/posting")
-    public String movePosting(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request){
+    public String movePosting(@Valid @ModelAttribute LoginForm form,
+                              BindingResult bindingResult,
+                              HttpServletRequest request){
 
         if (bindingResult.hasErrors()) {
             return "login";
@@ -124,6 +126,8 @@ public class BoardController {
 
     @GetMapping("/modify")
     public ModelAndView boardModify(@Param("id_board") int id_board,
+                                    @Valid @ModelAttribute LoginForm form,
+                                    HttpServletRequest request,
                                     BindingResult bindingResult){
 
         ModelAndView mv = new ModelAndView();
@@ -131,6 +135,10 @@ public class BoardController {
             mv.setViewName("login");
             return mv;
         }
+        Member loginMember = loginService.login(form.getLoginId(),form.getPassword());
+        HttpSession session = request.getSession();
+        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+
         List<Board> list;
         list = boardService.getDetailBoard(id_board);
         mv.addObject("list", list);
@@ -163,13 +171,19 @@ public class BoardController {
 
     @GetMapping("/detail")
     public ModelAndView boardDetail(@RequestParam(value = "id_board", required = false) int id_board,
-                                    BindingResult bindingResult){
+                                    @Valid @ModelAttribute LoginForm form,
+                                    BindingResult bindingResult,
+                                    HttpServletRequest request){
 
         ModelAndView mv = new ModelAndView();
         if (bindingResult.hasErrors()) {
             mv.setViewName("login");
             return mv;
         }
+        Member loginMember = loginService.login(form.getLoginId(),form.getPassword());
+        HttpSession session = request.getSession();
+        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+
         List<Board> list;
         list = boardService.getDetailBoard(id_board);
         mv.addObject("list", list);
