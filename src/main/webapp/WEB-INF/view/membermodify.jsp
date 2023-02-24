@@ -18,36 +18,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-<form method="post" name="frm" onsubmit="return modifyform_check(this)" action="modifyForm.jsp" enctype="multipart/form-data">
+<form method="post" name="frm" action="membermodify.jsp" enctype="multipart/form-data">
     <c:forEach items="${list}" var="list">
     <div>
         <table>
             <tr>
                 <td> 아이디 </td>
                 <td>
-                    ${list.user_member}
-                    <label><input type="text" id="emailMember" name="emailMember" value="${list.title_board}"></label>
+                    <label><input type="text" id="userMember" name="userMember" value="${list.user_member}"></label>
                 </td>
             </tr>
             <tr>
                 <td> 가입날짜 </td>
                 <td>
-                    ${list.regdate_member}
-                    <label><input type="text" id="emailMember" name="emailMember" value="${list.title_board}"></label></td>
+                    <label><input type="text" id="regdateMember" name="regdateMember" value="${list.regdate_member}"></label></td>
             </tr>
             <tr>
                 <td> 이름 </td>
-                <td> ${list.name_member}
-                    <label><input type="text" id="emailMember" name="emailMember" value="${list.title_board}"></label></td>
+                <td>
+                    <label><input type="text" id="nameMember" name="nameMember" value="${list.name_member}"></label>
+                </td>
             </tr>
             <tr>
                 <td> 성별 </td>
-                <td> ${list.gender_member}
-                    <label><input type="text" id="emailMember" name="emailMember" value="${list.title_board}"></label></td>
+                <td>
+                    <label><input type="text" id="genderMemeber" name="genderMemeber" value="${list.gender_member}"></label>
+                </td>
             </tr>
             <tr>
                 <td> 이메일 </td>
-                <td> <label><input type="text" id="emailMember" name="emailMember" value="${list.title_board}"></label></td>
+                <td>
+                    <label><input type="text" id="emailMember" name="emailMember" value="${list.email_member}"></label>
+                </td>
             </tr>
         </table>
     </div>
