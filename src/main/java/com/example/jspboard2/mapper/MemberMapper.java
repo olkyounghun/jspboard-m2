@@ -3,7 +3,8 @@ package com.example.jspboard2.mapper;
 import com.example.jspboard2.domain.Member;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Mapper
 public interface MemberMapper {
@@ -17,5 +18,7 @@ public interface MemberMapper {
 
     void insideLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw);
 
+
+    List<Member> getMember(@Param("idMember") int idMember);
 
 }

@@ -11,4 +11,11 @@
     <select id="insideLogin">
 
     </select>
+    <select id="getMember" resultType="com.example.jspboard2.domain.Member">
+        SELECT *
+        FROM member_tb
+        <where>
+            ID_MEMBER = ${idMember}
+        </where>
+    </select>
 </mapper>

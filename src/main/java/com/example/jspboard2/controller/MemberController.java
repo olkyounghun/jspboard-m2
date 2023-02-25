@@ -1,14 +1,23 @@
 package com.example.jspboard2.controller;
 
-import com.example.jspboard2.domain.MemberRepository;
+import com.example.jspboard2.domain.*;
 import com.example.jspboard2.service.MemberService;
+import com.example.jspboard2.service.SessionConst;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,6 +27,9 @@ public class MemberController {
 
     @Resource
     private MemberService memberService;
+
+    @Resource
+    private LoginService loginService;
 
 
 
@@ -47,6 +59,34 @@ public class MemberController {
 
         return "login";
     }
+
+    @GetMapping("/membermodify")
+    public ModelAndView movePosting(@Valid @ModelAttribute LoginForm form,
+                                    BindingResult bindingResult,
+                                    HttpServletRequest request,
+                                    @Param("id_member") int idMember){
+
+        ModelAndView mv = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+            mv.setViewName("login");
+            return mv;
+        }
+
+        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
+        HttpSession session = request.getSession();
+        if(loginMember.getRating_member() != 1){
+            mv.setViewName("login");
+            return mv;
+        }
+        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+        List<Member> list;
+        list = memberService.getMember(idMember);
+        mv.addObject("list",list);
+        mv.setViewName("membermodify?id_member="+idMember);
+
+        return mv;
+    }
+
 
     /*@GetMapping("/login")
     public  String goLogin() {return "login";}

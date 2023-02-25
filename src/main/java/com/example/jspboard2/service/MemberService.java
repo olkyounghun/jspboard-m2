@@ -2,7 +2,8 @@ package com.example.jspboard2.service;
 
 import com.example.jspboard2.domain.Member;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 public interface MemberService {
 
@@ -14,5 +15,9 @@ public interface MemberService {
                                @Param("emailChk") String emailChk);
 
     void insideLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw);
+
+    List<Member> getMember(@Param("idMember") int idMember);
+
+    }
 
 }

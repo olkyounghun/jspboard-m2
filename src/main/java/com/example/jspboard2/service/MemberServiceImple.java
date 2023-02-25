@@ -4,7 +4,8 @@ import com.example.jspboard2.domain.Member;
 import com.example.jspboard2.mapper.MemberMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Service
 public class MemberServiceImple implements MemberService {
@@ -24,5 +25,7 @@ public class MemberServiceImple implements MemberService {
     public void insideLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw) {
 
     }
+
+    public List<Member> getMember(@Param("idMember") int idMember){return memberMapper.getMember(idMember);}
 
 }
