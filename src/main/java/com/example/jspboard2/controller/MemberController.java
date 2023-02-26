@@ -87,6 +87,32 @@ public class MemberController {
         return mv;
     }
 
+    @GetMapping ("membermodify/deleteMember")
+    public ModelAndView deleteMember(@Valid @ModelAttribute LoginForm form,
+                               BindingResult bindingResult,
+                               HttpServletRequest request,
+                               @Param("id_member") int idMember){
+
+        ModelAndView mv = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+            mv.setViewName("login");
+            return mv;
+        }
+
+        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
+        HttpSession session = request.getSession();
+        if(loginMember.getRating_member() != 1){
+            mv.setViewName("login");
+            return mv;
+        }
+        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+
+        memberService.deleteMember(idMember);
+
+
+        return mv;
+    }
+
 
     /*@GetMapping("/login")
     public  String goLogin() {return "login";}

@@ -11,6 +11,9 @@
     <select id="insideLogin">
 
     </select>
+    <select id="deleteMember">
+
+    </select>
     <select id="getMember" resultType="com.example.jspboard2.domain.Member">
         SELECT *
         FROM member_tb

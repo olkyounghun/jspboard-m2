@@ -16,8 +16,8 @@ public interface MemberService {
 
     void insideLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw);
 
-    List<Member> getMember(@Param("idMember") int idMember);
 
-    }
+    void deleteMember(@Param("id_member") int idMember);
+    List<Member> getMember(@Param("idMember") int idMember);
 
 }

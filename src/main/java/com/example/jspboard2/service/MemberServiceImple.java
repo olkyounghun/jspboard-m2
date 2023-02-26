@@ -26,6 +26,8 @@ public class MemberServiceImple implements MemberService {
 
     }
 
+    public void deleteMember(@Param("id_member") int idMember){return memberMapper.deleteMember(idMember);}
+
     public List<Member> getMember(@Param("idMember") int idMember){return memberMapper.getMember(idMember);}
 
 }

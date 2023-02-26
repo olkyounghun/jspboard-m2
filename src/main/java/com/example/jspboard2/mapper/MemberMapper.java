@@ -18,6 +18,7 @@ public interface MemberMapper {
 
     void insideLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw);
 
+    void deleteMember(@Param("id_member") int idMember);
 
     List<Member> getMember(@Param("idMember") int idMember);
 
