@@ -104,11 +104,11 @@ public class MemberController {
         if(loginMember.getRating_member() != 1){
             mv.setViewName("login");
             return mv;
+        }else{
+            memberService.deleteMember(idMember);
+            mv.setViewName("manager");
         }
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
-
-        memberService.deleteMember(idMember);
-
 
         return mv;
     }

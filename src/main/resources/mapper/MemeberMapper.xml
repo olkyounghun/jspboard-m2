@@ -12,7 +12,10 @@
 
     </select>
     <select id="deleteMember">
-
+        DELETE FROM MEMBER_TB
+        <where>
+            ID_MEMBER = ${idMember}
+        </where>
     </select>
     <select id="getMember" resultType="com.example.jspboard2.domain.Member">
         SELECT *
