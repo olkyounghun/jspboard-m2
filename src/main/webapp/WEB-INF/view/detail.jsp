@@ -58,8 +58,8 @@
         </div>
       </div>
       <div class="form-check" style="padding-top: 40px;">
-        <button type="button" class="btn btn-secondary" onclick="location.href='modify?id_board=${list.id_board}&type=d'">수정</button>
-        <button type="button" class="btn btn-secondary" onclick="">삭제</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='modify?id_board=${list.id_board}'">수정</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='delete?id_board=${list.id_board}">삭제</button>
         <button type="button" class="btn btn-secondary" onclick="location.href='list.jsp'">목록</button>
       </div>
     </div>
