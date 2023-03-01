@@ -31,9 +31,15 @@ public class BoardController {
     }
 
     @RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView getBoardList(@RequestParam(value = "page", required = false,defaultValue = "1") int page){
+    public ModelAndView getBoardList(@Valid @ModelAttribute LoginForm form,
+                                     BindingResult bindingResult,
+                                     HttpServletRequest request,
+                                     @RequestParam(value = "page", required = false,defaultValue = "1") int page){
 
-
+        ModelAndView mv = new ModelAndView();
+        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
+        HttpSession session = request.getSession();
+        session.setAttribute("login", loginMember);
         Paging paging = new Paging();
         int count = boardService.getAllCount();
 
@@ -42,9 +48,10 @@ public class BoardController {
         int beginpage = paging.getBeginPage();
         int endpage = paging.getEndPage();
 
-        ModelAndView mv = new ModelAndView();
+
         List<Board> list;
         list = boardService.getBoardList(beginpage,endpage,page);
+        mv.addObject("login",session.getAttribute("login"));
         mv.addObject("list", list);
         mv.addObject("paging", paging);
         mv.setViewName("list");
