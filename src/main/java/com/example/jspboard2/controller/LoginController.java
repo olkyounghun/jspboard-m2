@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,8 +25,16 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
-        return "login";
+    public ModelAndView loginForm(HttpServletRequest request
+                            , @ModelAttribute("loginMember") Member loginMember) {
+
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        String logindata = (String)session.getAttribute("loginMember");
+        mv.addObject("loginMember",logindata);
+        mv.setViewName("login");
+
+        return mv;
     }
 //
 //    @PostMapping("/login")
@@ -48,13 +57,14 @@ public class LoginController {
 
     // //
     @PostMapping("/login")
-    public String loginV3(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request) {
+    public String loginV3(@Valid @ModelAttribute Member member, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "login";
         }
 
-        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
-        log.info("login? {}", loginMember);
+        Member loginMember = loginService.login(member.getUser_member(), member.getPassword_member());
+
+        System.out.println("login? " + loginMember);
 
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");

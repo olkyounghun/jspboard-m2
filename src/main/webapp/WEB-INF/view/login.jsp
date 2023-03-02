@@ -18,6 +18,9 @@
 </head>
 <body>
     <div>
+       아이디 : <c:out value="${loginMember}">
+    </div>
+    <div>
         <form method="post" action="login.jsp">
             <div class="input-group" >
                 <span class="input-group-text" id="basic-addon1">ID</span>
@@ -30,7 +33,7 @@
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-outline-secondary" onclick="location='home'">메인</button>
                 <button type="button" class="btn btn-outline-secondary" onclick="location='signup'">가입</button>
-                <button type="button" class="btn btn-outline-secondary" onclick="location='list'">시작</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="location='login'">시작</button>
             </div>
         </form>
     </div>
