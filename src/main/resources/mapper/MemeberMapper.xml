@@ -8,8 +8,12 @@
         VALUES (#{userMember},#{userPw},#{userName},#{userEmailComplet},#{emailChk},#{userGender},curdate(),2)
     </insert>
 
-    <select id="insideLogin">
-
+    <select id="checkLogin" resultType="String">
+        SELECT USER_MEMBER
+        FROM member_tb
+        <where>
+            USER_MEMBER = ${loginId} AND password_member = ${loginPw}
+        </where>
     </select>
     <select id="deleteMember">
         DELETE FROM MEMBER_TB

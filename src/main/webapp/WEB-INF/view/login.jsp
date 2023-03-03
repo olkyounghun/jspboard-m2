@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <style>
@@ -18,7 +17,7 @@
 </head>
 <body>
     <div>
-       아이디 : <c:out value="${loginMember}">
+        아이디 : ${loginMember}
     </div>
     <div>
         <form method="post" action="login.jsp">

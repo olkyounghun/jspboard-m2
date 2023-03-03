@@ -24,15 +24,15 @@ public class MemberRepository {
     }
 
     public Optional<Member> findByLoginId(String loginId) {
-        /*List<Member> all = findAll();
+        List<Member> all = findAll();
         for (Member m : all) {
-            if (m.getLoginId().equals(loginId)) {
+            if (m.getUser_member().equals(loginId)) {
                 return Optional.of(m);
             }
         }
-        return Optional.empty();*/
-        return findAll().stream() // stream ??
-                .filter(m -> m.getUser_member().equals(loginId)).findFirst();  // findFirst ??
+        return Optional.empty();
+//        return findAll().stream() // stream ??
+//                .filter(m -> m.getUser_member().equals(loginId)).findFirst();  // findFirst ??
     }
 
     public List<Member> findAll() {

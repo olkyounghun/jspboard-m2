@@ -14,7 +14,7 @@ public interface MemberService {
                                @Param("userEmailComplet") String userEmailComplet,
                                @Param("emailChk") String emailChk);
 
-    void insideLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw);
+    String checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw);
 
 
     void deleteMember(@Param("id_member") int idMember);

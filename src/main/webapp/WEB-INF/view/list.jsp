@@ -20,7 +20,7 @@
 <body>
     <div>
         <c:forEach items="${login}" var="login">
-            <h1>로그인 : ${login.loginMember}</h1>
+            <h1>로그인 : ${login}</h1>
         </c:forEach>
     </div>
     <div class="mainContainer">

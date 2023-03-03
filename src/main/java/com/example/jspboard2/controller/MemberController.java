@@ -1,8 +1,10 @@
 package com.example.jspboard2.controller;
 
-import com.example.jspboard2.domain.*;
+import com.example.jspboard2.domain.LoginForm;
+import com.example.jspboard2.domain.LoginService;
+import com.example.jspboard2.domain.Member;
+import com.example.jspboard2.domain.MemberRepository;
 import com.example.jspboard2.service.MemberService;
-import com.example.jspboard2.service.SessionConst;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -78,7 +80,7 @@ public class MemberController {
             mv.setViewName("login");
             return mv;
         }
-        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+        session.setAttribute("login", loginMember.getUser_member());
         List<Member> list;
         list = memberService.getMember(idMember);
         mv.addObject("list",list);
@@ -108,7 +110,7 @@ public class MemberController {
             memberService.deleteMember(idMember);
             mv.setViewName("manager");
         }
-        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+        session.setAttribute("login", loginMember.getUser_member());
 
         return mv;
     }

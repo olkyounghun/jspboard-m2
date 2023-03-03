@@ -22,9 +22,7 @@ public class MemberServiceImple implements MemberService {
                                       @Param("emailChk") String emailChk){
     }
 
-    public void insideLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw) {
-
-    }
+    public String checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw) {return memberMapper.checkLogin(loginID,loginPw);}
 
     public void deleteMember(@Param("id_member") int idMember){
 

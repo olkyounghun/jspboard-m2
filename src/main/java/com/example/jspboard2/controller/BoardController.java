@@ -39,7 +39,7 @@ public class BoardController {
         ModelAndView mv = new ModelAndView();
         Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
         HttpSession session = request.getSession();
-        session.setAttribute("login", loginMember);
+        session.setAttribute("login", loginMember.getUser_member());
         Paging paging = new Paging();
         int count = boardService.getAllCount();
 
