@@ -17,22 +17,22 @@
 </head>
 <body>
     <div>
-        아이디 : ${loginMember}
+        아이디 : ${sessionScope.userName}
     </div>
     <div>
-        <form method="post" action="login.jsp">
+        <form method="post" action="login">
             <div class="input-group" >
                 <span class="input-group-text" id="basic-addon1">ID</span>
-                <input id="loginID" name="loginID" type="text" class="form-control">
+                <input id="loginId" name="loginId" type="text" class="form-control">
             </div>
             <div class="input-group" style=>
                 <span class="input-group-text" id="basic-addon2">PW</span>
-                <input type="password" id="loginPW" name="loginPw" class="form-control">
+                <input type="password" id="loginPw" name="loginPw" class="form-control">
             </div>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-outline-secondary" onclick="location='home'">메인</button>
                 <button type="button" class="btn btn-outline-secondary" onclick="location='signup'">가입</button>
-                <button type="button" class="btn btn-outline-secondary" onclick="location='login'">시작</button>
+                <button type="submit" class="btn btn-outline-secondary" >시작</button>
             </div>
         </form>
     </div>

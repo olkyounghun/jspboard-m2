@@ -31,13 +31,13 @@ public class BoardController {
     }
 
     @RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView getBoardList(@Valid @ModelAttribute LoginForm form,
+    public ModelAndView getBoardList(@Valid @ModelAttribute("mv") Member member,
                                      BindingResult bindingResult,
                                      HttpServletRequest request,
                                      @RequestParam(value = "page", required = false,defaultValue = "1") int page){
 
         ModelAndView mv = new ModelAndView();
-        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
+        Member loginMember = loginService.login(member.getUser_member(), member.getPassword_member());
         HttpSession session = request.getSession();
         session.setAttribute("login", loginMember.getUser_member());
         Paging paging = new Paging();

@@ -28,18 +28,7 @@ public class LoginController {
 
     private final MemberService memberService;
 
-    @GetMapping("/login")
-    public ModelAndView loginForm(HttpServletRequest request
-                            , @ModelAttribute("loginMember") Member loginMember) {
 
-        ModelAndView mv = new ModelAndView();
-        HttpSession session = request.getSession();
-        String logindata = (String)session.getAttribute("loginMember");
-        mv.addObject("loginMember",logindata);
-        mv.setViewName("login");
-
-        return mv;
-    }
 //
 //    @PostMapping("/login")
 //    public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult) { // valid 와 modelAttribute ??
@@ -60,11 +49,24 @@ public class LoginController {
 //    }
 
     // //
+
+    @GetMapping("/login")
+    public ModelAndView loginForm(HttpServletRequest request) {
+
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        String logindata = (String)session.getAttribute("userName");
+        mv.addObject("userName",logindata);
+        mv.setViewName("login");
+
+        return mv;
+    }
     @PostMapping("/login")
-    public ModelAndView loginV3(@Valid @Param("loginId") String loginId,
-                                @Param("loginPw") String loginPw,
-                                BindingResult bindingResult,
-                                HttpServletRequest request) {
+    public ModelAndView loginV3( @Param("loginId") String loginId,
+                                 @Param("loginPw") String loginPw,
+                                 @Valid Member member,
+                                 BindingResult bindingResult,
+                                 HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         if (bindingResult.hasErrors()) {
             mv.setViewName("login");
@@ -84,8 +86,9 @@ public class LoginController {
         // 로그인 성공 처리
         //세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
         HttpSession session = request.getSession(); //세션에 로그인 회원 정보 보관
-        session.setAttribute("loginMember", loginMember);
-        mv.addObject("loginMember",loginMember);
+        session.setAttribute("userName", loginMember);
+        mv.addObject("userName",loginMember);
+        mv.setViewName("login");
         return mv;
     }
 
