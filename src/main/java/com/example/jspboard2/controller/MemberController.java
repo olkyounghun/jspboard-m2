@@ -1,9 +1,6 @@
 package com.example.jspboard2.controller;
 
-import com.example.jspboard2.domain.LoginForm;
-import com.example.jspboard2.domain.LoginService;
 import com.example.jspboard2.domain.Member;
-import com.example.jspboard2.domain.MemberRepository;
 import com.example.jspboard2.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
@@ -25,14 +22,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
 
-    private final MemberRepository memberRepository;
-
     @Resource
     private MemberService memberService;
-
-    @Resource
-    private LoginService loginService;
-
 
 
     @RequestMapping(value = "/signup", method = {RequestMethod.GET})
@@ -63,7 +54,7 @@ public class MemberController {
     }
 
     @GetMapping("/membermodify")
-    public ModelAndView movePosting(@Valid @ModelAttribute LoginForm form,
+    public ModelAndView movePosting(@Valid @ModelAttribute Member member,
                                     BindingResult bindingResult,
                                     HttpServletRequest request,
                                     @Param("id_member") int idMember){
@@ -74,13 +65,13 @@ public class MemberController {
             return mv;
         }
 
-        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
+        String loginMember = memberService.checkLogin(member.getUser_member(), member.getPassword_member());
         HttpSession session = request.getSession();
-        if(loginMember.getRating_member() != 1){
+        if(member.getRating_member() != 1){
             mv.setViewName("login");
             return mv;
         }
-        session.setAttribute("login", loginMember.getUser_member());
+        session.setAttribute("userName", loginMember);
         List<Member> list;
         list = memberService.getMember(idMember);
         mv.addObject("list",list);
@@ -90,7 +81,7 @@ public class MemberController {
     }
 
     @GetMapping ("membermodify/deleteMember")
-    public ModelAndView deleteMember(@Valid @ModelAttribute LoginForm form,
+    public ModelAndView deleteMember(@Valid @ModelAttribute Member member,
                                BindingResult bindingResult,
                                HttpServletRequest request,
                                @Param("id_member") int idMember){
@@ -101,16 +92,16 @@ public class MemberController {
             return mv;
         }
 
-        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
+        String loginMember = memberService.checkLogin(member.getUser_member(), member.getPassword_member());
         HttpSession session = request.getSession();
-        if(loginMember.getRating_member() != 1){
+        if(member.getRating_member() != 1){
             mv.setViewName("login");
             return mv;
         }else{
             memberService.deleteMember(idMember);
             mv.setViewName("manager");
         }
-        session.setAttribute("login", loginMember.getUser_member());
+        session.setAttribute("userName", loginMember);
 
         return mv;
     }

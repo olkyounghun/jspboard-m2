@@ -19,7 +19,7 @@
 </script>
 <body>
     <div>
-        <h1>로그인 : ${userName}</h1>
+        <h1>로그인 : ${sessionScope.userName}</h1>
     </div>
     <div class="mainContainer">
         <form method="get">

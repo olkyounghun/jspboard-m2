@@ -1,10 +1,7 @@
 package com.example.jspboard2.controller;
 
-import com.example.jspboard2.domain.LoginForm;
-import com.example.jspboard2.domain.LoginService;
 import com.example.jspboard2.domain.Member;
 import com.example.jspboard2.service.MemberService;
-import com.example.jspboard2.service.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
@@ -24,10 +21,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class LoginController {
 
-    private final LoginService loginService;
-
     private final MemberService memberService;
-
 
 //
 //    @PostMapping("/login")
@@ -102,7 +96,7 @@ public class LoginController {
     }
 
     @GetMapping("/manager")
-    public String managerLogin(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request){
+    public String managerLogin(@Valid @ModelAttribute Member member, BindingResult bindingResult, HttpServletRequest request){
 
         String moveHere;
 
@@ -110,11 +104,11 @@ public class LoginController {
             return "login";
         }
 
-        Member loginMember = loginService.login(form.getLoginId(),form.getPassword());
+        String loginMember = memberService.checkLogin(member.getUser_member(),member.getPassword_member());
         HttpSession session = request.getSession();
-        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+        session.setAttribute("userName", loginMember);
 
-        if(loginMember.getRating_member() == 1){
+        if(member.getRating_member() == 1){
             moveHere = "manager";
         }else{
             moveHere = "login";

@@ -1,8 +1,10 @@
 package com.example.jspboard2.controller;
 
-import com.example.jspboard2.domain.*;
+import com.example.jspboard2.domain.Board;
+import com.example.jspboard2.domain.Member;
+import com.example.jspboard2.domain.Paging;
 import com.example.jspboard2.service.BoardService;
-import com.example.jspboard2.service.SessionConst;
+import com.example.jspboard2.service.MemberService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,7 +25,7 @@ public class BoardController {
     private BoardService boardService;
 
     @Resource
-    private LoginService loginService;
+    private MemberService memberService;
 
     @GetMapping("/home")
     public String main(){
@@ -37,9 +39,9 @@ public class BoardController {
                                      @RequestParam(value = "page", required = false,defaultValue = "1") int page){
 
         ModelAndView mv = new ModelAndView();
-        Member loginMember = loginService.login(member.getUser_member(), member.getPassword_member());
+
         HttpSession session = request.getSession();
-        session.setAttribute("login", loginMember.getUser_member());
+        String userName = (String) session.getAttribute("userName");
         Paging paging = new Paging();
         int count = boardService.getAllCount();
 
@@ -51,7 +53,7 @@ public class BoardController {
 
         List<Board> list;
         list = boardService.getBoardList(beginpage,endpage,page);
-        mv.addObject("login",session.getAttribute("login"));
+        mv.addObject("userName",userName);
         mv.addObject("list", list);
         mv.addObject("paging", paging);
         mv.setViewName("list");
@@ -96,7 +98,7 @@ public class BoardController {
 //    }
 
     @GetMapping("/posting")
-    public String movePosting(@Valid @ModelAttribute LoginForm form,
+    public String movePosting(@Valid @ModelAttribute Member member,
                               BindingResult bindingResult,
                               HttpServletRequest request){
 
@@ -104,9 +106,9 @@ public class BoardController {
             return "login";
         }
 
-        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
+        String loginMember = memberService.checkLogin(member.getUser_member(), member.getPassword_member());
         HttpSession session = request.getSession();
-        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+        session.setAttribute("userName", loginMember);
 
         return "posting";
     }
@@ -133,7 +135,7 @@ public class BoardController {
 
     @GetMapping("/modify")
     public ModelAndView boardModify(@Param("id_board") int id_board,
-                                    @Valid @ModelAttribute LoginForm form,
+                                    @Valid @ModelAttribute Member member,
                                     HttpServletRequest request,
                                     BindingResult bindingResult){
 
@@ -142,9 +144,9 @@ public class BoardController {
             mv.setViewName("login");
             return mv;
         }
-        Member loginMember = loginService.login(form.getLoginId(),form.getPassword());
+        String loginMember = memberService.checkLogin(member.getUser_member(),member.getPassword_member());
         HttpSession session = request.getSession();
-        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+        session.setAttribute("userName", loginMember);
 
         List<Board> list;
         list = boardService.getDetailBoard(id_board);
@@ -178,7 +180,7 @@ public class BoardController {
 
     @GetMapping("/detail")
     public ModelAndView boardDetail(@RequestParam(value = "id_board", required = false) int id_board,
-                                    @Valid @ModelAttribute LoginForm form,
+                                    @Valid @ModelAttribute Member member,
                                     BindingResult bindingResult,
                                     HttpServletRequest request){
 
@@ -187,9 +189,9 @@ public class BoardController {
             mv.setViewName("login");
             return mv;
         }
-        Member loginMember = loginService.login(form.getLoginId(),form.getPassword());
+        String loginMember = memberService.checkLogin(member.getUser_member(),member.getPassword_member());
         HttpSession session = request.getSession();
-        session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
+        session.setAttribute("userName", loginMember);
 
         List<Board> list;
         list = boardService.getDetailBoard(id_board);
