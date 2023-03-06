@@ -19,7 +19,9 @@
 </script>
 <body>
     <div>
-        <h1>로그인 : ${sessionScope.userName}</h1>
+        <c:if test="${sessionScope.userName ne null}">
+            ${sessionScope.userName} 님 환영합니다.
+        </c:if>
     </div>
     <div class="mainContainer">
         <form method="get">
@@ -70,25 +72,30 @@
                 </table>
             </div>
         </div>
-    </div>
-    <div id="paging">
-        <!-- 1~10까지 있는 페이지의 페이징 -->
-        <c:if test="${paging.prev}">
-            <a href=list?page=${paging.beginPage-1}">prev</a>
-        </c:if>
-        <c:forEach begin="${paging.beginPage}" end="${paging.endPage}" step="1" var="index">
-            <c:choose>
-                <c:when test="${paging.page==index}">
-                    ${index}
-                </c:when>
-                <c:otherwise>
-                    <a href="list?page=${index}">${index}</a>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-        <c:if test="${paging.next}">
-            <a href="list?page=${paging.endPage+1}">next</a>
-        </c:if>
+        <div id="paging">
+            <!-- 1~10까지 있는 페이지의 페이징 -->
+            <c:if test="${paging.prev}">
+                <a href=list?page=${paging.beginPage-1}">prev</a>
+            </c:if>
+            <c:forEach begin="${paging.beginPage}" end="${paging.endPage}" step="1" var="index">
+                <c:choose>
+                    <c:when test="${paging.page==index}">
+                        ${index}
+                    </c:when>
+                    <c:otherwise>
+                        <a href="list?page=${index}">${index}</a>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+            <c:if test="${paging.next}">
+                <a href="list?page=${paging.endPage+1}">next</a>
+            </c:if>
+        </div>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-secondary" onclick="location='home'">메인</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="location='posting'">작성</button>
+            <button type="submit" class="btn btn-outline-secondary" onclick="location='login'">로그인</button>
+        </div>
     </div>
 </body>
 </html>

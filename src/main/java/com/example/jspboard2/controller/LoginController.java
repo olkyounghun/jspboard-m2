@@ -82,7 +82,7 @@ public class LoginController {
         HttpSession session = request.getSession(); //세션에 로그인 회원 정보 보관
         session.setAttribute("userName", loginMember);
         mv.addObject("userName",loginMember);
-        mv.setViewName("login");
+        mv.setViewName("home");
         return mv;
     }
 
