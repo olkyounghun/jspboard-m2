@@ -40,9 +40,6 @@
             </div>
         </form>
         <div>
-            체크유저
-        </div>
-        <div>
             <div>
                 <table>
                     <thead>
@@ -61,7 +58,7 @@
                             <tr>
                                 <td>${list.id_board}</td>
                                 <td>${list.type_board}</td>
-                                <td><a href="/detail?id_board=${list.id_board}">${list.title_board}</a></td>
+                                <td><a href="/detail/${list.id_board}">${list.title_board}</a></td>
                                 <td>${list.user_board}</td>
                                 <td>${list.views_board}</td>
                                 <td><fmt:formatDate value="${list.regdate_board}" pattern="yyyy-MM-dd  HH:mm:ss" type="date"/></td>
@@ -95,6 +92,9 @@
             <button type="button" class="btn btn-outline-secondary" onclick="location='home'">메인</button>
             <button type="button" class="btn btn-outline-secondary" onclick="location='posting'">작성</button>
             <button type="submit" class="btn btn-outline-secondary" onclick="location='login'">로그인</button>
+            <c:if test="${sessionScope.userName ne null}">
+                <button type="button" class="btn btn-outline-secondary" onclick="location='manager'">회원관리</button>
+            </c:if>
         </div>
     </div>
 </body>

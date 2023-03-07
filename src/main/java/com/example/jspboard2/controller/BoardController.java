@@ -178,7 +178,7 @@ public class BoardController {
         return mv;
     }
 
-    @GetMapping("/detail")
+    @GetMapping("/detail/{id_board}")
     public ModelAndView boardDetail(@RequestParam(value = "id_board", required = false) int id_board,
                                     @Valid @ModelAttribute Member member,
                                     BindingResult bindingResult,
@@ -189,14 +189,13 @@ public class BoardController {
             mv.setViewName("login");
             return mv;
         }
-        String loginMember = memberService.checkLogin(member.getUser_member(),member.getPassword_member());
         HttpSession session = request.getSession();
-        session.setAttribute("userName", loginMember);
+        session.getAttribute("userName");
 
         List<Board> list;
         list = boardService.getDetailBoard(id_board);
         mv.addObject("list", list);
-        mv.setViewName("detail?id_board="+id_board);
+        mv.setViewName("detail");
 
         return mv;
     }
