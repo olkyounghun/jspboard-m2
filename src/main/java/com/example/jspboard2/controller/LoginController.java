@@ -96,25 +96,27 @@ public class LoginController {
     }
 
     @GetMapping("/manager")
-    public String managerLogin(@Valid @ModelAttribute Member member, BindingResult bindingResult, HttpServletRequest request){
+    public ModelAndView managerLogin(@Valid @ModelAttribute Member member, BindingResult bindingResult, HttpServletRequest request){
 
-        String moveHere;
+        ModelAndView mv = new ModelAndView();
 
         if (bindingResult.hasErrors()) {
-            return "login";
+            mv.setViewName("login");
+            return mv;
         }
 
-        String loginMember = memberService.checkLogin(member.getUser_member(),member.getPassword_member());
         HttpSession session = request.getSession();
-        session.setAttribute("userName", loginMember);
+        session.getAttribute("userName");
+        String userName = (String)session.getAttribute("userName");
+        Member userInfo;
+        userInfo = memberService.getuserName(userName);
 
-        if(member.getRating_member() == 1){
-            moveHere = "manager";
+        if(userInfo.getRating_member() == 2){
+            mv.setViewName("manager");
         }else{
-            moveHere = "login";
+            mv.setViewName("login");
         }
-
-        return moveHere;
+        return mv;
     }
 
 }

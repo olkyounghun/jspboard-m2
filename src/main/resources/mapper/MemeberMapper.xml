@@ -18,14 +18,21 @@
     <select id="deleteMember">
         DELETE FROM MEMBER_TB
         <where>
-            ID_MEMBER = ${idMember}
+            ID_MEMBER = #{idMember}
         </where>
     </select>
     <select id="getMember" resultType="com.example.jspboard2.domain.Member">
         SELECT *
         FROM member_tb
         <where>
-            ID_MEMBER = ${idMember}
+            ID_MEMBER = #{idMember}
+        </where>
+    </select>
+    <select id="getuserName" resultType="com.example.jspboard2.domain.Member">
+        SELECT *
+        FROM member_tb
+        <where>
+            USER_MEMBER = #{userName}
         </where>
     </select>
 </mapper>

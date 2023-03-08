@@ -22,4 +22,6 @@ public interface MemberMapper {
 
     List<Member> getMember(@Param("idMember") int idMember);
 
+    Member getuserName(@Param("userName") String userName);
+
 }
