@@ -25,6 +25,11 @@
 
 </script>
 <body>
+<div>
+    <c:if test="${sessionScope.userName ne null}">
+        ${sessionScope.userName} 님 환영합니다.
+    </c:if>
+</div>
 <div class="mainContainer">
     <form method="get">
         <div>
@@ -36,36 +41,52 @@
         </div>
     </form>
     <div>
-        체크유저
-    </div>
-    <div>
         <div>
             <table>
                 <thead>
-                <tr>
-                    <td> 번호</td>
-                    <td> 아이디</td>
-                    <td> 이름</td>
-                    <td> 이메일</td>
-                    <td> 회원가입날짜</td>
-                    <td> 등급</td>
-                </tr>
+                    <tr>
+                        <td> 번호</td>
+                        <td> 아이디</td>
+                        <td> 이름</td>
+                        <td> 이메일</td>
+                        <td> 회원가입날짜</td>
+                        <td> 등급</td>
+                    </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${list}" var="list">
-                    <tr>
-                        <td>${list.id_member}</td>
-                        <td>${list.user_member}</td>
-                        <td>${list.name_member}</td>
-                        <td>${list.email_member}</td>
-                        <td>${list.emailcheck_member}</td>
-                        <td><fmt:formatDate value="${list.regdate_member}" pattern="yyyy-MM-dd  HH:mm:ss" type="date"/></td>
-                        <td>${list.rating_member}</td>
-                    </tr>
-                </c:forEach>
+                    <c:forEach items="${list}" var="list">
+                        <tr>
+                            <td>${list.id_member}</td>
+                            <td>${list.user_member}</td>
+                            <td>${list.name_member}</td>
+                            <td>${list.email_member}</td>
+                            <td>${list.emailcheck_member}</td>
+                            <td><fmt:formatDate value="${list.regdate_member}" pattern="yyyy-MM-dd  HH:mm:ss" type="date"/></td>
+                            <td>${list.rating_member}</td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
+    </div>
+    <div id="paging">
+        <!-- 1~10까지 있는 페이지의 페이징 -->
+        <c:if test="${paging.prev}">
+            <a href=manager?page=${paging.beginPage-1}">prev</a>
+        </c:if>
+        <c:forEach begin="${paging.beginPage}" end="${paging.endPage}" step="1" var="index">
+            <c:choose>
+                <c:when test="${paging.page==index}">
+                    ${index}
+                </c:when>
+                <c:otherwise>
+                    <a href="manager?page=${index}">${index}</a>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+        <c:if test="${paging.next}">
+            <a href="manager?page=${paging.endPage+1}">next</a>
+        </c:if>
     </div>
 </div>
 </body>

@@ -22,6 +22,12 @@ public interface MemberMapper {
 
     List<Member> getMember(@Param("idMember") int idMember);
 
+    int getAllManager();
+
+    List<Member> getManagerMember(@Param("beginpage")int beginpage,
+                                  @Param("endpage") int endpage,
+                                  @Param("page") int page);
+
     Member getuserName(@Param("userName") String userName);
 
 }

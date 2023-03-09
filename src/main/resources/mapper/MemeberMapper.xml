@@ -28,11 +28,26 @@
             ID_MEMBER = #{idMember}
         </where>
     </select>
+    <select id="getManagerMember" resultType="com.example.jspboard2.domain.Member" parameterType="int">
+        SELECT *
+        FROM(
+                SELECT *
+                FROM (
+                         SELECT @rownum := @rownum + 1 as row_num, member_tb.*
+                         FROM member_tb , (SELECT @rownum := 0) r
+                     ) a
+                WHERE row_num >= 1
+            ) b
+        WHERE row_num <![CDATA[<=]]> 10;
+    </select>
     <select id="getuserName" resultType="com.example.jspboard2.domain.Member">
         SELECT *
         FROM member_tb
         <where>
             USER_MEMBER = #{userName}
         </where>
+    </select>
+    <select id="getAllManager" resultType="java.lang.Integer">
+        SELECT COUNT(*) as count FROM member_tb;
     </select>
 </mapper>

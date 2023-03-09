@@ -1,20 +1,20 @@
 package com.example.jspboard2.controller;
 
 import com.example.jspboard2.domain.Member;
+import com.example.jspboard2.domain.Paging;
 import com.example.jspboard2.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -95,8 +95,9 @@ public class LoginController {
         return "redirect:/";
     }
 
-    @GetMapping("/manager")
-    public ModelAndView managerLogin(@Valid @ModelAttribute Member member, BindingResult bindingResult, HttpServletRequest request){
+    @RequestMapping(value="/manager", method={RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView managerLogin(@Valid @ModelAttribute Member member, BindingResult bindingResult, HttpServletRequest request,
+                                     @RequestParam(value = "page", required = false,defaultValue = "1") int page){
 
         ModelAndView mv = new ModelAndView();
 
@@ -113,9 +114,23 @@ public class LoginController {
 
         if(userInfo.getRating_member() == 2){
             mv.setViewName("manager");
+            Paging paging = new Paging();
+            int count = memberService.getAllManager();
+
+            paging.setPage(page);
+            paging.setTotalCount(count);
+            int beginpage = paging.getBeginPage();
+            int endpage = paging.getEndPage();
+
+
+            List<Member> list;
+            list = memberService.getManagerMember(beginpage,endpage,page);
+            mv.addObject("list",list);
+            mv.addObject("paging", paging);
         }else{
-            mv.setViewName("login");
+            mv.setViewName("list");
         }
+
         return mv;
     }
 
