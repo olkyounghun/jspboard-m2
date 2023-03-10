@@ -28,4 +28,6 @@ public interface MemberService {
 
     Member getuserName(@Param("userName") String userName);
 
+    List<Member> getMemberInfo(@Param("id_member") int id_member);
+
 }

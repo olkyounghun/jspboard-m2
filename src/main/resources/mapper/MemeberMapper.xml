@@ -50,4 +50,11 @@
     <select id="getAllManager" resultType="java.lang.Integer">
         SELECT COUNT(*) as count FROM member_tb;
     </select>
+    <select id="getMemberInfo" resultType="com.example.jspboard2.domain.Member" parameterType="int">
+        SELECT *
+        FROM member_tb
+        <where>
+            ID_MEMBER = #{id_member}
+        </where>
+    </select>
 </mapper>

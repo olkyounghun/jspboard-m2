@@ -38,4 +38,6 @@ public class MemberServiceImple implements MemberService {
 
     public Member getuserName(@Param("userName") String userName){return memberMapper.getuserName(userName);}
 
+    public List<Member> getMemberInfo(@Param("id_member") int id_member){return memberMapper.getMemberInfo(id_member);}
+
 }

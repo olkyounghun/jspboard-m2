@@ -134,4 +134,29 @@ public class LoginController {
         return mv;
     }
 
+    @GetMapping("/memberinfo/{id_member}")
+    public ModelAndView MemberDetail(@PathVariable("id_member") Integer id_member,
+                                     @Valid @ModelAttribute Member member,
+                                     BindingResult bindingResult,
+                                     HttpServletRequest request){
+
+        ModelAndView mv = new ModelAndView();
+
+        if (bindingResult.hasErrors()) {
+            mv.setViewName("login");
+            return mv;
+        }
+
+        HttpSession session = request.getSession();
+        session.getAttribute("userName");
+
+        List<Member> list;
+        list = memberService.getMemberInfo(id_member);
+
+        mv.addObject("list",list);
+        mv.setViewName("memberinfo");
+
+        return mv;
+    }
+
 }
