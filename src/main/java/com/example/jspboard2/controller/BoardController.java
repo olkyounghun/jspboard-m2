@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
 public class BoardController {
 
     @Resource
@@ -28,8 +28,22 @@ public class BoardController {
     private MemberService memberService;
 
     @GetMapping("/home")
-    public String main(){
-        return "home";
+    public ModelAndView main(@Valid @ModelAttribute Member member,
+                             BindingResult bindingResult,
+                             HttpServletRequest request){
+
+        HttpSession session = request.getSession();
+        ModelAndView mv = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+            RedirectView redirectView = new RedirectView("/login");
+            redirectView.setExposeModelAttributes(false);
+            mv.setViewName("login");
+            return mv;
+        }
+        session.getAttribute("userName");
+        mv.setViewName("home");
+
+        return mv;
     }
 
     @RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})

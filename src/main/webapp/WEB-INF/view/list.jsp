@@ -91,8 +91,11 @@
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-outline-secondary" onclick="location='home'">메인</button>
             <button type="button" class="btn btn-outline-secondary" onclick="location='posting'">작성</button>
-            <button type="submit" class="btn btn-outline-secondary" onclick="location='login'">로그인</button>
-            <c:if test="${sessionScope.userName ne null}">
+            <c:choose>
+                <c:when test="${sessionScope.userName ne null}"><button type="button" class="btn btn-outline-secondary" onclick="location='logout'">로그아웃</button></c:when>
+                <c:otherwise><button type="button" class="btn btn-outline-secondary" onclick="location='login'">로그인</button></c:otherwise>
+            </c:choose>
+            <c:if test="${sessionScope.userName eq 'admin'}">
                 <button type="button" class="btn btn-outline-secondary" onclick="location='manager'">회원관리</button>
             </c:if>
         </div>

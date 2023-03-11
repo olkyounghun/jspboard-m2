@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,28 +24,7 @@ public class LoginController {
 
     private final MemberService memberService;
 
-//
-//    @PostMapping("/login")
-//    public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult) { // valid 와 modelAttribute ??
-//        if (bindingResult.hasErrors()) {
-//            return "login";
-//        }
-//
-//        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
-//
-//        if(loginMember == null) {
-//            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");  // binding ??
-//            return "login";
-//        }
-//
-//        // 로그인 성공 처리 TODO
-//
-//        return "redirect:/";
-//    }
-
-    // //
-
-    @GetMapping("/login")
+    @GetMapping(value={"/login", "/"})
     public ModelAndView loginForm(HttpServletRequest request) {
 
         ModelAndView mv = new ModelAndView();
@@ -56,7 +36,7 @@ public class LoginController {
         return mv;
     }
     @PostMapping("/login")
-    public ModelAndView loginV3( @Param("loginId") String loginId,
+    public ModelAndView StartLogin( @Param("loginId") String loginId,
                                  @Param("loginPw") String loginPw,
                                  @Valid Member member,
                                  BindingResult bindingResult,
@@ -82,17 +62,20 @@ public class LoginController {
         HttpSession session = request.getSession(); //세션에 로그인 회원 정보 보관
         session.setAttribute("userName", loginMember);
         mv.addObject("userName",loginMember);
+        RedirectView redirectView = new RedirectView("/home");
+        redirectView.setExposeModelAttributes(false);
         mv.setViewName("home");
+
         return mv;
     }
 
-    @PostMapping("/logout")
-    public String logoutV3(HttpServletRequest request) {
+    @RequestMapping(value = "/logout", method={RequestMethod.GET,RequestMethod.POST})
+    public String EndLogout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
-        return "redirect:/";
+        return "login";
     }
 
     @RequestMapping(value="/manager", method={RequestMethod.GET,RequestMethod.POST})
@@ -102,6 +85,8 @@ public class LoginController {
         ModelAndView mv = new ModelAndView();
 
         if (bindingResult.hasErrors()) {
+            RedirectView redirectView = new RedirectView("/login");
+            redirectView.setExposeModelAttributes(false);
             mv.setViewName("login");
             return mv;
         }
@@ -113,6 +98,8 @@ public class LoginController {
         userInfo = memberService.getuserName(userName);
 
         if(userInfo.getRating_member() == 2){
+            RedirectView redirectView = new RedirectView("/manager");
+            redirectView.setExposeModelAttributes(false);
             mv.setViewName("manager");
             Paging paging = new Paging();
             int count = memberService.getAllManager();
@@ -128,6 +115,8 @@ public class LoginController {
             mv.addObject("list",list);
             mv.addObject("paging", paging);
         }else{
+            RedirectView redirectView = new RedirectView("/list");
+            redirectView.setExposeModelAttributes(false);
             mv.setViewName("list");
         }
 
@@ -143,6 +132,8 @@ public class LoginController {
         ModelAndView mv = new ModelAndView();
 
         if (bindingResult.hasErrors()) {
+            RedirectView redirectView = new RedirectView("/login");
+            redirectView.setExposeModelAttributes(false);
             mv.setViewName("login");
             return mv;
         }
@@ -154,6 +145,8 @@ public class LoginController {
         list = memberService.getMemberInfo(id_member);
 
         mv.addObject("list",list);
+        RedirectView redirectView = new RedirectView("/memberinfo");
+        redirectView.setExposeModelAttributes(false);
         mv.setViewName("memberinfo");
 
         return mv;
