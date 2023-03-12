@@ -32,9 +32,9 @@ public class BoardController {
                              BindingResult bindingResult,
                              HttpServletRequest request){
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
         ModelAndView mv = new ModelAndView();
-        if (bindingResult.hasErrors()) {
+        if (session == null) {
             RedirectView redirectView = new RedirectView("/login");
             redirectView.setExposeModelAttributes(false);
             mv.setViewName("login");

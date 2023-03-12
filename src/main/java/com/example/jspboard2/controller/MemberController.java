@@ -35,22 +35,32 @@ public class MemberController {
 
 
     @RequestMapping(value = "/signup", method = {RequestMethod.POST})
-    public String getMembership(@Param("userMember") String userMember,
+    public ModelAndView getMembership(@Param("userMember") String userMember,
                                 @Param("userPw") String userPw,
                                 @Param("userName") String userName,
                                 @Param("userGender") String userGender,
                                 @Param("userEmail1") String userEmail1,
                                 @Param("userEmail2") String userEmail2,
-                                @Param("emailChk") String emailChk) {
+                                @Param("emailChk") String emailChk,
+                                HttpServletRequest request) {
 
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+            session = request.getSession();
+        }
         if(userMember == null || userPw == null || userName == null || userGender == null || userEmail1 == null || userEmail2 == null || emailChk == null){
-            return "signup";
+            mv.setViewName("signup");
+            return mv;
         }
 
         String userEmailComplet = userEmail1 + "@" + userEmail2;
         memberService.getMembership(userMember,userPw,userName,userGender,userEmailComplet,emailChk);
 
-        return "login";
+        session.setAttribute("userName",userMember);
+        mv.setViewName("home");
+        return mv;
     }
 
     @GetMapping("/membermodify")
