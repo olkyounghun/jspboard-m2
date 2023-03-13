@@ -50,13 +50,12 @@ public class MemberController {
             session.invalidate();
             session = request.getSession();
         }
-        if(userMember == null || userPw == null || userName == null || userGender == null || userEmail1 == null || userEmail2 == null || emailChk == null){
-            mv.setViewName("signup");
-            return mv;
-        }
 
         String userEmailComplet = userEmail1 + "@" + userEmail2;
         memberService.getMembership(userMember,userPw,userName,userGender,userEmailComplet,emailChk);
+        Member member = new Member();
+        member.setMember(userMember,userPw,userName,userEmailComplet,userGender);
+        member.printValue();
 
         session.setAttribute("userName",userMember);
         mv.setViewName("home");

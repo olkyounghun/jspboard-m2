@@ -17,6 +17,20 @@ public class Member {
     private Date regdate_member; // 멤버 회원가입날짜
     private Integer rating_member; // 멤버 등급 기본회원일겨우 '2' default
 
+    public void setMember(String user_member,String password_member, String name_member, String email_member, String gender_member){
+        this.user_member = user_member;
+        this.password_member = password_member;
+        this.name_member = name_member;
+        this.email_member = email_member;
+        this.gender_member = gender_member;
+    }
+    public void printValue(){
+        System.out.println("user_member : " + user_member);
+        System.out.println("password_member : " + password_member);
+        System.out.println("name_member : " + name_member);
+        System.out.println("email_member : " + email_member);
+        System.out.println("gender_member : " + gender_member);
 
+    }
 
 }

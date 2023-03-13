@@ -29,7 +29,7 @@
   <title>Model-2 게시판</title>
 </head>
 <body>
-<form id="formsighup" name="formsighup" method="post" action="signup" >
+<form method="post" action="signup" >
   <div>
     <div class="container">
       <div class="row">
