@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.jspboard2.mapper.MemberMapper">
-    <insert id="getMembership" >
+    <select id="getMembership" resultType="com.example.jspboard2.domain.Member">
         INSERT INTO
             member_tb (USER_MEMBER,
                        PASSWORD_MEMBER,
@@ -20,7 +20,7 @@
                        #{userGender},
                        curdate(),
                        2)
-    </insert>
+    </select>
 
     <select id="checkLogin" resultType="String">
         SELECT USER_MEMBER

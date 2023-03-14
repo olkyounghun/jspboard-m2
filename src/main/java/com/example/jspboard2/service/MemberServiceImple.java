@@ -14,12 +14,12 @@ public class MemberServiceImple implements MemberService {
 
     public MemberServiceImple(MemberMapper memberMapper){this.memberMapper = memberMapper; }
 
-    public void getMembership(@Param("userMember") String userMember,
+    public List<Member> getMembership(@Param("userMember") String userMember,
                                       @Param("userPw") String userPw,
                                       @Param("userName") String userName,
                                       @Param("userGender") String userGender,
                                       @Param("userEmailComplet") String userEmailComplet,
-                                      @Param("emailChk") String emailChk){
+                                      @Param("emailChk") String emailChk){return memberMapper.getMembership(userMember,userPw,userName,userGender,userEmailComplet,emailChk);
     }
 
     public String checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw) {return memberMapper.checkLogin(loginID,loginPw);}

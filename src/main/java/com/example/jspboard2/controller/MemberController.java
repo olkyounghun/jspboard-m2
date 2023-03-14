@@ -52,7 +52,8 @@ public class MemberController {
         }
 
         String userEmailComplet = userEmail1 + "@" + userEmail2;
-        memberService.getMembership(userMember,userPw,userName,userGender,userEmailComplet,emailChk);
+        List<Member> list;
+        list  = memberService.getMembership(userMember,userPw,userName,userGender,userEmailComplet,emailChk);
         Member member = new Member();
         member.setMember(userMember,userPw,userName,userEmailComplet,userGender);
         member.printValue();

@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface MemberMapper {
 
-    void getMembership(@Param("userMember") String userMember,
+    List<Member> getMembership(@Param("userMember") String userMember,
                                @Param("userPw") String userPw,
                                @Param("userName") String userName,
                                @Param("userGender") String userGender,
