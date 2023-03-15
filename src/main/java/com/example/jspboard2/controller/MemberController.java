@@ -104,30 +104,21 @@ public class MemberController {
 
         String loginMember = memberService.checkLogin(member.getUser_member(), member.getPassword_member());
         HttpSession session = request.getSession();
-        if(member.getRating_member() != 1){
+        if(member.getRating_member() != 1 || member.getId_member() != idMember){ // 둘다 아니라면 로그인
             mv.setViewName("login");
             return mv;
-        }else{
+        }else if(member.getRating_member() == 1){ // 관리자가 개인 멤버 삭제시
             memberService.deleteMember(idMember);
             mv.setViewName("manager");
+        }else{ // 멤버 본인일때 본인 회원정보 삭제시
+            memberService.deleteMember(idMember);
+            mv.setViewName("login");
         }
         session.setAttribute("userName", loginMember);
 
         return mv;
     }
 
-
-    /*@GetMapping("/login")
-    public  String goLogin() {return "login";}
-
-    @PostMapping("/login")
-    public String insideLogin(@Param("loignID") String loginID,
-                              @Param("loginPw") String loginPw){
-
-
-
-        return "";
-    }*/
 
 //    @GetMapping("/add")
 //    public String addForm(@ModelAttribute("member") Member member) {
