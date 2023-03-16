@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -63,6 +60,28 @@ public class MemberController {
         return mv;
     }
 
+    @GetMapping(value = "/memberdetail/{id_member}")
+    public ModelAndView memberModify(@RequestParam(value = "id_member", required = false) int idMember,
+                                     @Param("emailMember") String emailMember,
+                                     @Param("nameMember") String nameMemeber,
+                                     @Valid @ModelAttribute Member member,
+                                     HttpServletRequest request){
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("userName") == null) {
+            mv.setViewName("login");
+            return mv;
+        }
+
+        List<Member> list;
+        list = memberService.modifyMemberDetail(idMember,emailMember,nameMemeber);
+
+        mv.addObject("list",list);
+        mv.setViewName("memberdetail");
+
+        return mv;
+    }
+
     @GetMapping("/membermodify")
     public ModelAndView movePosting(@Valid @ModelAttribute Member member,
                                     BindingResult bindingResult,
@@ -101,17 +120,17 @@ public class MemberController {
             mv.setViewName("login");
             return mv;
         }
-
+        String deleteDone;
         String loginMember = memberService.checkLogin(member.getUser_member(), member.getPassword_member());
         HttpSession session = request.getSession();
         if(member.getRating_member() != 1 || member.getId_member() != idMember){ // 둘다 아니라면 로그인
             mv.setViewName("login");
             return mv;
         }else if(member.getRating_member() == 1){ // 관리자가 개인 멤버 삭제시
-            memberService.deleteMember(idMember);
+            deleteDone = memberService.deleteMember(idMember);
             mv.setViewName("manager");
         }else{ // 멤버 본인일때 본인 회원정보 삭제시
-            memberService.deleteMember(idMember);
+            deleteDone = memberService.deleteMember(idMember);
             mv.setViewName("login");
         }
         session.setAttribute("userName", loginMember);

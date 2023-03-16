@@ -29,12 +29,19 @@
             USER_MEMBER = #{loginId} and PASSWORD_MEMBER = #{loginPw}
         </where>
     </select>
-    <delete id="deleteMember">
+    <select id="modifyMemberDetail" resultType="com.example.jspboard2.domain.Member">
+        UPDATE member_tb
+        SET EMAIL_MEMBER = ${emailMember}, NAME_MEMBER = ${nameMember}
+        <where>
+            ID_MEMBER = ${idMember}
+        </where>
+    </select>
+    <select id="deleteMember" resultType="String">
         DELETE FROM MEMBER_TB
         <where>
             ID_MEMBER = #{idMember}
         </where>
-    </delete>
+    </select>
     <select id="getMember" resultType="com.example.jspboard2.domain.Member">
         SELECT *
         FROM member_tb

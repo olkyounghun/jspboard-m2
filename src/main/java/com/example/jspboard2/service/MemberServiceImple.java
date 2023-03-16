@@ -24,9 +24,11 @@ public class MemberServiceImple implements MemberService {
 
     public String checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw) {return memberMapper.checkLogin(loginID,loginPw);}
 
-    public void deleteMember(@Param("id_member") int idMember){
+    public List<Member> modifyMemberDetail(@Param("id_member") int idMember,
+                                           @Param("nameMember") String nameMember,
+                                           @Param("emailMember") String emailMember){return memberMapper.modifyMemberDetail(idMember,nameMember,emailMember);}
 
-    }
+    public String deleteMember(@Param("id_member") int idMember){return memberMapper.deleteMember(idMember);}
 
     public List<Member> getMember(@Param("idMember") int idMember){return memberMapper.getMember(idMember);}
 
