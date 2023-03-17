@@ -29,8 +29,7 @@ public class LoginController {
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
-        String logindata = (String)session.getAttribute("userName");
-        mv.addObject("userName",logindata);
+        session.getAttribute("userName");
         mv.setViewName("login");
 
         return mv;

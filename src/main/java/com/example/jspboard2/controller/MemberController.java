@@ -56,14 +56,15 @@ public class MemberController {
         member.printValue();
 
         session.setAttribute("userName",userMember);
+        mv.addObject("list",list);
         mv.setViewName("home");
         return mv;
     }
 
-    @GetMapping(value = "/memberdetail/{id_member}")
-    public ModelAndView memberModify(@RequestParam(value = "id_member", required = false) int idMember,
-                                     @Param("emailMember") String emailMember,
-                                     @Param("nameMember") String nameMemeber,
+    @RequestMapping(value = "/memberdetail/{id_member}", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView memberModify(@RequestParam(value = "id_member", required = false) Integer idMember,
+                                     @RequestParam(value = "emailMember", required = false) String emailMember,
+                                     @RequestParam(value = "nameMember", required = false) String nameMemeber,
                                      @Valid @ModelAttribute Member member,
                                      HttpServletRequest request){
         ModelAndView mv = new ModelAndView();

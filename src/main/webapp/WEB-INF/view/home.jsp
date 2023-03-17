@@ -23,11 +23,11 @@
 </head>
 <body>
     <div class="maincontainer">
-        <div>
-            <c:if test="${sessionScope.userName ne null}">
-                ${sessionScope.userName} 님 환영합니다.
-            </c:if>
-        </div>
+        <c:if test="${sessionScope.userName ne null}">
+            <c:forEach items="${list}" var="list">
+                <a href="/memberdetail/${list.id_member}">${sessionScope.userName}</a>님 환영합니다.
+            </c:forEach>
+        </c:if>
         <form id="form" name="form" method="post" action="searchworld">
             <div class="input-group">
                 <span class="input-group-text" id="basic-addon1">Let's</span>

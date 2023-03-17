@@ -19,7 +19,9 @@
     <div class="main">
         <div class="userName">
             <c:if test="${sessionScope.userName ne null}">
-                ${sessionScope.userName} 님 환영합니다.
+                <c:forEach items="${list}" var="list">
+                    <a href="/memberdetail/${list.id_member}">${sessionScope.userName}</a>님 환영합니다.
+                </c:forEach>
             </c:if>
         </div>
         <div class="logingroup">
