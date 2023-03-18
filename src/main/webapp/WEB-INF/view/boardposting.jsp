@@ -60,7 +60,7 @@
             </div>
             <div id="wrapper1" class="form-check">
                 <button type="submit" class="btn btn-secondary">저장</button>
-                <button type="button" class="btn btn-secondary" onclick="location.href='list.jsp'">목록</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href='boardlist'">목록</button>
             </div>
         </div>
     </div>

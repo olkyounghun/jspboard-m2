@@ -1,6 +1,7 @@
 package com.example.jspboard2.controller;
 
 import com.example.jspboard2.domain.Member;
+import com.example.jspboard2.domain.Paging;
 import com.example.jspboard2.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,15 +24,16 @@ public class MemberController {
     @Resource
     private MemberService memberService;
 
-
+    
+    // 회원가입페이지 이동
     @RequestMapping(value = "/signup", method = {RequestMethod.GET})
     public String movesignup(){
-
-
+        
         return "signup";
     }
 
 
+    // 회원가입 정보 입력후 완료
     @RequestMapping(value = "/signup", method = {RequestMethod.POST})
     public ModelAndView getMembership(@Param("userMember") String userMember,
                                 @Param("userPw") String userPw,
@@ -57,16 +60,18 @@ public class MemberController {
 
         session.setAttribute("userName",userMember);
         mv.addObject("list",list);
-        mv.setViewName("home");
+        mv.setViewName("search");
         return mv;
     }
 
+    // 개인 회원정보 확인
     @RequestMapping(value = "/memberdetail/{id_member}", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView memberModify(@RequestParam(value = "id_member", required = false) Integer idMember,
                                      @RequestParam(value = "emailMember", required = false) String emailMember,
                                      @RequestParam(value = "nameMember", required = false) String nameMemeber,
                                      @Valid @ModelAttribute Member member,
                                      HttpServletRequest request){
+
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
         if (session.getAttribute("userName") == null) {
@@ -83,6 +88,7 @@ public class MemberController {
         return mv;
     }
 
+    // 개인회원정보 수정
     @GetMapping("/membermodify")
     public ModelAndView movePosting(@Valid @ModelAttribute Member member,
                                     BindingResult bindingResult,
@@ -110,6 +116,83 @@ public class MemberController {
         return mv;
     }
 
+    // 매니저 등급 확인이후 매니저게시판으로 이동 및 회원게시판 읽어오기
+    @RequestMapping(value="/manager", method={RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView managerLogin(@Valid @ModelAttribute Member member, BindingResult bindingResult, HttpServletRequest request,
+                                     @RequestParam(value = "page", required = false,defaultValue = "1") int page){
+
+        ModelAndView mv = new ModelAndView();
+
+        if (bindingResult.hasErrors()) {
+            RedirectView redirectView = new RedirectView("/login");
+            redirectView.setExposeModelAttributes(false);
+            mv.setViewName("login");
+            return mv;
+        }
+
+        HttpSession session = request.getSession();
+        session.getAttribute("userName");
+        String userName = (String)session.getAttribute("userName");
+        Member userInfo;
+        userInfo = memberService.getuserName(userName);
+
+        if(userInfo.getRating_member() == 2){
+            RedirectView redirectView = new RedirectView("/manager");
+            redirectView.setExposeModelAttributes(false);
+            mv.setViewName("manager");
+            Paging paging = new Paging();
+            int count = memberService.getAllManager();
+
+            paging.setPage(page);
+            paging.setTotalCount(count);
+            int beginpage = paging.getBeginPage();
+            int endpage = paging.getEndPage();
+
+
+            List<Member> list;
+            list = memberService.getManagerMember(beginpage,endpage,page);
+            mv.addObject("list",list);
+            mv.addObject("paging", paging);
+        }else{
+            RedirectView redirectView = new RedirectView("/list");
+            redirectView.setExposeModelAttributes(false);
+            mv.setViewName("boardlist");
+        }
+
+        return mv;
+    }
+
+    // 매니저게시판 특정 회원정보 확인
+    @GetMapping("/memberinfo/{id_member}")
+    public ModelAndView MemberDetail(@PathVariable("id_member") Integer id_member,
+                                     @Valid @ModelAttribute Member member,
+                                     BindingResult bindingResult,
+                                     HttpServletRequest request){
+
+        ModelAndView mv = new ModelAndView();
+
+        if (bindingResult.hasErrors()) {
+            RedirectView redirectView = new RedirectView("/login");
+            redirectView.setExposeModelAttributes(false);
+            mv.setViewName("login");
+            return mv;
+        }
+
+        HttpSession session = request.getSession();
+        session.getAttribute("userName");
+
+        List<Member> list;
+        list = memberService.getMemberInfo(id_member);
+
+        mv.addObject("list",list);
+        RedirectView redirectView = new RedirectView("/memberinfo");
+        redirectView.setExposeModelAttributes(false);
+        mv.setViewName("managerinfo");
+
+        return mv;
+    }
+
+    // 매니저게시판 특정회원정보 삭제
     @GetMapping ("membermodify/deleteMember")
     public ModelAndView deleteMember(@Valid @ModelAttribute Member member,
                                BindingResult bindingResult,
@@ -138,24 +221,5 @@ public class MemberController {
 
         return mv;
     }
-
-
-//    @GetMapping("/add")
-//    public String addForm(@ModelAttribute("member") Member member) {
-//        return "/members/addMemberForm";
-//    }
-//
-//    @PostMapping("/add")
-//    public String save(@Valid @ModelAttribute Member member, BindingResult bindingResult) { // BindingResult ??
-//        if (bindingResult.hasErrors()) { // hasErroes ??
-//            return "/members/addMemberForm";
-//        }
-//
-//        memberRepository.save(member);
-//        return "redirect:/";
-//    }
-/** 세션 어노테이션을 확인해서 다시 시도해보자 */
-
-
-
+    
 }

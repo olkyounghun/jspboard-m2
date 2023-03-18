@@ -41,7 +41,7 @@ public class BoardController {
             return mv;
         }
         session.getAttribute("userName");
-        mv.setViewName("home");
+        mv.setViewName("search");
 
         return mv;
     }
@@ -70,7 +70,7 @@ public class BoardController {
         mv.addObject("userName",userName);
         mv.addObject("list", list);
         mv.addObject("paging", paging);
-        mv.setViewName("list");
+        mv.setViewName("boardlist");
         return mv;
     }
 
@@ -85,7 +85,7 @@ public class BoardController {
         List<Board> list;
         list = boardService.getSearchResult(startDate,endDate,searchType,searchName);
         mv.addObject("list", list);
-        mv.setViewName("list");
+        mv.setViewName("boardlist");
 
         return mv;
     }
@@ -124,7 +124,7 @@ public class BoardController {
         HttpSession session = request.getSession();
         session.setAttribute("userName", loginMember);
 
-        return "posting";
+        return "boardposting";
     }
     @PostMapping("/postingAction")
     public ModelAndView boardPosting(@Param("typeBoard") String typeBoard,
@@ -209,7 +209,7 @@ public class BoardController {
         List<Board> list;
         list = boardService.getDetailBoard(id_board);
         mv.addObject("list", list);
-        mv.setViewName("detail");
+        mv.setViewName("boarddetail");
 
         return mv;
     }
