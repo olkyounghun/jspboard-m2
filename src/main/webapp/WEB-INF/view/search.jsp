@@ -24,9 +24,7 @@
 <body>
     <div class="maincontainer">
         <c:if test="${sessionScope.userName ne null}">
-            <c:forEach items="${list}" var="list">
-                <a href="/memberdetail/${list.id_member}">${sessionScope.userName}</a>님 환영합니다.
-            </c:forEach>
+            <a href="/memberdetail/9">${sessionScope.userName}</a>님 환영합니다.
         </c:if>
         <form id="form" name="form" method="post" action="searchworld">
             <div class="input-group">

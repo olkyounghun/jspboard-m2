@@ -64,8 +64,27 @@ public class MemberController {
         return mv;
     }
 
+    @RequestMapping(value = "/memberdetail/{id_member}", method = {RequestMethod.GET})
+    public ModelAndView memberInformationCheck(@PathVariable("id_member") Integer idMember,
+                                     @Valid @ModelAttribute Member member,
+                                     HttpServletRequest request){
+
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        if (session.getAttribute("userName") == null) {
+            mv.setViewName("login");
+            return mv;
+        }
+        List<Member> list;
+        list = memberService.getMember(idMember);
+        mv.addObject("list", list);
+        mv.setViewName("memberdetail");
+
+        return mv;
+    }
+
     // 개인 회원정보 확인
-    @RequestMapping(value = "/memberdetail/{id_member}", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/memberdetail/{id_member}", method = {RequestMethod.POST})
     public ModelAndView memberModify(@RequestParam(value = "id_member", required = false) Integer idMember,
                                      @RequestParam(value = "emailMember", required = false) String emailMember,
                                      @RequestParam(value = "nameMember", required = false) String nameMemeber,
