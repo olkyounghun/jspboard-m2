@@ -16,8 +16,8 @@
   <title>Model-2 게시판</title>
 </head>
 <body>
-<form method="post" action=" 수정하기 ">
-  <c:forEach items="${list}" var="list">
+<c:forEach items="${list}" var="list">
+<form method="post" action="/membermodify/${list.id_member}">
     <div class="container">
       <div class="row">
         <div class="col-sm-3"></div>
@@ -50,15 +50,15 @@
           </div>
           <div class="form-check" style="padding-top: 40px;">
             <button type="submit" class="btn btn-secondary" >수정</button>
-            <button type="button" class="btn btn-secondary" onclick="location.href='memberdelete?id_board=${list.id_member}'">삭제</button>
+            <button type="button" class="btn btn-secondary" onclick="location.href='/memberdelete/${list.id_member}'">삭제</button>
             <button type="button" class="btn btn-secondary" onclick="location.href='list'">목록</button>
           </div>
         </div>
       </div>
       <div class="col-sm-3"></div>
     </div>
-  </c:forEach>
 </form>
+</c:forEach>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

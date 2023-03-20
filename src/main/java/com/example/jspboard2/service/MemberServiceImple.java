@@ -28,9 +28,9 @@ public class MemberServiceImple implements MemberService {
                                            @Param("nameMember") String nameMember,
                                            @Param("emailMember") String emailMember){return memberMapper.modifyMemberDetail(idMember,nameMember,emailMember);}
 
-    public String deleteMember(@Param("id_member") int idMember){return memberMapper.deleteMember(idMember);}
+    public String deleteMember(@Param("idMember") int idMember){return memberMapper.deleteMember(idMember);}
 
-    public List<Member> getMember(@Param("idMember") int idMember){return memberMapper.getMember(idMember);}
+    public List<Member> getMember(@Param("idMember") int id_member){return memberMapper.getMember(id_member);}
 
 
     public int getAllManager(){return memberMapper.getAllManager();}

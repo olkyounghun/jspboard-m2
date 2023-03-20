@@ -19,7 +19,7 @@ public interface MemberService {
     List<Member> modifyMemberDetail(@Param("id_member") int idMember,
                                     @Param("nameMember") String nameMember,
                                     @Param("emailMember") String emailMember);
-    String deleteMember(@Param("id_member") int idMember);
+    String deleteMember(@Param("idMember") int idMember);
     List<Member> getMember(@Param("idMember") int idMember);
 
     int getAllManager();

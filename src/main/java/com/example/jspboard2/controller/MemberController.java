@@ -84,7 +84,7 @@ public class MemberController {
     }
 
     // 개인 회원정보 확인
-    @RequestMapping(value = "/memberdetail/{id_member}", method = {RequestMethod.POST})
+    @RequestMapping(value = "/membermodify/{id_member}", method = {RequestMethod.POST})
     public ModelAndView memberModify(@RequestParam(value = "id_member", required = false) Integer idMember,
                                      @RequestParam(value = "emailMember", required = false) String emailMember,
                                      @RequestParam(value = "nameMember", required = false) String nameMemeber,
@@ -107,32 +107,21 @@ public class MemberController {
         return mv;
     }
 
-    // 개인회원정보 수정
-    @GetMapping("/membermodify")
-    public ModelAndView movePosting(@Valid @ModelAttribute Member member,
-                                    BindingResult bindingResult,
-                                    HttpServletRequest request,
-                                    @Param("id_member") int idMember){
+    @RequestMapping(value = "/memberdelete/{id_member}", method = {RequestMethod.GET})
+        public String memberInfoDelete(@PathVariable("id_member") Integer idMember,
+                                       @Valid @ModelAttribute Member member,
+                                       HttpServletRequest request){
 
-        ModelAndView mv = new ModelAndView();
-        if (bindingResult.hasErrors()) {
-            mv.setViewName("login");
-            return mv;
-        }
-
-        String loginMember = memberService.checkLogin(member.getUser_member(), member.getPassword_member());
         HttpSession session = request.getSession();
-        if(member.getRating_member() != 1){
-            mv.setViewName("login");
-            return mv;
+        if (session.getAttribute("userName") == null) {
+            return "login";
         }
-        session.setAttribute("userName", loginMember);
-        List<Member> list;
-        list = memberService.getMember(idMember);
-        mv.addObject("list",list);
-        mv.setViewName("membermodify?id_member="+idMember);
 
-        return mv;
+        String deleteDone;
+        deleteDone = memberService.deleteMember(idMember);
+        session.invalidate();  // 삭제된 개인 회원세션 로그아웃 하기
+        
+        return "login";
     }
 
     // 매니저 등급 확인이후 매니저게시판으로 이동 및 회원게시판 읽어오기
@@ -182,7 +171,7 @@ public class MemberController {
     }
 
     // 매니저게시판 특정 회원정보 확인
-    @GetMapping("/memberinfo/{id_member}")
+    @GetMapping("/managerinfo/{id_member}")
     public ModelAndView MemberDetail(@PathVariable("id_member") Integer id_member,
                                      @Valid @ModelAttribute Member member,
                                      BindingResult bindingResult,
@@ -212,11 +201,11 @@ public class MemberController {
     }
 
     // 매니저게시판 특정회원정보 삭제
-    @GetMapping ("membermodify/deleteMember")
-    public ModelAndView deleteMember(@Valid @ModelAttribute Member member,
+    @GetMapping ("managerdelete/{id_member}")
+    public ModelAndView deleteMember(@PathVariable("id_member") int idMember,
+                                @Valid @ModelAttribute Member member,
                                BindingResult bindingResult,
-                               HttpServletRequest request,
-                               @Param("id_member") int idMember){
+                               HttpServletRequest request){
 
         ModelAndView mv = new ModelAndView();
         if (bindingResult.hasErrors()) {
