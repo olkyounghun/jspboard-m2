@@ -50,9 +50,9 @@ public class LoginController {
             return mv;
         }
 
-        String loginMember = memberService.checkLogin(loginId,loginPw);
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
 
-        System.out.println("login? " + loginMember);
+        System.out.println("login? " + loginMember.getUser_member());
 
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");

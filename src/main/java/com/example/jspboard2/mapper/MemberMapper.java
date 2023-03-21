@@ -16,7 +16,7 @@ public interface MemberMapper {
                                @Param("userEmailComplet") String userEmailComplet,
                                @Param("emailChk") String emailChk);
 
-    String checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw);
+    Member checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw);
 
     List<Member> modifyMemberDetail(@Param("id_member") int idMember,
                                     @Param("nameMember") String nameMember,
@@ -26,6 +26,8 @@ public interface MemberMapper {
 
     List<Member> getMember(@Param("idMember") int idMember);
 
+    Member getMMember(@Param("idMember") int idMember);
+
     int getAllManager();
 
     List<Member> getManagerMember(@Param("beginpage")int beginpage,
@@ -34,6 +36,5 @@ public interface MemberMapper {
 
     Member getuserName(@Param("userName") String userName);
 
-    List<Member> getMemberInfo(@Param("id_member") int id_member);
 
 }

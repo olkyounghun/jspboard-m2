@@ -14,13 +14,15 @@ public interface MemberService {
                                @Param("userEmailComplet") String userEmailComplet,
                                @Param("emailChk") String emailChk);
 
-    String checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw);
+    Member checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw);
 
     List<Member> modifyMemberDetail(@Param("id_member") int idMember,
                                     @Param("nameMember") String nameMember,
                                     @Param("emailMember") String emailMember);
     String deleteMember(@Param("idMember") int idMember);
     List<Member> getMember(@Param("idMember") int idMember);
+
+    Member getMMember(@Param("idMember") int idMember);
 
     int getAllManager();
 
@@ -29,7 +31,5 @@ public interface MemberService {
                                   @Param("page") int page);
 
     Member getuserName(@Param("userName") String userName);
-
-    List<Member> getMemberInfo(@Param("id_member") int id_member);
 
 }

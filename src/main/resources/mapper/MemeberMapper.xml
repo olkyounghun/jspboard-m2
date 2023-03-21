@@ -22,8 +22,8 @@
                        2)
     </select>
 
-    <select id="checkLogin" resultType="String">
-        SELECT USER_MEMBER
+    <select id="checkLogin" resultType="com.example.jspboard2.domain.Member">
+        SELECT *
         FROM member_tb
         <where>
             USER_MEMBER = #{loginId} and PASSWORD_MEMBER = #{loginPw}
@@ -43,6 +43,13 @@
         </where>
     </select>
     <select id="getMember" resultType="com.example.jspboard2.domain.Member">
+        SELECT *
+        FROM member_tb
+        <where>
+            ID_MEMBER = #{idMember}
+        </where>
+    </select>
+    <select id="getMMember" resultType="com.example.jspboard2.domain.Member">
         SELECT *
         FROM member_tb
         <where>
@@ -70,12 +77,5 @@
     </select>
     <select id="getAllManager" resultType="java.lang.Integer">
         SELECT COUNT(*) as count FROM member_tb;
-    </select>
-    <select id="getMemberInfo" resultType="com.example.jspboard2.domain.Member" parameterType="int">
-        SELECT *
-        FROM member_tb
-        <where>
-            ID_MEMBER = #{id_member}
-        </where>
     </select>
 </mapper>

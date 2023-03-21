@@ -22,7 +22,7 @@ public class MemberServiceImple implements MemberService {
                                       @Param("emailChk") String emailChk){return memberMapper.getMembership(userMember,userPw,userName,userGender,userEmailComplet,emailChk);
     }
 
-    public String checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw) {return memberMapper.checkLogin(loginID,loginPw);}
+    public Member checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw) {return memberMapper.checkLogin(loginID,loginPw);}
 
     public List<Member> modifyMemberDetail(@Param("id_member") int idMember,
                                            @Param("nameMember") String nameMember,
@@ -32,6 +32,7 @@ public class MemberServiceImple implements MemberService {
 
     public List<Member> getMember(@Param("idMember") int id_member){return memberMapper.getMember(id_member);}
 
+    public Member getMMember(@Param("idMember") int idMember){return  memberMapper.getMMember(idMember);}
 
     public int getAllManager(){return memberMapper.getAllManager();}
     public List<Member> getManagerMember(@Param("beginpage")int beginpage,
@@ -39,7 +40,5 @@ public class MemberServiceImple implements MemberService {
                                          @Param("page") int page){return memberMapper.getManagerMember(beginpage,endpage,page);}
 
     public Member getuserName(@Param("userName") String userName){return memberMapper.getuserName(userName);}
-
-    public List<Member> getMemberInfo(@Param("id_member") int id_member){return memberMapper.getMemberInfo(id_member);}
 
 }

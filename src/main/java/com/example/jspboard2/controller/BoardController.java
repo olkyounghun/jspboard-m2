@@ -120,7 +120,7 @@ public class BoardController {
             return "login";
         }
 
-        String loginMember = memberService.checkLogin(member.getUser_member(), member.getPassword_member());
+        Member loginMember = memberService.checkLogin(member.getUser_member(), member.getPassword_member());
         HttpSession session = request.getSession();
         session.setAttribute("userName", loginMember);
 
@@ -142,7 +142,7 @@ public class BoardController {
         list = boardService.postingUpload(typeBoard,titleBoard,contentBoard);
         int newNumber = boardService.getNewBoardId();
         mv.addObject("list", list);
-        mv.setViewName("detail?id_board="+newNumber);
+        mv.setViewName("boarddetail");
 
         return mv;
     }
@@ -158,14 +158,14 @@ public class BoardController {
             mv.setViewName("login");
             return mv;
         }
-        String loginMember = memberService.checkLogin(member.getUser_member(),member.getPassword_member());
+        Member loginMember = memberService.checkLogin(member.getUser_member(),member.getPassword_member());
         HttpSession session = request.getSession();
         session.setAttribute("userName", loginMember);
 
         List<Board> list;
         list = boardService.getDetailBoard(id_board);
         mv.addObject("list", list);
-        mv.setViewName("modify?id_board="+id_board );
+        mv.setViewName("boardmodify");
 
         return mv;
     }
@@ -187,7 +187,7 @@ public class BoardController {
         list = boardService.postModifyBoard(idBoard,typeBoard,titleBoard,contentBoard);
 
         mv.addObject("list",list);
-        mv.setViewName("detail?id_board="+idBoard);
+        mv.setViewName("boarddetail");
 
         return mv;
     }

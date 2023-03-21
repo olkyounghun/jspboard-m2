@@ -190,7 +190,7 @@ public class MemberController {
         session.getAttribute("userName");
 
         List<Member> list;
-        list = memberService.getMemberInfo(id_member);
+        list = memberService.getMember(id_member);
 
         mv.addObject("list",list);
         RedirectView redirectView = new RedirectView("/memberinfo");
@@ -202,10 +202,10 @@ public class MemberController {
 
     // 매니저게시판 특정회원정보 삭제
     @GetMapping ("managerdelete/{id_member}")
-    public ModelAndView deleteMember(@PathVariable("id_member") int idMember,
-                                @Valid @ModelAttribute Member member,
-                               BindingResult bindingResult,
-                               HttpServletRequest request){
+    public ModelAndView deleteMember(@PathVariable("id_member") Integer idMember,
+                                     @Valid @ModelAttribute Member member,
+                                     BindingResult bindingResult,
+                                     HttpServletRequest request){
 
         ModelAndView mv = new ModelAndView();
         if (bindingResult.hasErrors()) {
@@ -213,19 +213,18 @@ public class MemberController {
             return mv;
         }
         String deleteDone;
-        String loginMember = memberService.checkLogin(member.getUser_member(), member.getPassword_member());
         HttpSession session = request.getSession();
-        if(member.getRating_member() != 1 || member.getId_member() != idMember){ // 둘다 아니라면 로그인
+        Member sessionMember = (Member)session.getAttribute("userName");
+        Member loginMember = memberService.checkLogin(sessionMember.getUser_member(), sessionMember.getPassword_member());
+
+        if(loginMember.getRating_member() != 1 ){ // 둘다 아니라면 로그인
             mv.setViewName("login");
             return mv;
-        }else if(member.getRating_member() == 1){ // 관리자가 개인 멤버 삭제시
+        }else if(loginMember.getRating_member() == 1){ // 관리자가 개인 멤버 삭제시
             deleteDone = memberService.deleteMember(idMember);
             mv.setViewName("manager");
-        }else{ // 멤버 본인일때 본인 회원정보 삭제시
-            deleteDone = memberService.deleteMember(idMember);
-            mv.setViewName("login");
         }
-        session.setAttribute("userName", loginMember);
+        //session.setAttribute("userName", loginMember);
 
         return mv;
     }
