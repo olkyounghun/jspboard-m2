@@ -214,8 +214,8 @@ public class MemberController {
         }
         String deleteDone;
         HttpSession session = request.getSession();
-        Member sessionMember = (Member)session.getAttribute("userName");
-        Member loginMember = memberService.checkLogin(sessionMember.getUser_member(), sessionMember.getPassword_member());
+        Object sessionMember = session.getAttribute("userName");
+        Member loginMember = memberService.checkLogin((String) sessionMember,(String)sessionMember);
 
         if(loginMember.getRating_member() != 1 ){ // 둘다 아니라면 로그인
             mv.setViewName("login");
