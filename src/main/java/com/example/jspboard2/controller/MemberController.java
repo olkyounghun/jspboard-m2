@@ -200,7 +200,7 @@ public class MemberController {
         return mv;
     }
 
-    // 매니저게시판 특정회원정보 삭제
+    // 매니저게시판 특정회원정보 삭제 // 세션 정보를 활용하여 아이디 비밀번호를 저장해야함
     @GetMapping ("managerdelete/{id_member}")
     public ModelAndView deleteMember(@PathVariable("id_member") Integer idMember,
                                      @Valid @ModelAttribute Member member,

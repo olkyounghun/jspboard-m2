@@ -55,7 +55,6 @@ public class BoardController {
         ModelAndView mv = new ModelAndView();
 
         HttpSession session = request.getSession();
-        String userName = (String) session.getAttribute("userName");
         Paging paging = new Paging();
         int count = boardService.getAllCount();
 
@@ -67,7 +66,8 @@ public class BoardController {
 
         List<Board> list;
         list = boardService.getBoardList(beginpage,endpage,page);
-        mv.addObject("userName",userName);
+        session.getAttribute("userName");
+        //mv.addObject("userName",userName);
         mv.addObject("list", list);
         mv.addObject("paging", paging);
         mv.setViewName("boardlist");
@@ -193,7 +193,7 @@ public class BoardController {
     }
 
     @GetMapping("/detail/{id_board}")
-    public ModelAndView boardDetail(@RequestParam(value = "id_board", required = false) int id_board,
+    public ModelAndView boardDetail(@PathVariable("id_board") Integer id_board,
                                     @Valid @ModelAttribute Member member,
                                     BindingResult bindingResult,
                                     HttpServletRequest request){
