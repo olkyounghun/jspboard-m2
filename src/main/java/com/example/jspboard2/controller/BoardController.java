@@ -147,8 +147,8 @@ public class BoardController {
         return mv;
     }
 
-    @GetMapping("/modify")
-    public ModelAndView boardModify(@Param("id_board") int id_board,
+    @GetMapping("/boardmodify/{id_board}")
+    public ModelAndView boardModify(@PathVariable("id_board") Integer id_board,
                                     @Valid @ModelAttribute Member member,
                                     HttpServletRequest request,
                                     BindingResult bindingResult){
@@ -158,9 +158,9 @@ public class BoardController {
             mv.setViewName("login");
             return mv;
         }
-        Member loginMember = memberService.checkLogin(member.getUser_member(),member.getPassword_member());
+        //Member loginMember = memberService.checkLogin(member.getUser_member(),member.getPassword_member());
         HttpSession session = request.getSession();
-        session.setAttribute("userName", loginMember);
+        //session.setAttribute("userName", loginMember);
 
         List<Board> list;
         list = boardService.getDetailBoard(id_board);
