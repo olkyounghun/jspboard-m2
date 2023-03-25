@@ -46,6 +46,20 @@ public class BoardController {
         return mv;
     }
 
+//    @GetMapping("/search")
+//    public ModelAndView searchPage(@Valid @ModelAttribute Member member,
+//                                   BindingResult bindingResult,
+//                                   HttpServletRequest request){
+//
+//        ModelAndView mv = new ModelAndView();
+//        HttpSession session = request.getSession();
+//        session.getAttribute("loginId");
+//        session.getAttribute("loginPw");
+//        mv.setViewName("search");
+//
+//        return mv;
+//    }
+
     @RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
     public ModelAndView getBoardList(@Valid @ModelAttribute("mv") Member member,
                                      BindingResult bindingResult,
@@ -154,12 +168,12 @@ public class BoardController {
                                     BindingResult bindingResult){
 
         ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
         if (bindingResult.hasErrors()) {
             mv.setViewName("login");
             return mv;
         }
-        //Member loginMember = memberService.checkLogin(member.getUser_member(),member.getPassword_member());
-        HttpSession session = request.getSession();
+        //Member loginMember = memberService.checkLogin(member.getUser_member(),member.getPassword_member())
         //session.setAttribute("userName", loginMember);
 
         List<Board> list;

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -7,7 +8,7 @@
   Time: 오후 8:36
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <style>
     .maincontainer{
@@ -23,9 +24,11 @@
 </head>
 <body>
     <div class="maincontainer">
-        <c:if test="${sessionScope.userName ne null}">
-            <a href="/memberdetail/9">${sessionScope.userName}</a>님 환영합니다.
-        </c:if>
+        <div>
+            <c:if test="${sessionScope.loginId ne null}">
+                <a href="/memberdetail/${id_member}">${sessionScope.loginId}</a>님 환영합니다.
+            </c:if>
+        </div>
         <form id="form" name="form" method="post" action="searchworld">
             <div class="input-group">
                 <span class="input-group-text" id="basic-addon1">Let's</span>

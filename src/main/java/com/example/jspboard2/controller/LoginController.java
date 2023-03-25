@@ -60,11 +60,14 @@ public class LoginController {
             return mv;
         }
 
+
+
         // 로그인 성공 처리
         //세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
         HttpSession session = request.getSession(); //세션에 로그인 회원 정보 보관
-        session.setAttribute("userName", loginMember);
-        mv.addObject("userName",loginMember);
+        session.setAttribute("loginId", loginId);
+        session.setAttribute("loginPw", loginPw);
+        mv.addObject("id_member",loginMember.getId_member());
         RedirectView redirectView = new RedirectView("/home");
         redirectView.setExposeModelAttributes(false);
         mv.setViewName("search");

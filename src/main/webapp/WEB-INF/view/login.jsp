@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
 <html>
 <style>
     .main{
@@ -18,10 +18,8 @@
 <body>
     <div class="main">
         <div class="userName">
-            <c:if test="${sessionScope.userName ne null}">
-                <c:forEach items="${list}" var="list">
-                    <a href="/memberdetail/${list.id_member}">${sessionScope.userName}</a>님 환영합니다.
-                </c:forEach>
+            <c:if test="${sessionScope.loginId ne null}">
+                <a href="/memberdetail/${id_member}">${sessionScope.loginId}</a>님 환영합니다.
             </c:if>
         </div>
         <div class="logingroup">
