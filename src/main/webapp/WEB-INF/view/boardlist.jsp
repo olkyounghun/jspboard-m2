@@ -19,8 +19,8 @@
 </script>
 <body>
     <div>
-        <c:if test="${sessionScope.userName ne null}">
-            ${sessionScope.userName} 님 환영합니다.
+        <c:if test="${sessionScope.loginId ne null}">
+            <a href="/memberdetail/${id_member}">${sessionScope.loginId}</a> 님 환영합니다.
         </c:if>
     </div>
     <div class="mainContainer">

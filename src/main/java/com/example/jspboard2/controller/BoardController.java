@@ -46,20 +46,6 @@ public class BoardController {
         return mv;
     }
 
-//    @GetMapping("/search")
-//    public ModelAndView searchPage(@Valid @ModelAttribute Member member,
-//                                   BindingResult bindingResult,
-//                                   HttpServletRequest request){
-//
-//        ModelAndView mv = new ModelAndView();
-//        HttpSession session = request.getSession();
-//        session.getAttribute("loginId");
-//        session.getAttribute("loginPw");
-//        mv.setViewName("search");
-//
-//        return mv;
-//    }
-
     @RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
     public ModelAndView getBoardList(@Valid @ModelAttribute("mv") Member member,
                                      BindingResult bindingResult,
@@ -67,24 +53,27 @@ public class BoardController {
                                      @RequestParam(value = "page", required = false,defaultValue = "1") int page){
 
         ModelAndView mv = new ModelAndView();
-
         HttpSession session = request.getSession();
+
         Paging paging = new Paging();
         int count = boardService.getAllCount();
-
         paging.setPage(page);
         paging.setTotalCount(count);
         int beginpage = paging.getBeginPage();
         int endpage = paging.getEndPage();
 
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         List<Board> list;
         list = boardService.getBoardList(beginpage,endpage,page);
-        session.getAttribute("userName");
-        //mv.addObject("userName",userName);
+
+        mv.addObject("id_member", loginMember.getId_member());
         mv.addObject("list", list);
         mv.addObject("paging", paging);
         mv.setViewName("boardlist");
+
         return mv;
     }
 

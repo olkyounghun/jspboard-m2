@@ -71,7 +71,7 @@ public class MemberController {
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
-        if (session.getAttribute("userName") == null) {
+        if (session.getAttribute("loginId") == null) {
             mv.setViewName("login");
             return mv;
         }
