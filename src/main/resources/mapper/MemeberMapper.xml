@@ -29,11 +29,11 @@
             USER_MEMBER = #{loginId} and PASSWORD_MEMBER = #{loginPw}
         </where>
     </select>
-    <select id="modifyMemberDetail" resultType="com.example.jspboard2.domain.Member">
+    <select id="modifyMemberDetail" resultType="com.example.jspboard2.domain.Member" parameterType="map">
         UPDATE member_tb
-        SET EMAIL_MEMBER = ${emailMember}, NAME_MEMBER = ${nameMember}
+        SET EMAIL_MEMBER = #{emailMember}, NAME_MEMBER = #{nameMember}
         <where>
-            ID_MEMBER = ${idMember}
+            ID_MEMBER = #{idMember}
         </where>
     </select>
     <select id="deleteMember" resultType="String">

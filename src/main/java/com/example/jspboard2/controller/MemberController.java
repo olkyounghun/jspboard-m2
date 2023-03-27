@@ -67,11 +67,13 @@ public class MemberController {
     @RequestMapping(value = "/memberdetail/{id_member}", method = {RequestMethod.GET})
     public ModelAndView memberInformationCheck(@PathVariable("id_member") Integer idMember,
                                      @Valid @ModelAttribute Member member,
+                                     BindingResult bindingResult,
                                      HttpServletRequest request){
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
         if (session.getAttribute("loginId") == null) {
+            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             mv.setViewName("login");
             return mv;
         }
@@ -85,25 +87,37 @@ public class MemberController {
 
     // 개인 회원정보 확인
     @RequestMapping(value = "/membermodify/{id_member}", method = {RequestMethod.POST})
-    public ModelAndView memberModify(@RequestParam(value = "id_member", required = false) Integer idMember,
-                                     @RequestParam(value = "emailMember", required = false) String emailMember,
-                                     @RequestParam(value = "nameMember", required = false) String nameMemeber,
+    public ModelAndView memberModify(@Param("idMember") Integer idMember,
+                                     @Param("emailMember") String emailMember,
+                                     @Param("nameMember") String nameMember,
                                      @Valid @ModelAttribute Member member,
+                                     BindingResult bindingResult,
                                      HttpServletRequest request){
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
-        if (session.getAttribute("userName") == null) {
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        if ( loginId == null && loginPw == null) {
+            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
             mv.setViewName("login");
             return mv;
         }
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
+        if(loginMember.getId_member() != Long.valueOf(idMember)){ // 무결성 검사
+            bindingResult.reject("loginFail", "회원정보와 로그인정보가 일치하지않습니다.");
+            RedirectView redirectView = new RedirectView("/login");
+            redirectView.setExposeModelAttributes(false);
+            mv.setViewName("login");
+            return mv;
+        }else{
+            List<Member> list;
+            list = memberService.modifyMemberDetail(idMember,emailMember,nameMember);
 
-        List<Member> list;
-        list = memberService.modifyMemberDetail(idMember,emailMember,nameMemeber);
-
-        mv.addObject("list",list);
-        mv.setViewName("memberdetail");
-
+            mv.addObject("list",list);
+            mv.addObject("id_Member",idMember);
+            mv.setViewName("memberdetail");
+        }
         return mv;
     }
 

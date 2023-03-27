@@ -18,6 +18,7 @@
 <body>
 <c:forEach items="${list}" var="list">
 <form method="post" action="/membermodify/${list.id_member}">
+    <input type="hidden" id="idMember" name="idMember" value="${list.id_member}">
     <div class="container">
       <div class="row">
         <div class="col-sm-3"></div>
@@ -32,10 +33,10 @@
             <div class="col-sm-6">
               <div class="row">
                 <div class="col-sm-4">
-                  <div><input name="emailMember" value="${list.email_member}"></div>
+                  <div><input id="emailMember" name="emailMember" value="${list.email_member}"></div>
                 </div>
                 <div class="col-sm-2">
-                  <div><input name="nameMember" value="${list.name_member}"> </div>
+                  <div><input id="nameMember" name="nameMember" value="${list.name_member}"> </div>
                 </div>
                 <div class="col-sm-2">
                   <div>${list.gender_member} </div>

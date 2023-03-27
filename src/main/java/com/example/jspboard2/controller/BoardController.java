@@ -158,17 +158,26 @@ public class BoardController {
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
-        if (bindingResult.hasErrors()) {
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        if ( loginId == null && loginPw == null) {
+            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
             mv.setViewName("login");
             return mv;
         }
-        //Member loginMember = memberService.checkLogin(member.getUser_member(),member.getPassword_member())
-        //session.setAttribute("userName", loginMember);
-
-        List<Board> list;
-        list = boardService.getDetailBoard(id_board);
-        mv.addObject("list", list);
-        mv.setViewName("boardmodify");
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
+        if(loginMember.getId_member() != Long.valueOf(id_board)){ // 수정사항 게시물의 정보와 멤버의 정보 일치여부를 어떤식으로 할껀가?
+            bindingResult.reject("loginFail", "회원정보와 로그인정보가 일치하지않습니다.");
+            RedirectView redirectView = new RedirectView("/login");
+            redirectView.setExposeModelAttributes(false);
+            mv.setViewName("login");
+            return mv;
+        }else{
+            List<Board> list;
+            list = boardService.getDetailBoard(id_board);
+            mv.addObject("list", list);
+            mv.setViewName("boardmodify");
+        }
 
         return mv;
     }

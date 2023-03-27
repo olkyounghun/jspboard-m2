@@ -18,9 +18,9 @@ public interface MemberMapper {
 
     Member checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw);
 
-    List<Member> modifyMemberDetail(@Param("id_member") int idMember,
-                                    @Param("nameMember") String nameMember,
-                                    @Param("emailMember") String emailMember);
+    List<Member> modifyMemberDetail(@Param("idMember") int idMember,
+                                    @Param("emailMember") String emailMember,
+                                    @Param("nameMember") String nameMember);
 
     String deleteMember(@Param("idMember") int idMember);
 
