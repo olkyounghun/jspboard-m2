@@ -35,6 +35,9 @@
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-outline-secondary" onclick="location='signup'">가입</button>
                     <button type="submit" class="btn btn-outline-secondary" >시작</button>
+                    <c:if test="${sessionScope.loginId ne null}">
+                        <button type="button" class="btn btn-outline-secondary" onclick="location='search'">검색</button>
+                    </c:if>
                     <c:if test="${sessionScope.userName ne null}">
                         <button type="button" class="btn btn-outline-secondary" onclick="location='manager'">회원관리</button>
                     </c:if>

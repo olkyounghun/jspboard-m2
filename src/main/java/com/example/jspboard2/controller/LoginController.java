@@ -27,11 +27,19 @@ public class LoginController {
 
     // 로그인 
     @GetMapping(value={"/login", "/"})
-    public ModelAndView loginForm(HttpServletRequest request) {
+    public ModelAndView loginForm(@Valid Member member,
+                                  BindingResult bindingResult,
+                                  HttpServletRequest request) {
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
-        session.getAttribute("userName");
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        if ( loginId == null && loginPw == null) {
+            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
+            mv.setViewName("login");
+            return mv;
+        }
         mv.setViewName("login");
 
         return mv;

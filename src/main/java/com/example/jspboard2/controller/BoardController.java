@@ -46,7 +46,7 @@ public class BoardController {
         return mv;
     }
 
-    @RequestMapping(value="/list", method={RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value="/boardlist", method={RequestMethod.GET,RequestMethod.POST})
     public ModelAndView getBoardList(@Valid @ModelAttribute("mv") Member member,
                                      BindingResult bindingResult,
                                      HttpServletRequest request,

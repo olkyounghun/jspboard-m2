@@ -1,12 +1,16 @@
 package com.example.jspboard2.controller;
 
+import com.example.jspboard2.domain.Member;
+import com.example.jspboard2.service.MemberService;
 import com.example.jspboard2.service.SearchService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class SearchController {
@@ -14,6 +18,22 @@ public class SearchController {
     @Resource
     private SearchService searchService;
 
+    @Resource
+    private MemberService memberService;
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public ModelAndView goSearchPage(HttpSession session){
+
+        ModelAndView mv = new ModelAndView();
+        String loginId = (String)session.getAttribute("loginId");
+        String loginPw = (String)session.getAttribute("loginPw");
+        if(loginId != null && loginPw != null){
+            Member loginInfo = memberService.checkLogin(loginId,loginPw);
+            mv.addObject("id_member",loginInfo.getId_member());
+        }
+        mv.setViewName("search");
+        return mv;
+    }
     @RequestMapping(value = "/searchworld", method = RequestMethod.POST)
     public String getSearchContent(@Param("startword") String startword){
 

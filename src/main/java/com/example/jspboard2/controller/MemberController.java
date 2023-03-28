@@ -100,23 +100,20 @@ public class MemberController {
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
         if ( loginId == null && loginPw == null) {
             bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
-            mv.setViewName("login");
+            mv.setViewName("redirect:/login");
             return mv;
         }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
         if(loginMember.getId_member() != Long.valueOf(idMember)){ // 무결성 검사
             bindingResult.reject("loginFail", "회원정보와 로그인정보가 일치하지않습니다.");
-            RedirectView redirectView = new RedirectView("/login");
-            redirectView.setExposeModelAttributes(false);
-            mv.setViewName("login");
+            mv.setViewName("redirect:/login");
             return mv;
         }else{
             List<Member> list;
             list = memberService.modifyMemberDetail(idMember,emailMember,nameMember);
 
             mv.addObject("list",list);
-            mv.addObject("id_Member",idMember);
-            mv.setViewName("memberdetail");
+            mv.setViewName("redirect:/search");
         }
         return mv;
     }

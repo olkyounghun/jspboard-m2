@@ -52,7 +52,7 @@
           <div class="form-check" style="padding-top: 40px;">
             <button type="submit" class="btn btn-secondary" >수정</button>
             <button type="button" class="btn btn-secondary" onclick="location.href='/memberdelete/${list.id_member}'">삭제</button>
-            <button type="button" class="btn btn-secondary" onclick="location.href='list'">목록</button>
+            <button type="button" class="btn btn-secondary" onclick="location.href='/boardlist'">목록</button>
           </div>
         </div>
       </div>
