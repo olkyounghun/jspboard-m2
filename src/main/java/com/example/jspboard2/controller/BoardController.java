@@ -166,6 +166,9 @@ public class BoardController {
             return mv;
         }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
+        List<Board> list;
+        list = boardService.getDetailBoard(id_board);
+
         if(loginMember.getId_member() != Long.valueOf(id_board)){ // 수정사항 게시물의 정보와 멤버의 정보 일치여부를 어떤식으로 할껀가?
             bindingResult.reject("loginFail", "회원정보와 로그인정보가 일치하지않습니다.");
             RedirectView redirectView = new RedirectView("/login");
@@ -173,13 +176,10 @@ public class BoardController {
             mv.setViewName("login");
             return mv;
         }else{
-            List<Board> list;
-            list = boardService.getDetailBoard(id_board);
             mv.addObject("list", list);
             mv.setViewName("boardmodify");
+            return mv;
         }
-
-        return mv;
     }
 
     @PostMapping("/modifyAction")
@@ -204,7 +204,7 @@ public class BoardController {
         return mv;
     }
 
-    @GetMapping("/detail/{id_board}")
+    @GetMapping("/boarddetail/{id_board}")
     public ModelAndView boardDetail(@PathVariable("id_board") Integer id_board,
                                     @Valid @ModelAttribute Member member,
                                     BindingResult bindingResult,
@@ -216,7 +216,6 @@ public class BoardController {
             return mv;
         }
         HttpSession session = request.getSession();
-        session.getAttribute("userName");
 
         List<Board> list;
         list = boardService.getDetailBoard(id_board);

@@ -58,7 +58,7 @@
                             <tr>
                                 <td>${list.id_board}</td>
                                 <td>${list.type_board}</td>
-                                <td><a href="/detail/${list.id_board}">${list.title_board}</a></td>
+                                <td><a href="/boarddetail/${list.id_board}">${list.title_board}</a></td>
                                 <td>${list.user_board}</td>
                                 <td>${list.views_board}</td>
                                 <td><fmt:formatDate value="${list.regdate_board}" pattern="yyyy-MM-dd  HH:mm:ss" type="date"/></td>
@@ -72,7 +72,7 @@
         <div id="paging">
             <!-- 1~10까지 있는 페이지의 페이징 -->
             <c:if test="${paging.prev}">
-                <a href=list?page=${paging.beginPage-1}">prev</a>
+                <a href=boardlist/page=${paging.beginPage-1}">prev</a>
             </c:if>
             <c:forEach begin="${paging.beginPage}" end="${paging.endPage}" step="1" var="index">
                 <c:choose>
@@ -80,22 +80,22 @@
                         ${index}
                     </c:when>
                     <c:otherwise>
-                        <a href="list?page=${index}">${index}</a>
+                        <a href="boardlist/page=${index}">${index}</a>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
             <c:if test="${paging.next}">
-                <a href="list?page=${paging.endPage+1}">next</a>
+                <a href="boardlist/page=${paging.endPage+1}">next</a>
             </c:if>
         </div>
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-outline-secondary" onclick="location='home'">메인</button>
-            <button type="button" class="btn btn-outline-secondary" onclick="location='posting'">작성</button>
+            <button type="button" class="btn btn-outline-secondary" onclick="location='boardposting'">작성</button>
             <c:choose>
-                <c:when test="${sessionScope.userName ne null}"><button type="button" class="btn btn-outline-secondary" onclick="location='logout'">로그아웃</button></c:when>
+                <c:when test="${sessionScope.loginId ne null}"><button type="button" class="btn btn-outline-secondary" onclick="location='logout'">로그아웃</button></c:when>
                 <c:otherwise><button type="button" class="btn btn-outline-secondary" onclick="location='login'">로그인</button></c:otherwise>
             </c:choose>
-            <c:if test="${sessionScope.userName eq 'admin'}">
+            <c:if test="${sessionScope.loginId eq 'admin'}">
                 <button type="button" class="btn btn-outline-secondary" onclick="location='manager'">회원관리</button>
             </c:if>
         </div>
