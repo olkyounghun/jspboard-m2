@@ -47,8 +47,8 @@
         </if>
     </select>
     <select id="postingUpload" resultType="com.example.jspboard2.domain.Board">
-        INSERT INTO BOARD_TB (TYPE_BOARD,TITLE_BOARD,CONTENT_BOARD,USER_BOARD,VIEWS_BOARD,REGDATE_BOARD,MODDATE_BOARD)
-            VALUES (${typeBoard},${titleBoard},${contentBoard},"TEST",0,DEFAULT,NULL)
+        INSERT INTO BOARD_TB (TYPE_BOARD,TITLE_BOARD,CONTENT_BOARD,USER_BOARD,VIEWS_BOARD,REGDATE_BOARD,MODDATE_BOARD,ID_MEMBER)
+            VALUES (#{typeBoard},#{titleBoard},#{contentBoard},#{userBoard},0,DEFAULT,NULL,#{idMember})
     </select>
     <select id="getDetailBoard" resultType="com.example.jspboard2.domain.Board" parameterType="int">
         SELECT *

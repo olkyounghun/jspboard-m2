@@ -114,26 +114,18 @@ public class BoardController {
 //        return "loginHome";
 //    }
 
-    @GetMapping("/posting")
-    public String movePosting(@Valid @ModelAttribute Member member,
-                              BindingResult bindingResult,
-                              HttpServletRequest request){
-
-        if (bindingResult.hasErrors()) {
-            return "login";
-        }
-
-        Member loginMember = memberService.checkLogin(member.getUser_member(), member.getPassword_member());
-        HttpSession session = request.getSession();
-        session.setAttribute("userName", loginMember);
+    @GetMapping("/boardposting")
+    public String movePosting(){
 
         return "boardposting";
     }
     @PostMapping("/postingAction")
-    public ModelAndView boardPosting(@Param("typeBoard") String typeBoard,
+    public ModelAndView boardPosting(@Valid @ModelAttribute("mv") Member member,
+                                     @Param("typeBoard") String typeBoard,
                                      @Param("titleBoard") String titleBoard,
                                      @Param("contentBoard") String contentBoard,
-                                     BindingResult bindingResult){
+                                     BindingResult bindingResult,
+                                     HttpSession session){
 
         ModelAndView mv = new ModelAndView();
         if (bindingResult.hasErrors()) {
@@ -141,11 +133,17 @@ public class BoardController {
             return mv;
         }
 
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member postMember = memberService.checkLogin(loginId,loginPw);
+        String userBoard = postMember.getUser_member();
+        Long idMember = postMember.getId_member();
         List<Board> list;
-        list = boardService.postingUpload(typeBoard,titleBoard,contentBoard);
+        list = boardService.postingUpload(typeBoard,titleBoard,contentBoard,userBoard,idMember);
         int newNumber = boardService.getNewBoardId();
+        ;
         mv.addObject("list", list);
-        mv.setViewName("boarddetail");
+        mv.setViewName("redirect:/boarddetail/" + newNumber);
 
         return mv;
     }

@@ -21,8 +21,10 @@ public interface BoardService {
                                 @Param("searchName") String searchName);
 
     List<Board> postingUpload(@Param("typeBoard") String typeBoard,
-                                     @Param("titleBoard") String titleBoard,
-                                     @Param("contentBoard") String contentBoard);
+                              @Param("titleBoard") String titleBoard,
+                              @Param("contentBoard") String contentBoard,
+                              @Param("userBoard") String userBoard,
+                              @Param("idMember") Long idMember);
 
 
     List<Board> getDetailBoard(@Param("id_board") int id_board);

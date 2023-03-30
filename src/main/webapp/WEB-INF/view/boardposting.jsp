@@ -55,7 +55,7 @@
             <div class="form-check">
                 <label> 내용 </label>
                 <label>
-                    <textarea id="contentboard" name="contentboard" class="form-control"></textarea>
+                    <textarea id="contentBoard" name="contentBoard" class="form-control"></textarea>
                 </label>
             </div>
             <div id="wrapper1" class="form-check">

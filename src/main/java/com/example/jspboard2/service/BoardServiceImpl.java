@@ -18,9 +18,9 @@ public class BoardServiceImpl implements BoardService{
         this.boardMapper = boardMapper;
     }
 
-    public int getAllCount(){return boardMapper.getAllCount();}
+    public int getAllCount(){return boardMapper.getAllCount();} // 목록 전체글 수 파악 후 전체페이지 설정에 이용
 
-    public int getNewBoardId(){return  boardMapper.getNewBoardId();}
+    public int getNewBoardId(){return  boardMapper.getNewBoardId();} // 작성된 글의 글번호를 가져오기 위함.
 
     public List<Board> getBoardList(@Param("beginpage")int beginpage,
                                     @Param("endpage") int endpage,
@@ -35,9 +35,11 @@ public class BoardServiceImpl implements BoardService{
 
     public List<Board> postingUpload(@Param("typeBoard") String typeBoard,
                                      @Param("titleBoard") String titleBoard,
-                                     @Param("contentBoard") String contentBoard){return boardMapper.postingUpload(typeBoard,titleBoard,contentBoard);}
+                                     @Param("contentBoard") String contentBoard,
+                                     @Param("userBoard") String userBoard,
+                                     @Param("idMember") Long idMember){return boardMapper.postingUpload(typeBoard,titleBoard,contentBoard,userBoard,idMember);}
 
-    public List<Board> getDetailBoard(@Param("id_board") int id_board){return boardMapper.getDetailBoard(id_board);}
+    public List<Board> getDetailBoard(@Param("id_board") int id_board){return boardMapper.getDetailBoard(id_board);} // 글 보기로 보여질 해당 회원의 글
 
     public List<Board> postModifyBoard(@Param("idBoard") int idBoard,
                                 @Param("typeBoard") String typeBoard,

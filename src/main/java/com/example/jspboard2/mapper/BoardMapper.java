@@ -24,11 +24,14 @@ public interface BoardMapper {
 
     List<Board> postingUpload(@Param("typeBoard") String typeBoard,
                               @Param("titleBoard") String titleBoard,
-                              @Param("contentBoard") String contentBoard);
+                              @Param("contentBoard") String contentBoard,
+                              @Param("userBoard") String userBoard,
+                              @Param("idMember") Long idMember);
 
     List<Board> getDetailBoard(@Param("id_board") int id_board);
 
-    List<Board> postModifyBoard(@Param("idBoard") int idBoard, @Param("typeBoard") String typeBoard,
+    List<Board> postModifyBoard(@Param("idBoard") int idBoard,
+                                @Param("typeBoard") String typeBoard,
                                 @Param("titleBoard") String titleBoard,
                                 @Param("contentBoard") String contentBoard);
 }
