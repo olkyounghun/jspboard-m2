@@ -15,5 +15,6 @@ public class Board {
     private Integer views_board; // 게시물 조회수
     private Date regdate_board; // 게시물 등록된 최초의 날짜
     private Date moddate_board; // 게시물이 수정된 최근의 날짜
+    private Long id_member;
 
 }

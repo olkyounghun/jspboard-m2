@@ -166,8 +166,9 @@ public class BoardController {
         Member loginMember = memberService.checkLogin(loginId,loginPw);
         List<Board> list;
         list = boardService.getDetailBoard(id_board);
+        Board boardInfo = boardService.getMatchPoint(id_board);
 
-        if(loginMember.getId_member() != Long.valueOf(id_board)){ // 수정사항 게시물의 정보와 멤버의 정보 일치여부를 어떤식으로 할껀가?
+        if(loginMember.getId_member() != boardInfo.getId_member()){
             bindingResult.reject("loginFail", "회원정보와 로그인정보가 일치하지않습니다.");
             RedirectView redirectView = new RedirectView("/login");
             redirectView.setExposeModelAttributes(false);
