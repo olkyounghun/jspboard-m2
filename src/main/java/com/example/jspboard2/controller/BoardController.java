@@ -160,7 +160,7 @@ public class BoardController {
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
         if ( loginId == null && loginPw == null) {
             bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
-            mv.setViewName("login");
+            mv.setViewName("redirect:/login");
             return mv;
         }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
@@ -170,9 +170,9 @@ public class BoardController {
 
         if(loginMember.getId_member() != boardInfo.getId_member()){
             bindingResult.reject("loginFail", "회원정보와 로그인정보가 일치하지않습니다.");
-            RedirectView redirectView = new RedirectView("/login");
-            redirectView.setExposeModelAttributes(false);
-            mv.setViewName("login");
+//            RedirectView redirectView = new RedirectView("/login");
+//            redirectView.setExposeModelAttributes(false);
+            mv.setViewName("redirect:/login");
             return mv;
         }else{
             mv.addObject("list", list);

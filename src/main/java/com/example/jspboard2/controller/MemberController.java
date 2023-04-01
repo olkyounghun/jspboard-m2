@@ -27,9 +27,21 @@ public class MemberController {
     
     // 회원가입페이지 이동
     @RequestMapping(value = "/signup", method = {RequestMethod.GET})
-    public String movesignup(){
-        
-        return "signup";
+    public ModelAndView movesignup(HttpServletRequest request){
+
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        //String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        if(loginId != null){
+            mv.addObject("error","login");
+            mv.addObject("errorMessage","로그인되어있어 로그아웃을 진행후 이용해주시기 바랍니다.");
+            mv.addObject("move","logout");
+            mv.setViewName("error");
+        }else{
+            mv.setViewName("signup");
+        }
+        return mv;
     }
 
 
