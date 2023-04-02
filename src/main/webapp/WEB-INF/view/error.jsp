@@ -23,10 +23,7 @@
                 ${errorMessage}
             </div>
         </c:if>
-        <form method="post" action="errorMove">
-            <input type="hidden" name="errorMove" id="errorMove" value="${errorMove}">
-            <button type="submit" class="btn btn-outline-secondary">확인</button>
-        </form>
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='${errorMove}'">확인</button>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

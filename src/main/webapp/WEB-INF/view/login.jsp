@@ -33,7 +33,7 @@
                     <input type="password" id="loginPw" name="loginPw" class="form-control">
                 </div>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <c:if test="${sessionScope.loginId ne null}">
+                    <c:if test="${sessionScope.loginId eq null}">
                         <button type="button" class="btn btn-outline-secondary" onclick="location='signup'">가입</button>
                     </c:if>
                     <button type="submit" class="btn btn-outline-secondary" >시작</button>

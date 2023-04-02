@@ -36,7 +36,7 @@ public class MemberController {
         if(loginId != null){
             mv.addObject("error","login");
             mv.addObject("errorMessage","로그인되어있어 로그아웃을 진행후 이용해주시기 바랍니다.");
-            mv.addObject("move","logout");
+            mv.addObject("errorMove","logout");
             mv.setViewName("error");
         }else{
             mv.setViewName("signup");
