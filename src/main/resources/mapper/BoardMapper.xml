@@ -12,11 +12,18 @@
     </select>
     <select id="getBoardList" resultType="com.example.jspboard2.domain.Board" parameterType="int">
         SELECT *
+        FROM BOARD_TB
+        ORDER BY ID_BOARD DESC
+            LIMIT 10;
+    </select>
+    <select id="getBoardList2" resultType="com.example.jspboard2.domain.Board" parameterType="int">
+        SELECT *
         FROM(
             SELECT *
             FROM (
                  SELECT @rownum := @rownum + 1 as row_num, board_tb.*
                  FROM board_tb , (SELECT @rownum := 0) r
+                 ORDER BY board_tb.ROW_NUM DESC
                  ) a
             WHERE row_num >= 1
             ) b

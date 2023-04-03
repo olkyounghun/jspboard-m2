@@ -16,6 +16,11 @@
   <title>Model-2 게시판</title>
 </head>
 <body>
+<div>
+  <c:if test="${sessionScope.loginId ne null}">
+    <a href="/memberdetail/${id_member}">${sessionScope.loginId}</a>님 환영합니다.
+  </c:if>
+</div>
 <c:forEach items="${list}" var="list">
 <div class="container">
   <div class="row">
