@@ -170,8 +170,6 @@ public class BoardController {
 
         if(loginMember.getId_member() != boardInfo.getId_member()){
             bindingResult.reject("loginFail", "회원정보와 로그인정보가 일치하지않습니다.");
-//            RedirectView redirectView = new RedirectView("/login");
-//            redirectView.setExposeModelAttributes(false);
             mv.setViewName("redirect:/login");
             return mv;
         }else{
@@ -224,5 +222,34 @@ public class BoardController {
         return mv;
     }
 
+    @GetMapping("/boarddelete/{id_board}")
+    public ModelAndView boardDelete(@PathVariable("id_board") Integer id_board,
+                                    @Valid @ModelAttribute Member member,
+                                    HttpServletRequest request,
+                                    BindingResult bindingResult){
+
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        if ( loginId == null && loginPw == null) {
+            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
+            mv.setViewName("redirect:/login");
+            return mv;
+        }
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
+        Board boardInfo = boardService.getMatchPoint(id_board);
+
+        if(loginMember.getId_member() != boardInfo.getId_member()){
+            mv.addObject("error","login");
+            mv.addObject("errorMessage","해당 글의 삭제권한이 없습니다.");
+            mv.addObject("errorMove","boardlist");
+            mv.setViewName("error");
+        }else{
+            boardService.boardDeleteAction(id_board);
+            mv.setViewName("redirect:/boardlist");
+        }
+        return mv;
+    }
 
 }

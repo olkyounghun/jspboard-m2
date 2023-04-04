@@ -35,4 +35,7 @@ public interface BoardService {
                                 @Param("typeBoard") String typeBoard,
                                 @Param("titleBoard") String titleBoard,
                                 @Param("contentBoard") String contentBoard);
+
+    List<Board> boardDeleteAction(@Param("id_board") int idBoard);
+
 }

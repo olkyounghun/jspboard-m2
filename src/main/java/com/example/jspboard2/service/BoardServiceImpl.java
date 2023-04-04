@@ -47,4 +47,7 @@ public class BoardServiceImpl implements BoardService{
                                 @Param("typeBoard") String typeBoard,
                                 @Param("titleBoard") String titleBoard,
                                 @Param("contentBoard") String contentBoard){return boardMapper.postModifyBoard(idBoard,typeBoard,titleBoard,contentBoard);}
+
+    public List<Board> boardDeleteAction(@Param("id_board") int idBoard){return boardMapper.activeDeleteBoard(idBoard);}
+
 }

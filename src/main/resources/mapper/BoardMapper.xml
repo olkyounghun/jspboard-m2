@@ -77,4 +77,10 @@
             ID_BOARD = ${id_board}
         </where>
     </select>
+    <select id="activeDeleteBoard" resultType="com.example.jspboard2.domain.Board" parameterType="int">
+        DELETE FROM BOARD_TB
+        <where>
+            ID_BOARD = ${idBoard}
+        </where>
+    </select>
 </mapper>

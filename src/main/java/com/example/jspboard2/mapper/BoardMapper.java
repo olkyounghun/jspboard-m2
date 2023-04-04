@@ -36,4 +36,7 @@ public interface BoardMapper {
                                 @Param("typeBoard") String typeBoard,
                                 @Param("titleBoard") String titleBoard,
                                 @Param("contentBoard") String contentBoard);
+
+    List<Board> activeDeleteBoard(@Param("idBoard") int idBoard);
+
 }
