@@ -43,10 +43,10 @@ public class BoardServiceImpl implements BoardService{
 
     public Board getMatchPoint(@Param("id_board") int id_board){return boardMapper.getMatchPoint(id_board);}
 
-    public List<Board> postModifyBoard(@Param("idBoard") int idBoard,
-                                @Param("typeBoard") String typeBoard,
-                                @Param("titleBoard") String titleBoard,
-                                @Param("contentBoard") String contentBoard){return boardMapper.postModifyBoard(idBoard,typeBoard,titleBoard,contentBoard);}
+    public List<Board> postModifyBoard(@Param("typeBoard") String typeBoard,
+                                       @Param("titleBoard") String titleBoard,
+                                       @Param("contentBoard") String contentBoard,
+                                       @Param("idBoard") int idBoard){return boardMapper.postModifyBoard(typeBoard,titleBoard,contentBoard,idBoard);}
 
     public List<Board> boardDeleteAction(@Param("id_board") int idBoard){return boardMapper.activeDeleteBoard(idBoard);}
 

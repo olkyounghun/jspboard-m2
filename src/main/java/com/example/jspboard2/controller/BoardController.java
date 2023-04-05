@@ -179,25 +179,39 @@ public class BoardController {
         }
     }
 
-    @PostMapping("/modifyAction")
-    public ModelAndView boardModifyAction(@Param("id_board") int idBoard,
-                                    @Param("typeBoard") String typeBoard,
-                                    @Param("titleBoard") String titleBoard,
-                                    @Param("contentBoard") String contentBoard,
-                                          BindingResult bindingResult){
+    @RequestMapping(value = "/modifyAction", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView boardModifyAction(@RequestParam("idBoard") Integer idBoard,
+                                          @RequestParam("typeBoard") String typeBoard,
+                                          @RequestParam("titleBoard") String titleBoard,
+                                          @RequestParam("contentBoard") String contentBoard,
+                                          @Valid @ModelAttribute Member member,
+                                          BindingResult bindingResult,
+                                          HttpServletRequest request){
 
         ModelAndView mv = new ModelAndView();
-        if (bindingResult.hasErrors()) {
-            mv.setViewName("login");
+        HttpSession session = request.getSession();
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        if ( loginId == null && loginPw == null) {
+            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
+            mv.setViewName("redirect:/login");
             return mv;
         }
-
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
         List<Board> list;
-        list = boardService.postModifyBoard(idBoard,typeBoard,titleBoard,contentBoard);
+        Board boardInfo = boardService.getMatchPoint(idBoard);
 
-        mv.addObject("list",list);
-        mv.setViewName("boarddetail");
-
+        if(loginMember.getId_member() != boardInfo.getId_member()){
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "회원정보와 로그인정보가 일치하지않습니다.");
+            mv.addObject("errorMove","redirect:/login");
+            mv.setViewName("error");
+        }else{
+            boardService.postModifyBoard(typeBoard,titleBoard,contentBoard,idBoard);
+            list = boardService.getDetailBoard(idBoard);
+            mv.addObject("list",list);
+            mv.setViewName("boarddetail");
+        }
         return mv;
     }
 

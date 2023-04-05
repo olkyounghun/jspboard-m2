@@ -18,14 +18,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-<form method="post" name="frm" action="modifyAction" enctype="multipart/form-data">
+<form method="post" name="frm" action="/modifyAction">
     <c:forEach items="${list}" var="list">
     <div>
+        <input type="hidden" id="idBoard" name="idBoard" value="${list.id_board}">
         <table>
             <tr>
                 <td> 카테고리 </td>
                 <td>
-                    ${list.type_board}
+                    <label>
+                        <select id="typeBoard" name="typeBoard" class="form-control">
+                            <option value="All" ${list.type_board == 'All' ? 'selected' : ''}>전체 카테고리</option>
+                            <option value="JAVA" ${list.type_board == 'JAVA' ? 'selected' : ''}>JAVA</option>
+                            <option value="Javascript" ${list.type_board == 'Javascript' ? 'selected' : ''}>Javascript</option>
+                            <option value="Database" ${list.type_board == 'Database' ? 'selected' : ''}>Database</option>
+                        </select>
+                    </label>
                 </td>
             </tr>
             <tr>
@@ -47,11 +55,11 @@
             </tr>
             <tr>
                 <td> 제목 </td>
-                <td> <label><input type="text" id="boardTitle" name="boardTitle" value="${list.title_board}"></label></td>
+                <td> <label><input type="text" id="titleBoard" name="titleBoard" value="${list.title_board}"></label></td>
             </tr>
             <tr>
                 <td> 내용 </td>
-                <td> <label><input type="text" id="boardContent" name="boardContent" value="${list.content_board}"></label></td>
+                <td> <label><input type="text" id="contentBoard" name="contentBoard" value="${list.content_board}"></label></td>
             </tr>
         </table>
     </div>

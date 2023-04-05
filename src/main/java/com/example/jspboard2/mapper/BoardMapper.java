@@ -32,10 +32,10 @@ public interface BoardMapper {
 
     Board getMatchPoint(@Param("id_board") int id_board);
 
-    List<Board> postModifyBoard(@Param("idBoard") int idBoard,
-                                @Param("typeBoard") String typeBoard,
+    List<Board> postModifyBoard(@Param("typeBoard") String typeBoard,
                                 @Param("titleBoard") String titleBoard,
-                                @Param("contentBoard") String contentBoard);
+                                @Param("contentBoard") String contentBoard,
+                                @Param("idBoard") int idBoard);
 
     List<Board> activeDeleteBoard(@Param("idBoard") int idBoard);
 
