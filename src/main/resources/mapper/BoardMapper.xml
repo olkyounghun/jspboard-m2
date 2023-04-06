@@ -77,6 +77,12 @@
             ID_BOARD = ${idBoard}
         </where>
     </select>
+    <select id="viewUpPoint" resultType="com.example.jspboard2.domain.Board">
+        UPDATE BOARD_TB SET VIEWS_BOARD = VIEWS_BOARD + 1
+        <where>
+            ID_BOARD = ${idBoard}
+        </where>
+    </select>
     <select id="activeDeleteBoard" resultType="com.example.jspboard2.domain.Board" parameterType="int">
         DELETE FROM BOARD_TB
         <where>

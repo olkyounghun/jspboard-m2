@@ -229,6 +229,7 @@ public class BoardController {
         HttpSession session = request.getSession();
 
         List<Board> list;
+        boardService.viewUpPoint(id_board);
         list = boardService.getDetailBoard(id_board);
         mv.addObject("list", list);
         mv.setViewName("boarddetail");

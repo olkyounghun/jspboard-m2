@@ -30,6 +30,8 @@ public interface BoardMapper {
 
     List<Board> getDetailBoard(@Param("id_board") int id_board);
 
+    Board viewUpPoint(@Param("idBoard") int idBoard);
+
     Board getMatchPoint(@Param("id_board") int id_board);
 
     List<Board> postModifyBoard(@Param("typeBoard") String typeBoard,

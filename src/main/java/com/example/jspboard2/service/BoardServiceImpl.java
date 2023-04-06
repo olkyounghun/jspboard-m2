@@ -41,6 +41,8 @@ public class BoardServiceImpl implements BoardService{
 
     public List<Board> getDetailBoard(@Param("id_board") int id_board){return boardMapper.getDetailBoard(id_board);} // 글 보기로 보여질 해당 회원의 글
 
+    public Board viewUpPoint(@Param("idBoard") int idBoard){return boardMapper.viewUpPoint(idBoard);    }
+
     public Board getMatchPoint(@Param("id_board") int id_board){return boardMapper.getMatchPoint(id_board);}
 
     public List<Board> postModifyBoard(@Param("typeBoard") String typeBoard,
