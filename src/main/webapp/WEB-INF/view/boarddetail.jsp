@@ -41,10 +41,9 @@
             </div>
             <div class="col-sm-6">
               <div>
-                <c:set var="modd" value="${list.moddate_board}"/>
                 <c:choose>
-                  <c:when test="${modd eq null}">${list.regdate_board}</c:when>
-                  <c:when test="${!modd eq null}">${list.moddate_board}</c:when>
+                  <c:when test="${not empty list.moddate_board}">${list.regdate_board}</c:when>
+                  <c:when test="${empty list.moddate_board}">${list.moddate_board}</c:when>
                 </c:choose>
               </div>
             </div>

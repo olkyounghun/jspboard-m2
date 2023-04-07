@@ -61,8 +61,8 @@
                                 <td><a href="/boarddetail/${list.id_board}">${list.title_board}</a></td>
                                 <td>${list.user_board}</td>
                                 <td>${list.views_board}</td>
-                                <td><fmt:formatDate value="${list.regdate_board}" pattern="yyyy-MM-dd  HH:mm:ss" type="date"/></td>
-                                <td><fmt:formatDate value="${list.moddate_board}" pattern="yyyy-MM-dd  HH:mm:ss" type="date"/></td>
+                                <td><fmt:formatDate value="${list.regdate_board}" pattern="yyyy-MM-dd" type="date"/></td>
+                                <td><fmt:formatDate value="${list.moddate_board}" pattern="yyyy-MM-dd" type="date"/></td>
                             </tr>
                         </c:forEach>
                     </tbody>

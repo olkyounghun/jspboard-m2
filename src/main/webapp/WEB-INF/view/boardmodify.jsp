@@ -44,8 +44,8 @@
                 <td> 수정일자 </td>
                 <td>
                     <c:choose>
-                        <c:when test="${list.moddate_board} eq null">${list.moddate_board}</c:when>
-                        <c:when test="!${list.moddate_board} eq null">${list.regdate_board}</c:when>
+                        <c:when test="${not empty list.moddate_board}">${list.moddate_board}</c:when>
+                        <c:when test="${empty list.moddate_board}">${list.regdate_board}</c:when>
                     </c:choose>
                 </td>
             </tr>
