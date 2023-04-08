@@ -87,7 +87,7 @@
         <div class="input mb-3" style="margin: auto;">
           <button type="submit" class="btn btn-secondary">가입하기</button>
           &nbsp;
-          <button type="button" class="btn btn-secondary" onclick="location='list'"> 목록 </button>
+          <button type="button" class="btn btn-secondary" onclick="location='/'"> 뒤로가기 </button>
         </div>
       </div>
     </div>

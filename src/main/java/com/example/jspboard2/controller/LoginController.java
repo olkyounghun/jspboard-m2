@@ -60,7 +60,7 @@ public class LoginController {
 
         Member loginMember = memberService.checkLogin(loginId,loginPw);
 
-        if (loginId == null || loginPw == null) {
+        if (loginMember == null) {
             mv.addObject("error","login");
             mv.addObject("errorMessage","로그인 정보를 전부 입력해주세요.");
             mv.addObject("errorMove","login");
@@ -84,9 +84,10 @@ public class LoginController {
     @RequestMapping(value = "/logout", method={RequestMethod.GET,RequestMethod.POST})
     public String EndLogout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
+        session.removeAttribute("loginId");
+        session.removeAttribute("loginPw");
+        session.invalidate();
+
         return "login";
     }
 
