@@ -61,7 +61,7 @@
                             <td>${list.name_member}</td>
                             <td>${list.email_member}</td>
                             <td>${list.emailcheck_member}</td>
-                            <td><fmt:formatDate value="${list.regdate_member}" pattern="yyyy-MM-dd  HH:mm:ss" type="date"/></td>
+                            <td><fmt:formatDate value="${list.regdate_member}" pattern="yyyy-MM-dd" type="date"/></td>
                             <td>${list.rating_member}</td>
                         </tr>
                     </c:forEach>

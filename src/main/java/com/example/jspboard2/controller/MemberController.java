@@ -143,28 +143,25 @@ public class MemberController {
 
     // 매니저 등급 확인이후 매니저게시판으로 이동 및 회원게시판 읽어오기
     @RequestMapping(value="/manager", method={RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView managerLogin(@Valid @ModelAttribute Member member, BindingResult bindingResult, HttpServletRequest request,
+    public ModelAndView managerLogin(@Valid @ModelAttribute Member member,
+                                     BindingResult bindingResult,
+                                     HttpServletRequest request,
                                      @RequestParam(value = "page", required = false,defaultValue = "1") int page){
 
         ModelAndView mv = new ModelAndView();
-
-        if (bindingResult.hasErrors()) {
-            RedirectView redirectView = new RedirectView("/login");
-            redirectView.setExposeModelAttributes(false);
-            mv.setViewName("login");
+        HttpSession session = request.getSession();
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        if ( loginId == null && loginPw == null) {
+            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
+            mv.setViewName("redirect:/login");
             return mv;
         }
 
-        HttpSession session = request.getSession();
-        session.getAttribute("userName");
-        String userName = (String)session.getAttribute("userName");
-        Member userInfo;
-        userInfo = memberService.getuserName(userName);
+        Member userInfo = memberService.checkLogin(loginId,loginPw);
 
-        if(userInfo.getRating_member() == 2){
-            RedirectView redirectView = new RedirectView("/manager");
-            redirectView.setExposeModelAttributes(false);
-            mv.setViewName("manager");
+        if(userInfo.getRating_member() == 1){
+
             Paging paging = new Paging();
             int count = memberService.getAllManager();
 
@@ -173,15 +170,15 @@ public class MemberController {
             int beginpage = paging.getBeginPage();
             int endpage = paging.getEndPage();
 
-
             List<Member> list;
             list = memberService.getManagerMember(beginpage,endpage,page);
             mv.addObject("list",list);
             mv.addObject("paging", paging);
+            mv.setViewName("/manager");
         }else{
-            RedirectView redirectView = new RedirectView("/list");
+            RedirectView redirectView = new RedirectView("/boardlist");
             redirectView.setExposeModelAttributes(false);
-            mv.setViewName("boardlist");
+            mv.setViewName("/boardlist");
         }
 
         return mv;
