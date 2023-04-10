@@ -17,10 +17,10 @@ public interface BoardMapper {
                              @Param("endpage") int endpage,
                              @Param("page") int page); // 목록 화면에서 게시물들 출력
 
-    List<Board> getSearchResult(@Param("startDate") String startDate, // 목록화면의 검색창에서 검색시 검색된 내용들 출력
-                                @Param("endDate") String endDate,
-                                @Param("searchType") String searchType,
-                                @Param("searchName") String searchName);
+    List<Board> getSearchResult( @Param("searchType") String searchType,
+                                 @Param("startDate") String startDate, // 목록화면의 검색창에서 검색시 검색된 내용들 출력
+                                 @Param("endDate") String endDate,
+                                 @Param("searchName") String searchName);
 
     List<Board> postingUpload(@Param("typeBoard") String typeBoard,
                               @Param("titleBoard") String titleBoard,

@@ -77,17 +77,35 @@ public class BoardController {
         return mv;
     }
 
-    @GetMapping(value = "/searchlist")
-    public ModelAndView getSearchResult(@Param("startDate") String startDate,
-                                        @Param("endDate") String endDate,
-                                        @Param("searchType") String searchType,
-                                        @Param("searchName") String searchName){
+    @RequestMapping(value = "/searchlist",method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView getSearchResult(@Valid @ModelAttribute("mv") Member member,
+                                        BindingResult bindingResult,
+                                        HttpServletRequest request,
+                                        @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                        @RequestParam("startDate") String startDate,
+                                        @RequestParam("endDate") String endDate,
+                                        @RequestParam("searchType") String searchType,
+                                        @RequestParam("searchName") String searchName){
 
-        /* 검색내용 > 서비스로 보내고 > 메퍼에서 검색해서 > 컨트롤에서 다시 보내기기*/
         ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+
+        Paging paging = new Paging();
+        int count = boardService.getAllCount();
+        paging.setPage(page);
+        paging.setTotalCount(count);
+        int beginpage = paging.getBeginPage();
+        int endpage = paging.getEndPage();
+
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
+
         List<Board> list;
-        list = boardService.getSearchResult(startDate,endDate,searchType,searchName);
+        list = boardService.getSearchResult(searchType,startDate,endDate,searchName);
+
         mv.addObject("list", list);
+        mv.addObject("paging", paging);
         mv.setViewName("boardlist");
 
         return mv;

@@ -29,30 +29,25 @@
             ) b
         WHERE row_num <![CDATA[<=]]> 10;
     </select>
-    <select id="getSearchResult" resultType="com.example.jspboard2.domain.Board">
-        SELECT
-        *
+    <select id="getSearchResult" resultType="com.example.jspboard2.domain.Board" parameterType="string">
+        SELECT *
         FROM BOARD_TB
-
+        WHERE
         <choose>
-            <when test=' == "JAVA"'>
-                WHERE TYPE_BOARD = 'JAVA'
-            </when>
-            <when test="#{searchType} == 'JavaScript'">
-                WHERE TYPE_BOARD = 'JavaScript'
-            </when>
-            <when test="#{searchType} == 'Database'">
-                WHERE TYPE_BOARD = 'Database'
-            </when>
-            <otherwise>
-                WHERE TYPE_BOARD = 'JAVA' OR TYPE_BOARD = 'JavaScript' OR TYPE_BOARD = 'Database'
-            </otherwise>
-        </choose>
+            <when test="#{searchType} == 'ALL'">
+            TYPE_BOARD = 'JAVA' OR TYPE_BOARD = 'JavaScript' OR TYPE_BOARD = 'Database'
+        </when>
+        <otherwise>
+            TYPE_BOARD = #{searchType}
+        </otherwise>
+    </choose>
+    <if test="#{startDate} != NULL || #{endDate} != NULL">
         AND REGDATE_BOARD BETWEEN CONVERT(DATE, #{startDate}) AND CONVERT(DATE, #{endDate})
-        <if test="#{searchName} != NULL">
-            AND USER_BOARD.search(#{searchName}) OR TITLE_BOARD.search(#{searchName}) OR CONTENT_BOARD.search(#{searchName})
-        </if>
-    </select>
+    </if>
+    <if test="#{searchName} != NULL">
+        AND (USER_BOARD LIKE '%${searchName}%' OR TITLE_BOARD LIKE '%${searchName}%' OR CONTENT_BOARD LIKE '%${searchName}%')
+    </if>
+</select>
     <select id="postingUpload" resultType="com.example.jspboard2.domain.Board">
         INSERT INTO BOARD_TB (TYPE_BOARD,TITLE_BOARD,CONTENT_BOARD,USER_BOARD,VIEWS_BOARD,REGDATE_BOARD,MODDATE_BOARD,ID_MEMBER)
             VALUES (#{typeBoard},#{titleBoard},#{contentBoard},#{userBoard},0,DEFAULT,NULL,#{idMember})

@@ -24,18 +24,18 @@
         </c:if>
     </div>
     <div class="mainContainer">
-        <form method="get">
+        <form method="post">
             <div>
-                <input type="date" name="startDate">
+                <input type="date" id="startDate" name="startDate">
                 ~
-                <input type="date" name="endDate">
-                <select name="searchType">
+                <input type="date" id="endDate" name="endDate">
+                <select id="searchType" name="searchType">
                     <option value="ALL" selected>모든 카테고리</option>
                     <option value="JAVA">JAVA</option>
                     <option value="Javascript">Javascript</option>
                     <option value="Database">Database</option>
                 </select>
-                <input type="text" name="searchName" placeholder="제목 + 작성자 + 내용">
+                <input type="text" id="searchName" name="searchName" placeholder="제목 + 작성자 + 내용">
                 <button type="submit" >검색</button>
             </div>
         </form>

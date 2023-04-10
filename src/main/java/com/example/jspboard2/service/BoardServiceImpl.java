@@ -26,11 +26,11 @@ public class BoardServiceImpl implements BoardService{
                                     @Param("endpage") int endpage,
                                     @Param("page") int page){return boardMapper.getBoardList(beginpage,endpage,page);} // 목록 화면에서 게시물들 출력
 
-    public List<Board> getSearchResult(@Param("startDate") String startDate, // 목록화면의 검색창에서 검색시 검색된 내용들 출력
+    public List<Board> getSearchResult(@Param("searchType") String searchType,
+                                       @Param("startDate") String startDate,
                                        @Param("endDate") String endDate,
-                                       @Param("searchType") String searchType,
                                        @Param("searchName") String searchName){
-        return boardMapper.getSearchResult(startDate, endDate, searchType,searchName);
+        return boardMapper.getSearchResult(searchType,startDate, endDate,searchName);
     }
 
     public List<Board> postingUpload(@Param("typeBoard") String typeBoard,
