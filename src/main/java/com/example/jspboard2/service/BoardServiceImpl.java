@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -30,7 +31,13 @@ public class BoardServiceImpl implements BoardService{
                                        @Param("startDate") String startDate,
                                        @Param("endDate") String endDate,
                                        @Param("searchName") String searchName){
-        return boardMapper.getSearchResult(searchType,startDate, endDate,searchName);
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("searchName", searchName);
+        map.put("endDate", endDate);
+        map.put("startDate", startDate);
+        map.put("searchType", searchType);
+
+        return boardMapper.getSearchResult(map);
     }
 
     public List<Board> postingUpload(@Param("typeBoard") String typeBoard,

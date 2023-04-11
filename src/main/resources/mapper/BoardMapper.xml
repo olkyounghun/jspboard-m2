@@ -29,25 +29,25 @@
             ) b
         WHERE row_num <![CDATA[<=]]> 10;
     </select>
-    <select id="getSearchResult" resultType="com.example.jspboard2.domain.Board" parameterType="string">
+    <select id="getSearchResult" resultType="com.example.jspboard2.domain.Board" parameterType="hashmap">
         SELECT *
         FROM BOARD_TB
-        WHERE
         <choose>
-            <when test="#{searchType} == 'ALL'">
-            TYPE_BOARD = 'JAVA' OR TYPE_BOARD = 'JavaScript' OR TYPE_BOARD = 'Database'
-        </when>
-        <otherwise>
-            TYPE_BOARD = #{searchType}
-        </otherwise>
-    </choose>
-    <if test="#{startDate} != NULL || #{endDate} != NULL">
-        AND REGDATE_BOARD BETWEEN CONVERT(DATE, #{startDate}) AND CONVERT(DATE, #{endDate})
-    </if>
-    <if test="#{searchName} != NULL">
-        AND (USER_BOARD LIKE '%${searchName}%' OR TITLE_BOARD LIKE '%${searchName}%' OR CONTENT_BOARD LIKE '%${searchName}%')
-    </if>
-</select>
+            <when test="searchType == 'ALL'">
+                WHERE TYPE_BOARD = 'JAVA' and TYPE_BOARD = 'JavaScript' and TYPE_BOARD = 'Database'
+            </when>
+            <otherwise>
+                WHERE TYPE_BOARD = #{searchType}
+            </otherwise>
+        </choose>
+        <if test="startDate != '' and endDate != ''">
+            AND REGDATE_BOARD BETWEEN DATE_FORMAT(#{startDate},'%Y-%m-%d') AND DATE_FORMAT(#{endDate},'%Y-%m-%d')
+        </if>
+        <if test="searchName != ''">
+            AND (USER_BOARD LIKE CONCAT('%',#{searchName},'%') OR TITLE_BOARD LIKE CONCAT('%',#{searchName},'%') OR CONTENT_BOARD LIKE CONCAT('%',#{searchName},'%'))
+        </if>
+        ORDER BY ID_BOARD DESC LIMIT 10;
+    </select>
     <select id="postingUpload" resultType="com.example.jspboard2.domain.Board">
         INSERT INTO BOARD_TB (TYPE_BOARD,TITLE_BOARD,CONTENT_BOARD,USER_BOARD,VIEWS_BOARD,REGDATE_BOARD,MODDATE_BOARD,ID_MEMBER)
             VALUES (#{typeBoard},#{titleBoard},#{contentBoard},#{userBoard},0,DEFAULT,NULL,#{idMember})

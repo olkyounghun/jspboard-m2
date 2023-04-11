@@ -24,7 +24,7 @@
         </c:if>
     </div>
     <div class="mainContainer">
-        <form method="post">
+        <form method="post" action="/searchlist">
             <div>
                 <input type="date" id="startDate" name="startDate">
                 ~

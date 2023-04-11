@@ -102,7 +102,7 @@ public class BoardController {
         Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         List<Board> list;
-        list = boardService.getSearchResult(searchType,startDate,endDate,searchName);
+        list = boardService.getSearchResult(searchType, startDate, endDate, searchName);
 
         mv.addObject("list", list);
         mv.addObject("paging", paging);
