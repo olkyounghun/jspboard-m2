@@ -34,7 +34,7 @@
         FROM BOARD_TB
         <choose>
             <when test="searchType == 'ALL'">
-                WHERE TYPE_BOARD = 'JAVA' and TYPE_BOARD = 'JavaScript' and TYPE_BOARD = 'Database'
+                WHERE ( TYPE_BOARD = 'JAVA' or TYPE_BOARD = 'JavaScript' or TYPE_BOARD = 'Database' )
             </when>
             <otherwise>
                 WHERE TYPE_BOARD = #{searchType}
