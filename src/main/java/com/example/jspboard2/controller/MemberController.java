@@ -93,7 +93,7 @@ public class MemberController {
 
     // 개인 회원정보 확인
     @RequestMapping(value = "/membermodify/{id_member}", method = {RequestMethod.POST})
-    public ModelAndView memberModify(@Param("idMember") Integer idMember,
+    public ModelAndView memberModify(@Param("id_member") Integer idMember,
                                      @Param("emailMember") String emailMember,
                                      @Param("nameMember") String nameMember,
                                      @Valid @ModelAttribute Member member,
@@ -117,28 +117,40 @@ public class MemberController {
         }else{
             List<Member> list;
             list = memberService.modifyMemberDetail(idMember,emailMember,nameMember);
-
-            mv.addObject("list",list);
-            mv.setViewName("redirect:/search");
+            mv.addObject("error","회원정보수정");
+            mv.addObject("errorMessage", "회원정보가 올바르게 '수정' 되었습니다.");
+            mv.addObject("errorMove","/search");
+            mv.setViewName("error");
         }
         return mv;
     }
 
     @RequestMapping(value = "/memberdelete/{id_member}", method = {RequestMethod.GET})
-        public String memberInfoDelete(@PathVariable("id_member") Integer idMember,
+        public ModelAndView memberInfoDelete(@PathVariable("id_member") Integer idMember,
                                        @Valid @ModelAttribute Member member,
                                        HttpServletRequest request){
 
+        ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
-        if (session.getAttribute("userName") == null) {
-            return "login";
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        if (loginId == null || loginPw == null) {
+            mv.addObject("error","로그인정보");
+            mv.addObject("errorMessage", "현재 잘못된 로그인정보 상태입니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
+            return mv;
         }
 
         String deleteDone;
         deleteDone = memberService.deleteMember(idMember);
         session.invalidate();  // 삭제된 개인 회원세션 로그아웃 하기
+        mv.addObject("error","회원정보삭제");
+        mv.addObject("errorMessage", "회원정보가 올바르게 '삭제' 되었습니다.");
+        mv.addObject("errorMove","/login");
+        mv.setViewName("error");
         
-        return "login";
+        return mv;
     }
 
     // 매니저 등급 확인이후 매니저게시판으로 이동 및 회원게시판 읽어오기

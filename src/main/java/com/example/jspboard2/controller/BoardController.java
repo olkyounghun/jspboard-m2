@@ -104,6 +104,7 @@ public class BoardController {
         List<Board> list;
         list = boardService.getSearchResult(searchType, startDate, endDate, searchName);
 
+        mv.addObject("id_member", loginMember.getId_member());
         mv.addObject("list", list);
         mv.addObject("paging", paging);
         mv.setViewName("boardlist");
