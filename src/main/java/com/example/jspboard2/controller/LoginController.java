@@ -35,11 +35,13 @@ public class LoginController {
         HttpSession session = request.getSession();
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
         if ( loginId == null && loginPw == null) {
             bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
             mv.setViewName("login");
             return mv;
         }
+        mv.addObject("id_member",loginMember.getId_member());
         mv.setViewName("login");
 
         return mv;

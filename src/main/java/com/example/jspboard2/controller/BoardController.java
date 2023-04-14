@@ -32,7 +32,11 @@ public class BoardController {
                              BindingResult bindingResult,
                              HttpServletRequest request){
 
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession();
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
+
         ModelAndView mv = new ModelAndView();
         if (session == null) {
             RedirectView redirectView = new RedirectView("/login");
@@ -40,7 +44,7 @@ public class BoardController {
             mv.setViewName("login");
             return mv;
         }
-        session.getAttribute("userName");
+        mv.addObject("id_member",loginMember.getId_member());
         mv.setViewName("search");
 
         return mv;
