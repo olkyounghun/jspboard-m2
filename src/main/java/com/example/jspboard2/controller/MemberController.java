@@ -78,13 +78,19 @@ public class MemberController {
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
-        if (session.getAttribute("loginId") == null) {
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
+
+        if (loginId == "null") {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             mv.setViewName("login");
             return mv;
         }
+
         List<Member> list;
         list = memberService.getMember(idMember);
+        mv.addObject("id_member",loginMember.getId_member());
         mv.addObject("list", list);
         mv.setViewName("memberdetail");
 

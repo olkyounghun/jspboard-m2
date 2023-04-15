@@ -250,10 +250,14 @@ public class BoardController {
             return mv;
         }
         HttpSession session = request.getSession();
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         List<Board> list;
         boardService.viewUpPoint(id_board);
         list = boardService.getDetailBoard(id_board);
+        mv.addObject("id_member",loginMember.getId_member());
         mv.addObject("list", list);
         mv.setViewName("boarddetail");
 
