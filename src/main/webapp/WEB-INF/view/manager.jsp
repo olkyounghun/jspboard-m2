@@ -31,12 +31,12 @@
     </c:if>
 </div>
 <div class="mainContainer">
-    <form method="get">
+    <form method="post" action="/searchmember">
         <div>
             <input type="date" name="startDate">
             ~
             <input type="date" name="endDate">
-            <input type="text" name="searchName" placeholder="제목 + 작성자 + 내용">
+            <input type="text" name="searchName" placeholder="아이디 + 이름 + 이메일">
             <button type="submit" >검색</button>
         </div>
     </form>
@@ -89,8 +89,8 @@
         </c:if>
     </div>
     <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-outline-secondary" onclick="location='list'">목록</button>
-        <button type="button" class="btn btn-outline-secondary" onclick="location='logout'">로그아웃</button>
+        <button type="button" class="btn btn-outline-secondary" onclick="location='/boardlist'">목록</button>
+        <button type="button" class="btn btn-outline-secondary" onclick="location='/logout'">로그아웃</button>
     </div>
 </div>
 </body>

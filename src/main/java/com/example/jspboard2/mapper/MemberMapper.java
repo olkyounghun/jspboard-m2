@@ -30,6 +30,10 @@ public interface MemberMapper {
 
     int getAllManager();
 
+    List<Member> getSearchMember(@Param("startDate") String startDate,
+                                  @Param("endDate") String endDate,
+                                  @Param("searchName") String searchName);
+
     List<Member> getManagerMember(@Param("beginpage")int beginpage,
                                   @Param("endpage") int endpage,
                                   @Param("page") int page);

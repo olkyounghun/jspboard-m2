@@ -35,6 +35,10 @@ public class MemberServiceImple implements MemberService {
     public Member getMMember(@Param("idMember") int idMember){return  memberMapper.getMMember(idMember);}
 
     public int getAllManager(){return memberMapper.getAllManager();}
+
+    public List<Member> getSearchMemeber(@Param("startDate") String startDate,
+                                  @Param("endDate") String endDate,
+                                  @Param("searchName") String searchName){return memberMapper.getSearchMember(startDate,endDate,searchName);}
     public List<Member> getManagerMember(@Param("beginpage")int beginpage,
                                          @Param("endpage") int endpage,
                                          @Param("page") int page){return memberMapper.getManagerMember(beginpage,endpage,page);}

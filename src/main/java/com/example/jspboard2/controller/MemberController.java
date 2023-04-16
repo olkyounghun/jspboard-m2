@@ -202,6 +202,40 @@ public class MemberController {
         return mv;
     }
 
+    @RequestMapping(value = "/searchmember",method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView getSearchResult(@Valid @ModelAttribute("mv") Member member,
+                                        BindingResult bindingResult,
+                                        HttpServletRequest request,
+                                        @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                        @RequestParam("startDate") String startDate,
+                                        @RequestParam("endDate") String endDate,
+                                        @RequestParam("searchName") String searchName){
+
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+
+        Paging paging = new Paging();
+        int count = memberService.getAllManager();
+        paging.setPage(page);
+        paging.setTotalCount(count);
+        int beginpage = paging.getBeginPage();
+        int endpage = paging.getEndPage();
+
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
+
+        List<Member> list;
+        list = memberService.getSearchMemeber(startDate, endDate, searchName);
+
+        mv.addObject("id_member", loginMember.getId_member());
+        mv.addObject("list", list);
+        mv.addObject("paging", paging);
+        mv.setViewName("manager");
+
+        return mv;
+    }
+
     // 매니저게시판 특정 회원정보 확인
     @GetMapping("/managerinfo/{id_member}")
     public ModelAndView MemberDetail(@PathVariable("id_member") Integer id_member,

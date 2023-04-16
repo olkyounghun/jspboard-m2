@@ -26,6 +26,10 @@ public interface MemberService {
 
     int getAllManager();
 
+    List<Member> getSearchMemeber(@Param("startDate") String startDate,
+                                  @Param("endDate") String endDate,
+                                  @Param("searchName") String searchName);
+
     List<Member> getManagerMember(@Param("beginpage")int beginpage,
                                   @Param("endpage") int endpage,
                                   @Param("page") int page);
