@@ -116,27 +116,6 @@ public class BoardController {
         return mv;
     }
 
-    // 로그아웃 추가 1.20
-//    @GetMapping("/")
-//    public String homeLoginV3(HttpServletRequest request, Model model) {
-//
-//        // 세션이 없으면 home
-//        HttpSession session = request.getSession(false);
-//        if (session == null) {
-//            return "home";
-//        }
-//
-//        Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-//        // 세션에 데이터가 없으면 home
-//        if (loginMember == null) {
-//            return "home";
-//        }
-//
-//        // 세션이 유지되면 로그인으로 이동
-//        model.addAttribute("member", loginMember);
-//        return "loginHome";
-//    }
-
     @GetMapping("/boardposting")
     public String movePosting(){
 
@@ -164,7 +143,6 @@ public class BoardController {
         List<Board> list;
         list = boardService.postingUpload(typeBoard,titleBoard,contentBoard,userBoard,idMember);
         int newNumber = boardService.getNewBoardId();
-        ;
         mv.addObject("list", list);
         mv.setViewName("redirect:/boarddetail/" + newNumber);
 

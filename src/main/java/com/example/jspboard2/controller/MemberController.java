@@ -121,8 +121,7 @@ public class MemberController {
             mv.setViewName("redirect:/login");
             return mv;
         }else{
-            List<Member> list;
-            list = memberService.modifyMemberDetail(idMember,emailMember,nameMember);
+            memberService.modifyMemberDetail(idMember,emailMember,nameMember);
             mv.addObject("error","회원정보수정");
             mv.addObject("errorMessage", "회원정보가 올바르게 '수정' 되었습니다.");
             mv.addObject("errorMove","/search");
@@ -148,8 +147,7 @@ public class MemberController {
             return mv;
         }
 
-        String deleteDone;
-        deleteDone = memberService.deleteMember(idMember);
+        memberService.deleteMember(idMember);
         session.invalidate();  // 삭제된 개인 회원세션 로그아웃 하기
         mv.addObject("error","회원정보삭제");
         mv.addObject("errorMessage", "회원정보가 올바르게 '삭제' 되었습니다.");
@@ -278,7 +276,6 @@ public class MemberController {
             mv.setViewName("login");
             return mv;
         }
-        String deleteDone;
         HttpSession session = request.getSession();
         Object sessionMember = session.getAttribute("userName");
         Member loginMember = memberService.checkLogin((String) sessionMember,(String)sessionMember);
@@ -287,10 +284,9 @@ public class MemberController {
             mv.setViewName("login");
             return mv;
         }else if(loginMember.getRating_member() == 1){ // 관리자가 개인 멤버 삭제시
-            deleteDone = memberService.deleteMember(idMember);
+            memberService.deleteMember(idMember);
             mv.setViewName("manager");
         }
-        //session.setAttribute("userName", loginMember);
 
         return mv;
     }
