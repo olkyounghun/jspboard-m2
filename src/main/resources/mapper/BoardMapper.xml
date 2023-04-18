@@ -14,7 +14,7 @@
         SELECT *
         FROM BOARD_TB
         ORDER BY ID_BOARD DESC
-            LIMIT 10;
+            LIMIT 10 , 0;
     </select>
     <select id="getBoardList2" resultType="com.example.jspboard2.domain.Board" parameterType="int">
         SELECT *

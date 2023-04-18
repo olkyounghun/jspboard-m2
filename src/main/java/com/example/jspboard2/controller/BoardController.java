@@ -50,15 +50,18 @@ public class BoardController {
         return mv;
     }
 
-    @RequestMapping(value="/boardlist", method={RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value="/boardlist/page={page}", method={RequestMethod.GET,RequestMethod.POST})
     public ModelAndView getBoardList(@Valid @ModelAttribute("mv") Member member,
                                      BindingResult bindingResult,
                                      HttpServletRequest request,
-                                     @RequestParam(value = "page", required = false,defaultValue = "1") int page){
+                                     @PathVariable(value = "page", required = false) int page){
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
 
+        if(page == 0){
+            page = 1;
+        }
         Paging paging = new Paging();
         int count = boardService.getAllCount();
         paging.setPage(page);
