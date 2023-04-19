@@ -50,17 +50,44 @@ public class BoardController {
         return mv;
     }
 
-    @RequestMapping(value="/boardlist/page={page}", method={RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value="/boardlist", method={RequestMethod.GET,RequestMethod.POST})
     public ModelAndView getBoardList(@Valid @ModelAttribute("mv") Member member,
                                      BindingResult bindingResult,
-                                     HttpServletRequest request,
-                                     @PathVariable(value = "page", required = false) int page){
+                                     HttpServletRequest request){
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
 
-        if(page == 0){
-            page = 1;
+        Paging paging = new Paging();
+        int count = boardService.getAllCount();
+        paging.setTotalCount(count);
+
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
+
+        List<Board> list;
+        list = boardService.getBoardList();
+
+        mv.addObject("id_member", loginMember.getId_member());
+        mv.addObject("list", list);
+        mv.addObject("paging", paging);
+        mv.setViewName("boardlist");
+
+        return mv;
+    }
+
+    @RequestMapping(value="/boardlist/{page}", method={RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView getPageList(@Valid @ModelAttribute("mv") Member member,
+                                     BindingResult bindingResult,
+                                     HttpServletRequest request,
+                                     @PathVariable(value = "page", required = false) Integer page){
+
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+
+        if(page == null || page <= 0){
+            page = 1; // Set a default value for page if not provided or invalid
         }
         Paging paging = new Paging();
         int count = boardService.getAllCount();
@@ -74,7 +101,7 @@ public class BoardController {
         Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         List<Board> list;
-        list = boardService.getBoardList(beginpage,endpage,page);
+        list = boardService.getPageList(beginpage,endpage,page);
 
         mv.addObject("id_member", loginMember.getId_member());
         mv.addObject("list", list);

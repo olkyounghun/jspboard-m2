@@ -10,11 +10,15 @@
         FROM BOARD_TB
         ORDER BY ID_BOARD DESC LIMIT 1;
     </select>
-    <select id="getBoardList" resultType="com.example.jspboard2.domain.Board" parameterType="int">
+    <select id="getBoardList" resultType="com.example.jspboard2.domain.Board">
         SELECT *
         FROM BOARD_TB
-        ORDER BY ID_BOARD DESC
-            LIMIT 10 , 0;
+        ORDER BY ID_BOARD DESC LIMIT 10;
+    </select>
+    <select id="getPageList" resultType="com.example.jspboard2.domain.Board" parameterType="int">
+        SELECT *
+        FROM BOARD_TB
+        ORDER BY ID_BOARD DESC LIMIT 10;
     </select>
     <select id="getBoardList2" resultType="com.example.jspboard2.domain.Board" parameterType="int">
         SELECT *

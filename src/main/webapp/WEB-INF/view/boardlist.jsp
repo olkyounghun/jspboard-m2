@@ -72,7 +72,7 @@
         <div id="paging">
             <!-- 1~10까지 있는 페이지의 페이징 -->
             <c:if test="${paging.prev}">
-                <a href=boardlist/page=${paging.beginPage-1}">prev</a>
+                <a href=boardlist/${paging.beginPage-1}">prev</a>
             </c:if>
             <c:forEach begin="${paging.beginPage}" end="${paging.endPage}" step="1" var="index">
                 <c:choose>
@@ -80,12 +80,12 @@
                         ${index}
                     </c:when>
                     <c:otherwise>
-                        <a href="boardlist/page=${index}">${index}</a>
+                        <a href="http://localhost:8080/boardlist/${index}">${index}</a>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
             <c:if test="${paging.next}">
-                <a href="boardlist/page=${paging.endPage+1}">next</a>
+                <a href="boardlist/${paging.endPage+1}">next</a>
             </c:if>
         </div>
         <div class="btn-group" role="group" aria-label="Basic example">

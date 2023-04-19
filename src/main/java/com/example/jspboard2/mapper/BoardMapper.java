@@ -14,9 +14,11 @@ public interface BoardMapper {
 
     int getNewBoardId();
 
-    List<Board> getBoardList(@Param("beginpage")int beginpage,
-                             @Param("endpage") int endpage,
-                             @Param("page") int page); // 목록 화면에서 게시물들 출력
+    List<Board> getBoardList(); // 목록 화면에서 게시물들 출력
+
+    List<Board> getPageList(@Param("beginpage")int beginpage,
+                            @Param("endpage") int endpage,
+                            @Param("page") int page);
 
     List<Board> getSearchResult(HashMap<String, String> map);
 

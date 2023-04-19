@@ -23,9 +23,11 @@ public class BoardServiceImpl implements BoardService{
 
     public int getNewBoardId(){return  boardMapper.getNewBoardId();} // 작성된 글의 글번호를 가져오기 위함.
 
-    public List<Board> getBoardList(@Param("beginpage")int beginpage,
-                                    @Param("endpage") int endpage,
-                                    @Param("page") int page){return boardMapper.getBoardList(beginpage,endpage,page);} // 목록 화면에서 게시물들 출력
+    public List<Board> getBoardList(){return boardMapper.getBoardList();} // 목록 화면에서 게시물들 출력
+
+    public List<Board> getPageList(@Param("beginpage")int beginpage,
+                            @Param("endpage") int endpage,
+                            @Param("page") int page){return boardMapper.getPageList(beginpage,endpage,page);}
 
     public List<Board> getSearchResult(@Param("searchType") String searchType,
                                        @Param("startDate") String startDate,
