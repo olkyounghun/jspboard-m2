@@ -13,12 +13,12 @@
     <select id="getBoardList" resultType="com.example.jspboard2.domain.Board">
         SELECT *
         FROM BOARD_TB
-        ORDER BY ID_BOARD DESC LIMIT 10;
+        ORDER BY ID_BOARD DESC LIMIT 10 OFFSET 0;
     </select>
     <select id="getPageList" resultType="com.example.jspboard2.domain.Board" parameterType="int">
         SELECT *
         FROM BOARD_TB
-        ORDER BY ID_BOARD DESC LIMIT 10;
+        ORDER BY ID_BOARD DESC LIMIT 10 OFFSET ${pagelist};
     </select>
     <select id="getBoardList2" resultType="com.example.jspboard2.domain.Board" parameterType="int">
         SELECT *

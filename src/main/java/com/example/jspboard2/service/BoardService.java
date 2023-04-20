@@ -15,7 +15,7 @@ public interface BoardService {
 
     List<Board> getPageList(@Param("beginpage")int beginpage,
                             @Param("endpage") int endpage,
-                            @Param("page") int page);
+                            @Param("pagelist") int pagelist);
 
     List<Board> getSearchResult(@Param("searchType") String searchType,
                                 @Param("startDate") String startDate,

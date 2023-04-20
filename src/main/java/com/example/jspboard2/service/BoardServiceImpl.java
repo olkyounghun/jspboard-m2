@@ -27,7 +27,7 @@ public class BoardServiceImpl implements BoardService{
 
     public List<Board> getPageList(@Param("beginpage")int beginpage,
                             @Param("endpage") int endpage,
-                            @Param("page") int page){return boardMapper.getPageList(beginpage,endpage,page);}
+                            @Param("pagelist") int pagelist){return boardMapper.getPageList(beginpage,endpage,pagelist);}
 
     public List<Board> getSearchResult(@Param("searchType") String searchType,
                                        @Param("startDate") String startDate,

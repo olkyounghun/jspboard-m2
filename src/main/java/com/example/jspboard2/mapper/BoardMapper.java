@@ -18,7 +18,7 @@ public interface BoardMapper {
 
     List<Board> getPageList(@Param("beginpage")int beginpage,
                             @Param("endpage") int endpage,
-                            @Param("page") int page);
+                            @Param("pagelist") int pagelist);
 
     List<Board> getSearchResult(HashMap<String, String> map);
 

@@ -87,7 +87,7 @@ public class BoardController {
         HttpSession session = request.getSession();
 
         if(page == null || page <= 0){
-            page = 1; // Set a default value for page if not provided or invalid
+            page = 1;
         }
         Paging paging = new Paging();
         int count = boardService.getAllCount();
@@ -95,13 +95,15 @@ public class BoardController {
         paging.setTotalCount(count);
         int beginpage = paging.getBeginPage();
         int endpage = paging.getEndPage();
+        int pagelist = (page-1)*10;
+
 
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
         Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         List<Board> list;
-        list = boardService.getPageList(beginpage,endpage,page);
+        list = boardService.getPageList(beginpage,endpage,pagelist);
 
         mv.addObject("id_member", loginMember.getId_member());
         mv.addObject("list", list);
