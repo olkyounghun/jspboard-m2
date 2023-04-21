@@ -21,19 +21,39 @@ public class BoardServiceImpl implements BoardService{
 
     public int getAllCount(){return boardMapper.getAllCount();} // 목록 전체글 수 파악 후 전체페이지 설정에 이용
 
+    public int getSearchAllCount(@Param("searchType") String searchType,
+                                 @Param("startDate") String startDate,
+                                 @Param("endDate") String endDate,
+                                 @Param("searchName") String searchName){return boardMapper.getSearchAllCount(searchType,startDate,endDate,searchName);}
+
     public int getNewBoardId(){return  boardMapper.getNewBoardId();} // 작성된 글의 글번호를 가져오기 위함.
 
     public List<Board> getBoardList(){return boardMapper.getBoardList();} // 목록 화면에서 게시물들 출력
 
-    public List<Board> getPageList(@Param("beginpage")int beginpage,
-                            @Param("endpage") int endpage,
-                            @Param("pagelist") int pagelist){return boardMapper.getPageList(beginpage,endpage,pagelist);}
+    public List<Board> getPageList(@Param("pagelist") int pagelist){return boardMapper.getPageList(pagelist);}
 
     public List<Board> getSearchResult(@Param("searchType") String searchType,
                                        @Param("startDate") String startDate,
                                        @Param("endDate") String endDate,
                                        @Param("searchName") String searchName){
+
         HashMap<String, String> map = new HashMap<String, String>();
+        map.put("searchName", searchName);
+        map.put("endDate", endDate);
+        map.put("startDate", startDate);
+        map.put("searchType", searchType);
+
+        return boardMapper.getSearchResult(map);
+    }
+
+    public List<Board> getSearchPageResult(@Param("searchType") String searchType,
+                                    @Param("startDate") String startDate,
+                                    @Param("endDate") String endDate,
+                                    @Param("searchName") String searchName,
+                                    @Param("pagelist") String pagelist){
+
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("pagelist",pagelist);
         map.put("searchName", searchName);
         map.put("endDate", endDate);
         map.put("startDate", startDate);

@@ -9,18 +9,27 @@ public interface BoardService {
 
     int getAllCount();
 
+    int getSearchAllCount(@Param("searchType") String searchType,
+                          @Param("startDate") String startDate,
+                          @Param("endDate") String endDate,
+                          @Param("searchName") String searchName);
+
     int getNewBoardId();
 
     List<Board> getBoardList(); // 목록 화면에서 게시물들 출력
 
-    List<Board> getPageList(@Param("beginpage")int beginpage,
-                            @Param("endpage") int endpage,
-                            @Param("pagelist") int pagelist);
+    List<Board> getPageList(@Param("pagelist") int pagelist);
 
     List<Board> getSearchResult(@Param("searchType") String searchType,
                                 @Param("startDate") String startDate,
                                 @Param("endDate") String endDate,
                                 @Param("searchName") String searchName);
+
+    List<Board> getSearchPageResult(@Param("searchType") String searchType,
+                                @Param("startDate") String startDate,
+                                @Param("endDate") String endDate,
+                                @Param("searchName") String searchName,
+                                @Param("pagelist") String pagelist);
 
     List<Board> postingUpload(@Param("typeBoard") String typeBoard,
                               @Param("titleBoard") String titleBoard,

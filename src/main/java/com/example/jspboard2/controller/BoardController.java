@@ -93,8 +93,6 @@ public class BoardController {
         int count = boardService.getAllCount();
         paging.setPage(page);
         paging.setTotalCount(count);
-        int beginpage = paging.getBeginPage();
-        int endpage = paging.getEndPage();
         int pagelist = (page-1)*10;
 
 
@@ -103,7 +101,7 @@ public class BoardController {
         Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         List<Board> list;
-        list = boardService.getPageList(beginpage,endpage,pagelist);
+        list = boardService.getPageList(pagelist);
 
         mv.addObject("id_member", loginMember.getId_member());
         mv.addObject("list", list);
@@ -127,7 +125,7 @@ public class BoardController {
         HttpSession session = request.getSession();
 
         Paging paging = new Paging();
-        int count = boardService.getAllCount();
+        int count = boardService.getSearchAllCount(searchType, startDate, endDate, searchName);
         paging.setPage(page);
         paging.setTotalCount(count);
         int beginpage = paging.getBeginPage();
@@ -143,7 +141,45 @@ public class BoardController {
         mv.addObject("id_member", loginMember.getId_member());
         mv.addObject("list", list);
         mv.addObject("paging", paging);
-        mv.setViewName("boardlist");
+        mv.setViewName("searchlist");
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/searchlist/{page}",method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView getSearchPageResult(@Valid @ModelAttribute("mv") Member member,
+                                        BindingResult bindingResult,
+                                        HttpServletRequest request,
+                                        @PathVariable(value = "page", required = false) Integer page,
+                                        @RequestParam("startDate") String startDate,
+                                        @RequestParam("endDate") String endDate,
+                                        @RequestParam("searchType") String searchType,
+                                        @RequestParam("searchName") String searchName){ // 페이지이동시 파라미터 확인불가 에러
+
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+
+
+        if(page == null || page <= 0){
+            page = 1;
+        }
+        Paging paging = new Paging();
+        int count = boardService.getSearchAllCount(searchType, startDate, endDate, searchName);
+        paging.setPage(page);
+        paging.setTotalCount(count);
+        String pagelist =  Integer.toString((page-1)*10);
+
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
+
+        List<Board> list;
+        list = boardService.getSearchPageResult(searchType, startDate, endDate, searchName,pagelist);
+
+        mv.addObject("id_member", loginMember.getId_member());
+        mv.addObject("list", list);
+        mv.addObject("paging", paging);
+        mv.setViewName("searchlist");
 
         return mv;
     }

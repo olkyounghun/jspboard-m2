@@ -5,6 +5,24 @@
     <select id="getAllCount" resultType="int">
         SELECT COUNT(*) as count FROM BOARD_TB;
     </select>
+    <select id="getSearchAllCount" resultType="int">
+        SELECT COUNT(*) as count FROM BOARD_TB
+        <choose>
+            <when test="searchType == 'ALL'">
+                WHERE ( TYPE_BOARD = 'JAVA' or TYPE_BOARD = 'JavaScript' or TYPE_BOARD = 'Database' )
+            </when>
+            <otherwise>
+                WHERE TYPE_BOARD = #{searchType}
+            </otherwise>
+        </choose>
+        <if test="startDate != '' and endDate != ''">
+            AND REGDATE_BOARD BETWEEN DATE_FORMAT(#{startDate},'%Y-%m-%d') AND DATE_FORMAT(#{endDate},'%Y-%m-%d')
+        </if>
+        <if test="searchName != ''">
+            AND (USER_BOARD LIKE CONCAT('%',#{searchName},'%') OR TITLE_BOARD LIKE CONCAT('%',#{searchName},'%') OR CONTENT_BOARD LIKE CONCAT('%',#{searchName},'%'))
+        </if>
+        ORDER BY ID_BOARD DESC LIMIT 10;
+    </select>
     <select id="getNewBoardId" resultType="int">
         SELECT ID_BOARD
         FROM BOARD_TB
@@ -19,19 +37,6 @@
         SELECT *
         FROM BOARD_TB
         ORDER BY ID_BOARD DESC LIMIT 10 OFFSET ${pagelist};
-    </select>
-    <select id="getBoardList2" resultType="com.example.jspboard2.domain.Board" parameterType="int">
-        SELECT *
-        FROM(
-            SELECT *
-            FROM (
-                 SELECT @rownum := @rownum + 1 as row_num, board_tb.*
-                 FROM board_tb , (SELECT @rownum := 0) r
-                 ORDER BY board_tb.ROW_NUM DESC
-                 ) a
-            WHERE row_num >= 1
-            ) b
-        WHERE row_num <![CDATA[<=]]> 10;
     </select>
     <select id="getSearchResult" resultType="com.example.jspboard2.domain.Board" parameterType="hashmap">
         SELECT *
@@ -51,6 +56,25 @@
             AND (USER_BOARD LIKE CONCAT('%',#{searchName},'%') OR TITLE_BOARD LIKE CONCAT('%',#{searchName},'%') OR CONTENT_BOARD LIKE CONCAT('%',#{searchName},'%'))
         </if>
         ORDER BY ID_BOARD DESC LIMIT 10;
+    </select>
+    <select id="getSearchPageResult" resultType="com.example.jspboard2.domain.Board" parameterType="hashmap">
+        SELECT *
+        FROM BOARD_TB
+        <choose>
+            <when test="searchType == 'ALL'">
+                WHERE ( TYPE_BOARD = 'JAVA' or TYPE_BOARD = 'JavaScript' or TYPE_BOARD = 'Database' )
+            </when>
+            <otherwise>
+                WHERE TYPE_BOARD = #{searchType}
+            </otherwise>
+        </choose>
+        <if test="startDate != '' and endDate != ''">
+            AND REGDATE_BOARD BETWEEN DATE_FORMAT(#{startDate},'%Y-%m-%d') AND DATE_FORMAT(#{endDate},'%Y-%m-%d')
+        </if>
+        <if test="searchName != ''">
+            AND (USER_BOARD LIKE CONCAT('%',#{searchName},'%') OR TITLE_BOARD LIKE CONCAT('%',#{searchName},'%') OR CONTENT_BOARD LIKE CONCAT('%',#{searchName},'%'))
+        </if>
+        ORDER BY ID_BOARD DESC LIMIT 10 OFFSET ${pagelist};
     </select>
     <select id="postingUpload" resultType="com.example.jspboard2.domain.Board">
         INSERT INTO BOARD_TB (TYPE_BOARD,TITLE_BOARD,CONTENT_BOARD,USER_BOARD,VIEWS_BOARD,REGDATE_BOARD,MODDATE_BOARD,ID_MEMBER)
