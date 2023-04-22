@@ -43,6 +43,7 @@ public class MemberServiceImple implements MemberService {
                                          @Param("endpage") int endpage,
                                          @Param("page") int page){return memberMapper.getManagerMember(beginpage,endpage,page);}
 
-    public Member getuserName(@Param("userName") String userName){return memberMapper.getuserName(userName);}
+    public List<Member> getManagerPageMember(@Param("page") int page){return memberMapper.getManagerPageMember(page);}
+
 
 }

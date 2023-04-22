@@ -62,6 +62,12 @@
         ORDER BY ID_MEMBER DESC
         LIMIT 10;
     </select>
+    <select id="getManagerPageMember" resultType="com.example.jspboard2.domain.Member" parameterType="int">
+        SELECT *
+        FROM MEMBER_TB
+        ORDER BY ID_MEMBER DESC
+        LIMIT 10 OFFSET ${page};
+    </select>
     <select id="getAllManager" resultType="java.lang.Integer">
         SELECT COUNT(*) as count FROM member_tb;
     </select>

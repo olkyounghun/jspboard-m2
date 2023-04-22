@@ -34,6 +34,7 @@ public interface MemberService {
                                   @Param("endpage") int endpage,
                                   @Param("page") int page);
 
-    Member getuserName(@Param("userName") String userName);
+    List<Member> getManagerPageMember(@Param("page") int page);
+
 
 }

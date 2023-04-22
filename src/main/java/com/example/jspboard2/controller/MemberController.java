@@ -200,6 +200,52 @@ public class MemberController {
         return mv;
     }
 
+    @RequestMapping(value="/manager/{page}", method={RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView managerPageLogin(@Valid @ModelAttribute Member member,
+                                     BindingResult bindingResult,
+                                     HttpServletRequest request,
+                                     @PathVariable(value = "page", required = false) Integer page){
+
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        if ( loginId == null && loginPw == null) {
+            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
+            mv.setViewName("redirect:/login");
+            return mv;
+        }
+
+        Member userInfo = memberService.checkLogin(loginId,loginPw);
+
+        if(userInfo.getRating_member() == 1){
+
+
+            if(page == null || page <= 0){
+                page = 1;
+            }
+            Paging paging = new Paging();
+            int count = memberService.getAllManager();
+
+            paging.setPage(page);
+            paging.setTotalCount(count);
+            int pagelist = (page-1)*10;
+
+            List<Member> list;
+            list = memberService.getManagerPageMember(page);
+            mv.addObject("list",list);
+            mv.addObject("paging", paging);
+            mv.setViewName("/manager");
+        }else{
+            RedirectView redirectView = new RedirectView("/boardlist");
+            redirectView.setExposeModelAttributes(false);
+            mv.setViewName("/boardlist");
+        }
+
+        return mv;
+    }
+
     @RequestMapping(value = "/searchmember",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView getSearchResult(@Valid @ModelAttribute("mv") Member member,
                                         BindingResult bindingResult,
