@@ -116,10 +116,10 @@ public class BoardController {
                                         BindingResult bindingResult,
                                         HttpServletRequest request,
                                         @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                        @RequestParam("startDate") String startDate,
-                                        @RequestParam("endDate") String endDate,
-                                        @RequestParam("searchType") String searchType,
-                                        @RequestParam("searchName") String searchName){
+                                        @RequestParam(value = "startDate", required = false) String startDate,
+                                        @RequestParam(value = "endDate", required = false) String endDate,
+                                        @RequestParam(value = "searchType", required = false) String searchType,
+                                        @RequestParam(value = "searchName", required = false) String searchName){
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
@@ -144,21 +144,22 @@ public class BoardController {
         mv.setViewName("searchlist");
 
         return mv;
+
     }
+
 
     @RequestMapping(value = "/searchlist/{page}",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView getSearchPageResult(@Valid @ModelAttribute("mv") Member member,
                                         BindingResult bindingResult,
                                         HttpServletRequest request,
                                         @PathVariable(value = "page", required = false) Integer page,
-                                        @RequestParam("startDate") String startDate,
-                                        @RequestParam("endDate") String endDate,
-                                        @RequestParam("searchType") String searchType,
-                                        @RequestParam("searchName") String searchName){ // 페이지이동시 파라미터 확인불가 에러
+                                        @RequestParam(value = "startDate", required = false) String startDate,
+                                        @RequestParam(value = "endDate", required = false) String endDate,
+                                        @RequestParam(value = "searchType", required = false) String searchType,
+                                        @RequestParam(value = "searchName", required = false) String searchName){
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
-
 
         if(page == null || page <= 0){
             page = 1;
@@ -339,5 +340,5 @@ public class BoardController {
         }
         return mv;
     }
+    }
 
-}
