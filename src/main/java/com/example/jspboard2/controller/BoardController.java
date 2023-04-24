@@ -128,8 +128,6 @@ public class BoardController {
         int count = boardService.getSearchAllCount(searchType, startDate, endDate, searchName);
         paging.setPage(page);
         paging.setTotalCount(count);
-        int beginpage = paging.getBeginPage();
-        int endpage = paging.getEndPage();
 
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
@@ -141,6 +139,10 @@ public class BoardController {
         mv.addObject("id_member", loginMember.getId_member());
         mv.addObject("list", list);
         mv.addObject("paging", paging);
+        mv.addObject("startDate",startDate);
+        mv.addObject("endDate",endDate);
+        mv.addObject("searchType",searchType);
+        mv.addObject("searchName",searchName);
         mv.setViewName("searchlist");
 
         return mv;
@@ -148,15 +150,15 @@ public class BoardController {
     }
 
 
-    @RequestMapping(value = "/searchlist/{page}",method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/searchlist/{page}?startDate={startDate}&endDate={endDate}&searchType={searchType}&searchName={searchName}",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView getSearchPageResult(@Valid @ModelAttribute("mv") Member member,
                                         BindingResult bindingResult,
                                         HttpServletRequest request,
                                         @PathVariable(value = "page", required = false) Integer page,
-                                        @RequestParam(value = "startDate", required = false) String startDate,
-                                        @RequestParam(value = "endDate", required = false) String endDate,
-                                        @RequestParam(value = "searchType", required = false) String searchType,
-                                        @RequestParam(value = "searchName", required = false) String searchName){
+                                        @PathVariable(value = "startDate", required = false) String startDate,
+                                        @PathVariable(value = "endDate", required = false) String endDate,
+                                        @PathVariable(value = "searchType", required = false) String searchType,
+                                        @PathVariable(value = "searchName", required = false) String searchName){
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
@@ -180,6 +182,11 @@ public class BoardController {
         mv.addObject("id_member", loginMember.getId_member());
         mv.addObject("list", list);
         mv.addObject("paging", paging);
+        mv.addObject("startDate",startDate);
+        mv.addObject("endDate",endDate);
+        mv.addObject("searchType",searchType);
+        mv.addObject("searchName",searchName);
+
         mv.setViewName("searchlist");
 
         return mv;

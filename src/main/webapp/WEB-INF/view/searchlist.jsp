@@ -24,18 +24,18 @@
         </c:if>
     </div>
     <div class="mainContainer">
-        <form method="post" action="/searchlist">
+        <form method="get" action="/searchlist">
             <div>
-                <input type="date" id="startDate" name="startDate">
+                <input type="date" id="startDate" name="startDate" value="${startDate}">
                 ~
-                <input type="date" id="endDate" name="endDate">
+                <input type="date" id="endDate" name="endDate" value="${endDate}">
                 <select id="searchType" name="searchType">
-                    <option value="ALL" selected>모든 카테고리</option>
-                    <option value="JAVA">JAVA</option>
-                    <option value="Javascript">Javascript</option>
-                    <option value="Database">Database</option>
+                    <option value="ALL" ${searchType == 'ALL' ? 'selected' : ''}>모든 카테고리</option>
+                    <option value="JAVA" ${searchType == 'JAVA' ? 'selected' : ''}>JAVA</option>
+                    <option value="Javascript" ${searchType == 'Javascript' ? 'selected' : ''}>Javascript</option>
+                    <option value="Database" ${searchType == 'Database' ? 'selected' : ''}>Database</option>
                 </select>
-                <input type="text" id="searchName" name="searchName" placeholder="제목 + 작성자 + 내용">
+                <input type="text" id="searchName" name="searchName" placeholder="제목 + 작성자 + 내용" value="${searchName}">
                 <button type="submit" >검색</button>
             </div>
         </form>
@@ -72,7 +72,7 @@
         <div id="paging">
             <!-- 1~10까지 있는 페이지의 페이징 -->
             <c:if test="${paging.prev}">
-                <a href=searchlist/${paging.beginPage-1}">prev</a>
+                <a href=/searchlist/${paging.beginPage-1}?startDate=${startDate}&endDate=${endDate}&searchType=${searchType}&searchName=${searchName}">prev</a>
             </c:if>
             <c:forEach begin="${paging.beginPage}" end="${paging.endPage}" step="1" var="index">
                 <c:choose>
@@ -80,12 +80,12 @@
                         ${index}
                     </c:when>
                     <c:otherwise>
-                        <a href="http://localhost:8080/searchlist/${index}">${index}</a>
+                        <a href="/searchlist/${index}?startDate=${startDate}&endDate=${endDate}&searchType=${searchType}&searchName=${searchName}">${index}</a>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
             <c:if test="${paging.next}">
-                <a href="searchlist/${paging.endPage+1}">next</a>
+                <a href="/searchlist/${paging.endPage+1}?startDate=${startDate}&endDate=${endDate}&searchType=${searchType}&searchName=${searchName}">next</a>
             </c:if>
         </div>
         <div class="btn-group" role="group" aria-label="Basic example">
