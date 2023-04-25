@@ -47,20 +47,10 @@ public class BoardServiceImpl implements BoardService{
     }
 
     public List<Board> getSearchPageResult(@Param("searchType") String searchType,
-                                    @Param("startDate") String startDate,
-                                    @Param("endDate") String endDate,
-                                    @Param("searchName") String searchName,
-                                    @Param("pagelist") String pagelist){
-
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("pagelist",pagelist);
-        map.put("searchName", searchName);
-        map.put("endDate", endDate);
-        map.put("startDate", startDate);
-        map.put("searchType", searchType);
-
-        return boardMapper.getSearchResult(map);
-    }
+                                           @Param("startDate") String startDate,
+                                           @Param("endDate") String endDate,
+                                           @Param("searchName") String searchName,
+                                           @Param("pagelist") int pagelist){return boardMapper.getSearchPageResult(searchType,startDate,endDate,searchName,pagelist);};
 
     public List<Board> postingUpload(@Param("typeBoard") String typeBoard,
                                      @Param("titleBoard") String titleBoard,

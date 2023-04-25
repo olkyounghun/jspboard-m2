@@ -26,10 +26,10 @@ public interface BoardService {
                                 @Param("searchName") String searchName);
 
     List<Board> getSearchPageResult(@Param("searchType") String searchType,
-                                @Param("startDate") String startDate,
-                                @Param("endDate") String endDate,
-                                @Param("searchName") String searchName,
-                                @Param("pagelist") String pagelist);
+                                           @Param("startDate") String startDate,
+                                           @Param("endDate") String endDate,
+                                           @Param("searchName") String searchName,
+                                           @Param("pagelist") int pagelist);
 
     List<Board> postingUpload(@Param("typeBoard") String typeBoard,
                               @Param("titleBoard") String titleBoard,

@@ -25,7 +25,11 @@ public interface BoardMapper {
 
     List<Board> getSearchResult(HashMap<String, String> map);
 
-    List<Board> getSearchPageResult(HashMap<String, String> map);
+    List<Board> getSearchPageResult(@Param("searchType") String searchType,
+                                    @Param("startDate") String startDate,
+                                    @Param("endDate") String endDate,
+                                    @Param("searchName") String searchName,
+                                    @Param("pagelist") int pagelist);
 
     List<Board> postingUpload(@Param("typeBoard") String typeBoard,
                               @Param("titleBoard") String titleBoard,

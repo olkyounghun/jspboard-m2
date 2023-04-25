@@ -95,7 +95,6 @@ public class BoardController {
         paging.setTotalCount(count);
         int pagelist = (page-1)*10;
 
-
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
         Member loginMember = memberService.checkLogin(loginId,loginPw);
@@ -150,15 +149,15 @@ public class BoardController {
     }
 
 
-    @RequestMapping(value = "/searchlist/{page}?startDate={startDate}&endDate={endDate}&searchType={searchType}&searchName={searchName}",method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/searchlist/{page}",method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView getSearchPageResult(@Valid @ModelAttribute("mv") Member member,
                                         BindingResult bindingResult,
                                         HttpServletRequest request,
                                         @PathVariable(value = "page", required = false) Integer page,
-                                        @PathVariable(value = "startDate", required = false) String startDate,
-                                        @PathVariable(value = "endDate", required = false) String endDate,
-                                        @PathVariable(value = "searchType", required = false) String searchType,
-                                        @PathVariable(value = "searchName", required = false) String searchName){
+                                        @RequestParam(value = "startDate", required = false) String startDate,
+                                        @RequestParam(value = "endDate", required = false) String endDate,
+                                        @RequestParam(value = "searchType", required = false) String searchType,
+                                        @RequestParam(value = "searchName", required = false) String searchName){
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
@@ -166,11 +165,16 @@ public class BoardController {
         if(page == null || page <= 0){
             page = 1;
         }
+
+        if(searchType == null){
+            searchType = "ALL";
+        }
+
         Paging paging = new Paging();
         int count = boardService.getSearchAllCount(searchType, startDate, endDate, searchName);
         paging.setPage(page);
         paging.setTotalCount(count);
-        String pagelist =  Integer.toString((page-1)*10);
+        int pagelist = (page-1)*10;
 
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
