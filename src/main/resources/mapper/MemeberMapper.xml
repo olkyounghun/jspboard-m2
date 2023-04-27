@@ -66,10 +66,22 @@
         SELECT *
         FROM MEMBER_TB
         ORDER BY ID_MEMBER DESC
-        LIMIT 10 OFFSET ${page};
+        LIMIT 10 OFFSET ${pagelist};
     </select>
     <select id="getAllManager" resultType="java.lang.Integer">
         SELECT COUNT(*) as count FROM member_tb;
+    </select>
+    <select id="getAllSearchManager" resultType="java.lang.Integer">
+        SELECT COUNT(*) as count
+        FROM member_tb
+        where 1 = 1
+        <if test="startDate != '' and endDate != ''">
+            AND regdate_member BETWEEN DATE_FORMAT(#{startDate},'%Y-%m-%d') AND DATE_FORMAT(#{endDate},'%Y-%m-%d')
+        </if>
+        <if test="searchName != ''">
+            AND (user_member LIKE CONCAT('%',#{searchName},'%') OR name_member LIKE CONCAT('%',#{searchName},'%') OR email_member LIKE CONCAT('%',#{searchName},'%'))
+        </if>
+        ORDER BY ID_MEMBER DESC LIMIT 10;
     </select>
     <select id="getSearchMember" resultType="com.example.jspboard2.domain.Member" parameterType="hashmap">
         SELECT *
@@ -82,5 +94,17 @@
             AND (user_member LIKE CONCAT('%',#{searchName},'%') OR name_member LIKE CONCAT('%',#{searchName},'%') OR email_member LIKE CONCAT('%',#{searchName},'%'))
         </if>
         ORDER BY ID_MEMBER DESC LIMIT 10;
+    </select>
+    <select id="getSearchPageMember" resultType="com.example.jspboard2.domain.Member" parameterType="hashmap">
+        SELECT *
+        FROM member_tb
+        where 1 = 1
+        <if test="startDate != '' and endDate != ''">
+            AND regdate_member BETWEEN DATE_FORMAT(#{startDate},'%Y-%m-%d') AND DATE_FORMAT(#{endDate},'%Y-%m-%d')
+        </if>
+        <if test="searchName != ''">
+            AND (user_member LIKE CONCAT('%',#{searchName},'%') OR name_member LIKE CONCAT('%',#{searchName},'%') OR email_member LIKE CONCAT('%',#{searchName},'%'))
+        </if>
+        ORDER BY ID_MEMBER DESC LIMIT 10 OFFSET ${pagelist};
     </select>
 </mapper>

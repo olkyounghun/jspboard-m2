@@ -233,7 +233,7 @@ public class MemberController {
             int pagelist = (page-1)*10;
 
             List<Member> list;
-            list = memberService.getManagerPageMember(page);
+            list = memberService.getManagerPageMember(pagelist);
             mv.addObject("list",list);
             mv.addObject("paging", paging);
             mv.setViewName("/manager");
@@ -259,23 +259,63 @@ public class MemberController {
         HttpSession session = request.getSession();
 
         Paging paging = new Paging();
-        int count = memberService.getAllManager();
+        int count = memberService.getAllSearchManager(startDate,endDate,searchName);
         paging.setPage(page);
         paging.setTotalCount(count);
-        int beginpage = paging.getBeginPage();
-        int endpage = paging.getEndPage();
 
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
         Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         List<Member> list;
-        list = memberService.getSearchMemeber(startDate, endDate, searchName);
+        list = memberService.getSearchMember(startDate, endDate, searchName);
 
         mv.addObject("id_member", loginMember.getId_member());
         mv.addObject("list", list);
         mv.addObject("paging", paging);
-        mv.setViewName("manager");
+        mv.addObject("startDate",startDate);
+        mv.addObject("endDate",endDate);
+        mv.addObject("searchName",searchName);
+        mv.setViewName("searchmember");
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/searchmember/{page}",method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView getSearchPageResult(@Valid @ModelAttribute("mv") Member member,
+                                        BindingResult bindingResult,
+                                        HttpServletRequest request,
+                                        @PathVariable(value = "page", required = false) Integer page,
+                                        @RequestParam(value = "startDate", required = false) String startDate,
+                                        @RequestParam(value = "endDate", required = false) String endDate,
+                                        @RequestParam(value = "searchName", required = false) String searchName){
+
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+
+        if(page == null || page <= 0){
+            page = 1;
+        }
+        Paging paging = new Paging();
+        int count = memberService.getAllSearchManager(startDate,endDate,searchName);
+        paging.setPage(page);
+        paging.setTotalCount(count);
+        int pagelist = (page-1)*10;
+
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
+
+        List<Member> list;
+        list = memberService.getSearchPageMember(startDate, endDate, searchName,pagelist);
+
+        mv.addObject("id_member", loginMember.getId_member());
+        mv.addObject("list", list);
+        mv.addObject("paging", paging);
+        mv.addObject("startDate",startDate);
+        mv.addObject("endDate",endDate);
+        mv.addObject("searchName",searchName);
+        mv.setViewName("searchmember");
 
         return mv;
     }
