@@ -72,7 +72,7 @@
     <div id="paging">
         <!-- 1~10까지 있는 페이지의 페이징 -->
         <c:if test="${paging.prev}">
-            <a href=/manager/${paging.beginPage-1}?startDate=${startDate}&endDate=${endDate}&searchName=${searchName}">prev</a>
+            <a href=/searchmember/${paging.beginPage-1}?startDate=${startDate}&endDate=${endDate}&searchName=${searchName}">prev</a>
         </c:if>
         <c:forEach begin="${paging.beginPage}" end="${paging.endPage}" step="1" var="index">
             <c:choose>
@@ -80,12 +80,12 @@
                     ${index}
                 </c:when>
                 <c:otherwise>
-                    <a href="/manager/${index}?startDate=${startDate}&endDate=${endDate}&searchName=${searchName}">${index}</a>
+                    <a href="/searchmember/${index}?startDate=${startDate}&endDate=${endDate}&searchName=${searchName}">${index}</a>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
         <c:if test="${paging.next}">
-            <a href="/manager/${paging.endPage+1}?startDate=${startDate}&endDate=${endDate}&searchName=${searchName}">next</a>
+            <a href="/searchmember/${paging.endPage+1}?startDate=${startDate}&endDate=${endDate}&searchName=${searchName}">next</a>
         </c:if>
     </div>
     <div class="btn-group" role="group" aria-label="Basic example">
