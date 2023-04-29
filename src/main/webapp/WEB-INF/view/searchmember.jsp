@@ -8,7 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Model-2 게시판</title>
@@ -26,12 +26,12 @@
 </script>
 <body>
 <div>
-    <c:if test="${sessionScope.userName ne null}">
-        ${sessionScope.userName} 님 환영합니다.
+    <c:if test="${sessionScope.id_member ne null}">
+        ${sessionScope.id_member} 님 환영합니다.
     </c:if>
 </div>
 <div class="mainContainer">
-    <form method="post" action="/searchmember">
+    <form method="post" action="${pageContext.request.contextPath}/searchmember">
         <div>
             <input type="date" id="startDate" name="startDate" value="${startDate}">
             ~

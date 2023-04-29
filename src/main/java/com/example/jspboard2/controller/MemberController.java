@@ -36,6 +36,14 @@ public class MemberController {
         return mv;
     }
 
+    @RequestMapping(value = "/mailcheck", method = {RequestMethod.GET,RequestMethod.POST})
+    public String getMailCheck(@Param("email") String email){
+
+        System.out.println("이메일 인증 요청이 들어옴!");
+        System.out.println("이메일 인증 이메일 : " + email);
+
+        return "";
+    }
 
     // 회원가입 정보 입력후 완료
     @RequestMapping(value = "/signup", method = {RequestMethod.POST})
