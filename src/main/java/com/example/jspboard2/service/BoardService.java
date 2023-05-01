@@ -3,6 +3,7 @@ package com.example.jspboard2.service;
 import com.example.jspboard2.domain.Board;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface BoardService {
@@ -39,6 +40,10 @@ public interface BoardService {
 
 
     List<Board> getDetailBoard(@Param("id_board") int id_board); // 글보기에 들어갈 글 자료
+
+    List<ArrayList> getPrevBoard(@Param("id_board") int id_board);
+
+    List<ArrayList> getNextBoard(@Param("id_board") int id_board);
 
     Board viewUpPoint(@Param("id_board") int idBoard);
 

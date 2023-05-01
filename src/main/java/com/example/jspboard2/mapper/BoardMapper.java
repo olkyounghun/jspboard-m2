@@ -4,6 +4,7 @@ import com.example.jspboard2.domain.Board;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,6 +39,10 @@ public interface BoardMapper {
                               @Param("idMember") Long idMember);
 
     List<Board> getDetailBoard(@Param("id_board") int id_board);
+
+    List<ArrayList> getPrevBoard(@Param("id_board") int id_board);
+
+    List<ArrayList> getNextBoard(@Param("id_board") int id_board);
 
     Board viewUpPoint(@Param("idBoard") int idBoard);
 

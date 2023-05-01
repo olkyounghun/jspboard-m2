@@ -24,11 +24,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.2'
-    // https://mvnrepository.com/artifact/javax.mail/javax.mail
-    implementation group: 'javax.mail', name: 'javax.mail', version: '1.4.0.v201005080615'
-    // https://mvnrepository.com/artifact/org.springframework/spring-context-support
-    implementation group: 'org.springframework', name: 'spring-context-support', version: '6.0.0-M6'
-
     compileOnly 'org.projectlombok:lombok'
     compileOnly 'javax.servlet:jstl'
     compileOnly "org.apache.tomcat.embed:tomcat-embed-jasper"

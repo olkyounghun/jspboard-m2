@@ -68,7 +68,28 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-3"></div>
+  <div class="list-group">
+    <a href="/boarddetail/${next.id_board}" class="list-group-item list-group-item-action <c:if test="${empty next.id_board}">disabled</c:if>">
+      <span style="font-weight: bold;">다음글</span> │ <c:choose>
+      <c:when test="${empty next.id_board}">
+        다음글이 없습니다.
+      </c:when>
+      <c:otherwise>
+        <span style="color: blue;">${next.title_board}</span>
+      </c:otherwise>
+    </c:choose>
+    </a>
+    <a href="/board/${prev.id_board}" class="list-group-item list-group-item-action <c:if test="${empty prev.id_board}">disabled</c:if>">
+      <span style="font-weight: bold;">이전글</span> │ <c:choose>
+      <c:when test="${empty prev.id_board}">
+        이전글이 없습니다.
+      </c:when>
+      <c:otherwise>
+        <span style="color: blue;">${prev.title_board}</span>
+      </c:otherwise>
+    </c:choose>
+    </a>
+  </div>
 </div>
 </c:forEach>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

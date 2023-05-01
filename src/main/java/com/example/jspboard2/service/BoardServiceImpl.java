@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -59,6 +60,14 @@ public class BoardServiceImpl implements BoardService{
                                      @Param("idMember") Long idMember){return boardMapper.postingUpload(typeBoard,titleBoard,contentBoard,userBoard,idMember);}
 
     public List<Board> getDetailBoard(@Param("id_board") int id_board){return boardMapper.getDetailBoard(id_board);} // 글 보기로 보여질 해당 회원의 글
+
+    public List<ArrayList> getPrevBoard(@Param("id_board") int id_board) {
+        return boardMapper.getPrevBoard(id_board);
+    }
+
+    public List<ArrayList> getNextBoard(@Param("id_board") int id_board){
+        return boardMapper.getNextBoard(id_board);
+    }
 
     public Board viewUpPoint(@Param("idBoard") int idBoard){return boardMapper.viewUpPoint(idBoard);    }
 

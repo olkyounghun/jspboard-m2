@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -313,10 +314,17 @@ public class BoardController {
         Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         List<Board> list;
+        List<ArrayList> prev;
+        List<ArrayList> next;
         boardService.viewUpPoint(id_board);
         list = boardService.getDetailBoard(id_board);
+        prev = boardService.getPrevBoard(id_board);
+        next = boardService.getNextBoard(id_board);
+
         mv.addObject("id_member",loginMember.getId_member());
         mv.addObject("list", list);
+        mv.addObject("prev", prev);
+        mv.addObject("next", next);
         mv.setViewName("boarddetail");
 
         return mv;
