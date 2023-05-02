@@ -87,15 +87,15 @@
             ID_BOARD = ${id_board}
         </where>
     </select>
-    <select id="getPrevBoard" resultType="ArrayList" parameterType="int">
-        SELECT MAX(ID_BOARD) as ID_BOARD, TITLE_BOARD
+    <select id="getPrevBoard" resultType="com.example.jspboard2.domain.Board" parameterType="int">
+        SELECT MAX(ID_BOARD)as fucku, TITLE_BOARD
         FROM BOARD_TB
         <where>
             ID_BOARD <![CDATA[<]]> ${id_board};
         </where>
     </select>
-    <select id="getNextBoard" resultType="ArrayList" parameterType="int">
-        SELECT MIN(ID_BOARD) as ID_BOARD, TITLE_BOARD
+    <select id="getNextBoard" resultType="com.example.jspboard2.domain.Board" parameterType="int">
+        SELECT MIN(ID_BOARD)as fucku, TITLE_BOARD
         FROM BOARD_TB
         <where>
             ID_BOARD > ${id_board};
