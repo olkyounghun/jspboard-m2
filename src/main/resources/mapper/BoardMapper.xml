@@ -88,14 +88,14 @@
         </where>
     </select>
     <select id="getPrevBoard" resultType="com.example.jspboard2.domain.Board" parameterType="int">
-        SELECT MAX(ID_BOARD)as fucku, TITLE_BOARD
+        SELECT MAX(ID_BOARD)as fucku, TITLE_BOARD as what_title
         FROM BOARD_TB
         <where>
             ID_BOARD <![CDATA[<]]> ${id_board};
         </where>
     </select>
     <select id="getNextBoard" resultType="com.example.jspboard2.domain.Board" parameterType="int">
-        SELECT MIN(ID_BOARD)as fucku, TITLE_BOARD
+        SELECT MIN(ID_BOARD)as fucku, TITLE_BOARD as what_title
         FROM BOARD_TB
         <where>
             ID_BOARD > ${id_board};

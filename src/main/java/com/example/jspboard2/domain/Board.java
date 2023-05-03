@@ -18,6 +18,8 @@ public class Board {
     private Long id_member;
     private Board prev_board; // 이전글
     private Board next_board; // 다음글
+
     private String fucku;
+    private String what_title;
 
 }

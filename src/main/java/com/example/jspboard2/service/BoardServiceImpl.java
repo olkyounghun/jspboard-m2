@@ -62,9 +62,7 @@ public class BoardServiceImpl implements BoardService{
 
     public List<Board> getPrevBoard(@Param("id_board") int id_board) {return boardMapper.getPrevBoard(id_board);}
 
-    public List<Board> getNextBoard(@Param("id_board") int id_board){
-        return boardMapper.getNextBoard(id_board);
-    }
+    public List<Board> getNextBoard(@Param("id_board") int id_board){return boardMapper.getNextBoard(id_board);}
 
     public Board viewUpPoint(@Param("idBoard") int idBoard){return boardMapper.viewUpPoint(idBoard);    }
 
