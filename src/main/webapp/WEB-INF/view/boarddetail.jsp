@@ -71,13 +71,15 @@
 </c:forEach>
   <c:forEach items="${next}" var="next">
     <div class="list-group">
-      <a href="/boarddetail/${next.fucku}" class="list-group-item list-group-item-action <c:if test="${empty next.fucku}">disabled</c:if>">
-        <span style="font-weight: bold;">다음글</span> │ <c:choose>
+      <c:choose>
         <c:when test="${empty next.fucku}">
-          다음글이 없습니다.
+        <a href="/boarddetail/${next.fucku}" class="list-group-item list-group-item-action <c:if test="${empty next.fucku}">disabled</c:if>">
+          <span style="font-weight: bold;">다음글</span> │ 다음글이 없습니다.
         </c:when>
         <c:otherwise>
-          <span style="color: blue;">${next.what_title}</span>
+          <a href="/boarddetail/${next.fucku}" class="list-group-item list-group-item-action <c:if test="${empty next.fucku}">disabled</c:if>">
+            <span style="font-weight: bold;">다음글</span> │
+            <span style="color: blue;">${next.what_title}</span>
         </c:otherwise>
       </c:choose>
       </a>
