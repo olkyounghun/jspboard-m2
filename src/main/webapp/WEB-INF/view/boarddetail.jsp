@@ -69,34 +69,43 @@
     </div>
   </div>
 </c:forEach>
-  <c:forEach items="${next}" var="next">
-    <div class="list-group">
-      <c:choose>
-        <c:when test="${empty next.fucku}">
-        <a href="/boarddetail/${next.fucku}" class="list-group-item list-group-item-action <c:if test="${empty next.fucku}">disabled</c:if>">
-          <span style="font-weight: bold;">다음글</span> │ 다음글이 없습니다.
-        </c:when>
-        <c:otherwise>
-          <a href="/boarddetail/${next.fucku}" class="list-group-item list-group-item-action <c:if test="${empty next.fucku}">disabled</c:if>">
-            <span style="font-weight: bold;">다음글</span> │
-            <span style="color: blue;">${next.what_title}</span>
-        </c:otherwise>
-      </c:choose>
-      </a>
-      </c:forEach>
-    <c:forEach items="${prev}" var="prev">
-      <a href="/boarddetail/${prev.fucku}" class="list-group-item list-group-item-action <c:if test="${empty prev.fucku}">disabled</c:if>">
-        <span style="font-weight: bold;">이전글</span> │
-        <c:choose>
-          <c:when test="${empty prev.fucku}">
-            이전글이 없습니다.
-          </c:when>
-          <c:otherwise>
-            <span style="color: blue;">${prev.what_title}</span>
-          </c:otherwise>
-        </c:choose>
-      </a>
-    </c:forEach>
+  <div class="list-group">
+    <c:choose>
+      <c:when test="${empty next}"></c:when>
+      <c:otherwise>
+        <c:forEach items="${next}" var="next">
+            <c:choose>
+              <c:when test="${empty next}">
+                <a href="/boarddetail/${next.fucku}" class="list-group-item list-group-item-action <c:if test="${empty next}">disabled</c:if>">
+                  <span style="font-weight: bold;">다음글</span> │ 다음글이 없습니다.</a>
+              </c:when>
+              <c:otherwise>
+                <a href="/boarddetail/${next.fucku}" class="list-group-item list-group-item-action <c:if test="${empty next}">disabled</c:if>">
+                  <span style="font-weight: bold;">다음글</span> │
+                  <span style="color: blue;">${next.what_title}</span></a>
+              </c:otherwise>
+            </c:choose>
+        </c:forEach>
+      </c:otherwise>
+    </c:choose>
+    <c:choose>
+      <c:when test="${empty prev}"></c:when>
+      <c:otherwise>
+        <c:forEach items="${prev}" var="next">
+          <c:choose>
+            <c:when test="${empty prev}">
+              <a href="/boarddetail/${prev.fucku}" class="list-group-item list-group-item-action <c:if test="${empty prev}">disabled</c:if>">
+                <span style="font-weight: bold;">이전글</span> │ 이전글이 없습니다.</a>
+            </c:when>
+            <c:otherwise>
+              <a href="/boarddetail/${prev.fucku}" class="list-group-item list-group-item-action <c:if test="${empty prev}">disabled</c:if>">
+                <span style="font-weight: bold;">이전글</span> │
+                <span style="color: blue;">${prev.what_title}</span></a>
+            </c:otherwise>
+          </c:choose>
+        </c:forEach>
+      </c:otherwise>
+    </c:choose>
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
