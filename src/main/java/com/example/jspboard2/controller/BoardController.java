@@ -319,11 +319,14 @@ public class BoardController {
         list = boardService.getDetailBoard(id_board);
         next = boardService.getNextBoard(id_board);
         prev = boardService.getPrevBoard(id_board);
-
+        if(next != null){
+            mv.addObject("next", next);
+        }
+        if(prev != null){
+            mv.addObject("prev", prev);
+        }
         mv.addObject("id_member",loginMember.getId_member());
         mv.addObject("list", list);
-        mv.addObject("prev", prev);
-        mv.addObject("next", next);
         mv.setViewName("boarddetail");
 
         return mv;
