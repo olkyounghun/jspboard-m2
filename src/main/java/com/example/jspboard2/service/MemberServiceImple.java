@@ -32,7 +32,13 @@ public class MemberServiceImple implements MemberService {
 
     public List<Member> getMember(@Param("idMember") int id_member){return memberMapper.getMember(id_member);}
 
-    public Member getMMember(@Param("idMember") int idMember){return  memberMapper.getMMember(idMember);}
+    public List<Member> getPrevMember(@Param("id_member") int id_member){
+        return memberMapper.getPrevMember(id_member);
+    }
+
+    public List<Member> getNextMember(@Param("id_member") int id_member){
+        return memberMapper.getNextMember(id_member);
+    }
 
     public int getAllManager(){return memberMapper.getAllManager();}
 

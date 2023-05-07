@@ -346,10 +346,23 @@ public class MemberController {
 
         HttpSession session = request.getSession();
         session.getAttribute("userName");
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
 
+        List<Member> prev;
+        List<Member> next;
         List<Member> list;
         list = memberService.getMember(id_member);
-
+        next = memberService.getNextMember(id_member);
+        prev = memberService.getPrevMember(id_member);
+        if(next != null){
+            mv.addObject("next", next);
+        }
+        if(prev != null){
+            mv.addObject("prev", prev);
+        }
+        mv.addObject("id_member", loginMember.getId_member());
         mv.addObject("list",list);
         RedirectView redirectView = new RedirectView("/memberinfo");
         redirectView.setExposeModelAttributes(false);

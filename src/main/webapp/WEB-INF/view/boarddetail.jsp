@@ -70,19 +70,6 @@
   </div>
 </c:forEach>
   <div class="list-group">
-    <c:forEach items="${next}" var="next">
-      <c:choose>
-        <c:when test="${empty next.fucku}">
-          <a href='/boarddetail/${next.fucku}' class="list-group-item list-group-item-action <c:if test="${empty next.fucku}">disabled</c:if>">
-          <span style="font-weight: bold;">다음글</span> │다음글이 없습니다.</a>
-          </c:when>
-          <c:otherwise>
-          <a href='/boarddetail/${next.fucku}' class="list-group-item list-group-item-action">
-            <span style="font-weight: bold;">다음글</span> │
-              <span style="color: blue;">${next.what_title}</span></a>
-          </c:otherwise>
-        </c:choose>
-    </c:forEach>
     <c:forEach items="${prev}" var="prev">
       <c:choose>
         <c:when test="${empty prev.fucku}">
@@ -95,6 +82,19 @@
             <span style="color: blue;">${prev.what_title}</span></a>
         </c:otherwise>
       </c:choose>
+    </c:forEach>
+    <c:forEach items="${next}" var="next">
+      <c:choose>
+        <c:when test="${empty next.fucku}">
+          <a href='/boarddetail/${next.fucku}' class="list-group-item list-group-item-action <c:if test="${empty next.fucku}">disabled</c:if>">
+          <span style="font-weight: bold;">다음글</span> │다음글이 없습니다.</a>
+          </c:when>
+          <c:otherwise>
+          <a href='/boarddetail/${next.fucku}' class="list-group-item list-group-item-action">
+            <span style="font-weight: bold;">다음글</span> │
+              <span style="color: blue;">${next.what_title}</span></a>
+          </c:otherwise>
+        </c:choose>
     </c:forEach>
   </div>
 </div>

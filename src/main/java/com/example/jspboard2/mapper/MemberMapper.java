@@ -26,7 +26,9 @@ public interface MemberMapper {
 
     List<Member> getMember(@Param("idMember") int idMember);
 
-    Member getMMember(@Param("idMember") int idMember);
+    List<Member> getPrevMember(@Param("id_member") int id_member);
+
+    List<Member> getNextMember(@Param("id_member") int id_member);
 
     int getAllManager();
 

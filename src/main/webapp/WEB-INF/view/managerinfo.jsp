@@ -16,6 +16,11 @@
   <title>Model-2 게시판</title>
 </head>
 <body>
+<div>
+  <c:if test="${sessionScope.loginId ne null}">
+    <a href="/memberdetail/${id_member}">${sessionScope.loginId}</a>님 환영합니다.
+  </c:if>
+</div>
 <c:forEach items="${list}" var="list">
 <div class="container">
   <div class="row">
@@ -50,13 +55,40 @@
       <div class="form-check" style="padding-top: 40px;">
         <button type="button" class="btn btn-secondary" onclick="location.href='/managermodify/${list.id_member}'">수정</button>
         <button type="button" class="btn btn-secondary" onclick="location.href='/managerdelete/${list.id_member}'">삭제</button>
-        <button type="button" class="btn btn-secondary" onclick="location.href='list'">목록</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='/manager'">목록</button>
       </div>
     </div>
   </div>
   <div class="col-sm-3"></div>
 </div>
 </c:forEach>
+<div class="list-group">
+  <c:forEach items="${prev}" var="prev">
+    <c:choose>
+      <c:when test="${empty prev.fucku}">
+        <a href='/managerinfo/${prev.fucku}' class="list-group-item list-group-item-action <c:if test="${empty prev.fucku}">disabled</c:if>">
+          <span style="font-weight: bold;">이전 회원</span> │ 이전 회원이 없습니다.</a>
+      </c:when>
+      <c:otherwise>
+        <a href='/managerinfo/${prev.fucku}' class="list-group-item list-group-item-action">
+          <span style="font-weight: bold;">이전 회원</span> │
+          <span style="color: blue;">${prev.what_user}</span></a>
+      </c:otherwise>
+    </c:choose>
+  </c:forEach>
+  <c:forEach items="${next}" var="next">
+    <c:choose>
+      <c:when test="${empty next.fucku}">
+        <a href='/managerinfo/${next.fucku}' class="list-group-item list-group-item-action <c:if test="${empty next.fucku}">disabled</c:if>">
+          <span style="font-weight: bold;">다음 회원</span> │ 다음 회원이 없습니다.</a>
+      </c:when>
+      <c:otherwise>
+        <a href='/managerinfo/${next.fucku}' class="list-group-item list-group-item-action">
+          <span style="font-weight: bold;">다음 회원</span> │
+          <span style="color: blue;">${next.what_user}</span></a>
+      </c:otherwise>
+    </c:choose>
+  </c:forEach>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -49,11 +49,18 @@
             ID_MEMBER = #{idMember}
         </where>
     </select>
-    <select id="getMMember" resultType="com.example.jspboard2.domain.Member">
-        SELECT *
+    <select id="getPrevMember" resultType="com.example.jspboard2.domain.Member" parameterType="int">
+        SELECT MIN(ID_MEMBER)as fucku, USER_MEMBER as what_user
         FROM member_tb
         <where>
-            ID_MEMBER = #{idMember}
+            ID_MEMBER > ${id_member};
+        </where>
+    </select>
+    <select id="getNextMember" resultType="com.example.jspboard2.domain.Member" parameterType="int">
+        SELECT MAX(ID_MEMBER)as fucku, USER_MEMBER as what_user
+        FROM member_tb
+        <where>
+            ID_MEMBER <![CDATA[<]]> ${id_member};
         </where>
     </select>
     <select id="getManagerMember" resultType="com.example.jspboard2.domain.Member" parameterType="int">
