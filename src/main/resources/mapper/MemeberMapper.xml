@@ -57,10 +57,16 @@
         </where>
     </select>
     <select id="getNextMember" resultType="com.example.jspboard2.domain.Member" parameterType="int">
-        SELECT MAX(ID_MEMBER)as fucku, USER_MEMBER as what_user
+        SELECT id_member as fucku, USER_MEMBER as what_user
         FROM member_tb
         <where>
-            ID_MEMBER <![CDATA[<]]> ${id_member};
+            id_member = (
+            SELECT MAX(id_member)
+            FROM member_tb
+            <where>
+                id_member <![CDATA[<]]> #{id_member}
+            </where>
+            );
         </where>
     </select>
     <select id="getManagerMember" resultType="com.example.jspboard2.domain.Member" parameterType="int">

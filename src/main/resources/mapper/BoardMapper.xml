@@ -97,12 +97,16 @@
         </where>
     </select>
     <select id="getNextBoard" resultType="com.example.jspboard2.domain.Board" parameterType="int">
-        SELECT MAX(ID_BOARD) as fucku, TITLE_BOARD as what_title
-        FROM BOARD_TB
+        SELECT id_board as fucku, title_board as what_title
+        FROM board_tb
         <where>
-            <![CDATA[
-                ID_BOARD < ${id_board};
-            ]]>
+            id_board = (
+            SELECT MAX(id_board)
+            FROM board_tb
+            <where>
+                id_board <![CDATA[<]]> #{id_board}
+            </where>
+            );
         </where>
     </select>
     <select id="getMatchPoint" resultType="com.example.jspboard2.domain.Board" parameterType="int">
