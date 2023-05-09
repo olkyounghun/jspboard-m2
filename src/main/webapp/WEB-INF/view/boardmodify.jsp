@@ -65,7 +65,7 @@
     </div>
     <div>
         <button type="submit" >수정</button>
-        <button type="button" onclick="location.href='list'">목록</button>
+        <button type="button" onclick="location.href='/boardlist'">목록</button>
     </div>
     </c:forEach>
 </form>
