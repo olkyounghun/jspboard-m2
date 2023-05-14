@@ -36,10 +36,11 @@ public class MemberController {
         return mv;
     }
 
-    @RequestMapping(value = "/mailcheck", method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/mailcheck", method = {RequestMethod.GET})
+    @ResponseBody
     public String getMailCheck(@Param("email") String email){
 
-        System.out.println("이메일 인증 요청이 들어옴!");
+        System.out.println("이메일 인증 요청 확인!");
         System.out.println("이메일 인증 이메일 : " + email);
 
         return "";
