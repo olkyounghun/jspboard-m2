@@ -3,8 +3,6 @@ package com.example.jspboard2.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -17,7 +15,7 @@ public class EmailServiceImpl{
     //의존성 주입을 통해서 필요한 객체를 가져온다.
     private final JavaMailSender emailSender;
     // 타임리프를사용하기 위한 객체를 의존성 주입으로 가져온다
-    private final SpringTemplateEngine templateEngine;
+//    private final SpringTemplateEngine templateEngine;
     private String authNum; //랜덤 인증 코드
 
     //랜덤 인증 코드 생성
@@ -55,7 +53,7 @@ public class EmailServiceImpl{
         message.addRecipients(MimeMessage.RecipientType.TO, email); //보낼 이메일 설정
         message.setSubject(title); //제목 설정
         message.setFrom(setFrom); //보내는 이메일
-        message.setText(setContext(authNum), "utf-8", "html");
+        //message.setText(setContext(authNum), "utf-8", "html");
 
         return message;
     }
@@ -72,10 +70,11 @@ public class EmailServiceImpl{
     }
 
     //타임리프를 이용한 context 설정
+    /**
     public String setContext(String code) {
         Context context = new Context();
         context.setVariable("code", code);
         return templateEngine.process("mail", context); //mail.html
     }
-
+    */
 }

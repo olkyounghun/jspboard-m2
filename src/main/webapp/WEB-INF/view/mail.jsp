@@ -5,9 +5,10 @@
   Time: 오후 10:57
   To change this template use File | Settings | File Templates.
 --%>
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<html>
 <body>
 <div style="margin:100px;">
   <h1> 안녕하세요.</h1>
@@ -22,7 +23,5 @@
   </div>
   <br/>
 </div>
-
-
 </body>
 </html>
