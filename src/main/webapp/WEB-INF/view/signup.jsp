@@ -75,7 +75,7 @@
           <input type="text" class="form-control" id="userEmail2" name="userEmail2" placeholder="Server" aria-label="Server">
         </div>
         <div class="input-group-addon">
-          <button type="button" class="btn btn-primary" id="mail-Check-Btn">본인인증</button>
+          <button type="button" class="btn btn-primary" id="mail-Check-Btn">인증번호</button>
         </div>
         <div class="mail-check-box">
           <input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
