@@ -75,7 +75,8 @@
           <input type="text" class="form-control" id="userEmail2" name="userEmail2" placeholder="Server" aria-label="Server">
         </div>
         <div class="input-group-addon">
-          <button type="button" class="btn btn-primary" id="mail-Check-Btn">인증번호</button>
+          <button type="button" class="btn btn-primary" id="mail-Check-Btn">인증번호받기</button>
+          <button type="button" class="btn btn-primary" id="code-Check-Btn">인증하기</button>
         </div>
         <div class="mail-check-box">
           <input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
@@ -105,20 +106,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </html>
 <script type="text/javascript">
-  $('#mail-Check-Btn').click(function() {
-    const eamil = $('#userEmail1').val()+'@'+ $('#userEmail2').val(); // 이메일 주소값 얻어오기!
-    console.log('완성된 이메일 : ' + eamil); // 이메일 오는지 확인
-    const checkInput = $('.mail-check-input') // 인증번호 입력하는곳
 
-    $.ajax({
-      type : 'get',
-      url : '<c:url value ="http://localhost:8080/mailcheck?email="/>'+eamil, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
-      success : function (data) {
-        console.log("data : " +  data);
-        checkInput.attr('disabled',false);
-        code =data;
-        alert('인증번호가 전송되었습니다.')
-      }
-    }); // end ajax
-  }); // end send eamil
 </script>
