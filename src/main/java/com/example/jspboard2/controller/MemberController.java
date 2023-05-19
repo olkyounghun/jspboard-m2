@@ -2,20 +2,27 @@ package com.example.jspboard2.controller;
 
 import com.example.jspboard2.domain.Member;
 import com.example.jspboard2.domain.Paging;
+import com.example.jspboard2.service.MailSender;
 import com.example.jspboard2.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,6 +30,9 @@ public class MemberController {
 
     @Resource
     private MemberService memberService;
+
+    @Resource
+    private MailSender mailSender;
 
     
     // 회원가입페이지 이동
@@ -36,15 +46,60 @@ public class MemberController {
         return mv;
     }
 
-    @RequestMapping(value = "/mailcheck", method = {RequestMethod.GET})
+    //이메일 발송을 위한 정보 받기
+    @RequestMapping("/mailcheck")
     @ResponseBody
-    public String getMailCheck(@Param("email") String email){
+    public Map findAuth(Member member, Model model) {
 
-        System.out.println("이메일 인증 요청 확인!");
-        System.out.println("이메일 인증 이메일 : " + email);
+        Map map = new HashMap();
 
-        return "";
+        //사용자가 작성한 아이디를 기준으로 존재하는 사용자인지 확인한다.(id는 회원가입시 중복 체크를 했기 때문에 유니크하다.)
+        TekaMemberVo isUser = member_dao.selectOneById(member.getId_member());
+
+        if(isUser != null) {//회원가입이 되어있는, 존재하는 사용자라면
+            Random r = new Random();
+            int num = r.nextInt(999999); //랜덤 난수
+
+            StringBuilder sb = new StringBuilder();
+
+            // DB에 저장된 email            입력받은 email
+            if(isUser.getM_email().equals(member.getM_email())) {//이메일 정보 또한 동일하다면
+
+                String setFrom = "ict04@naver.com";//발신자 이메일
+                String tomail = isUser.getM_email();//수신자 이메일
+                String title = "[TEKA] 비밀번호 변경 인증 이메일입니다.";
+                sb.append(String.format("안녕하세요 %s님\n", isUser.getM_nickname()));
+                sb.append(String.format("TEKA 비밀번호 찾기(변경) 인증번호는 %d입니다.", num));
+                String content = sb.toString();
+
+                try {
+                    MimeMessage msg = mailSender.createMimeMessage();
+                    MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "utf-8");
+
+                    msgHelper.setFrom(setFrom);
+                    msgHelper.setTo(tomail);
+                    msgHelper.setSubject(title);
+                    msgHelper.setText(content);
+
+                    //메일 전송
+                    mailSender.send(msg);
+
+                }catch (Exception e) {
+                    // TODO: handle exception
+                    System.out.println(e.getMessage());
+                }
+
+                //성공적으로 메일을 보낸 경우
+                map.put("status", true);
+                map.put("num", num);
+                map.put("m_idx", isUser.getM_idx());
+                return map;
+
+            }
+        }
+
     }
+
 
     // 회원가입 정보 입력후 완료
     @RequestMapping(value = "/signup", method = {RequestMethod.POST})
