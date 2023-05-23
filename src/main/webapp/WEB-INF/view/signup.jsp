@@ -70,18 +70,19 @@
       </div>
       <div class="row">
         <div class="input-group mb-3">
+          <label for="userEmail1" id="mailTxt">이메일을 입력해주세요</label>
           <input type="text" class="form-control" id="userEmail1" name="userEmail1" placeholder="Username" aria-label="Username">
           <span class="input-group-text">@</span>
           <input type="text" class="form-control" id="userEmail2" name="userEmail2" placeholder="Server" aria-label="Server">
+        </div>
+        <div class="mail-check-box">
+          <label for="check-code-input" id="memailconfirmTxt">인증번호를 입력해주세요</label>
+          <input class="form-control mail-check-input" id="check-code-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
         </div>
         <div class="input-group-addon">
           <button type="button" class="btn btn-primary" id="mail-Check-Btn">인증번호받기</button>
           <button type="button" class="btn btn-primary" id="code-Check-Btn">인증하기</button>
         </div>
-        <div class="mail-check-box">
-          <input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
-        </div>
-        <span id="mail-check-warn"></span>
       </div>
         <div class="input-group mb-3">
           <div class="form-check">
@@ -106,5 +107,46 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </html>
 <script type="text/javascript">
+  // 이메일 인증번호
+  $checkEmail.click(function() {
+    $.ajax({
+      type : "POST",
+      url : "login/mailConfirm",
+      data : {
+        "email" : $memail.val()
+      },
+      success : function(data){
+        alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
+        console.log("data : "+data);
+        chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt);
+      }
+    })
+  })
 
+  // 이메일 인증번호 체크 함수
+  function chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt){
+    $memailconfirm.on("keyup", function(){
+      if (data != $memailconfirm.val()) { //
+        emconfirmchk = false;
+        $memailconfirmTxt.html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
+        $("#emconfirmchk").css({
+          "color" : "#FA3E3E",
+          "font-weight" : "bold",
+          "font-size" : "10px"
+
+        })
+        //console.log("중복아이디");
+      } else { // 아니면 중복아님
+        emconfirmchk = true;
+        $memailconfirmTxt.html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
+
+        $("#emconfirmchk").css({
+          "color" : "#0D6EFD",
+          "font-weight" : "bold",
+          "font-size" : "10px"
+
+        })
+      }
+    })
+  }
 </script>
