@@ -70,18 +70,15 @@
       </div>
       <div class="row">
         <div class="input-group mb-3">
-          <label for="userEmail1" id="mailTxt">이메일을 입력해주세요</label>
-          <input type="text" class="form-control" id="userEmail1" name="userEmail1" placeholder="Username" aria-label="Username">
-          <span class="input-group-text">@</span>
-          <input type="text" class="form-control" id="userEmail2" name="userEmail2" placeholder="Server" aria-label="Server">
+          <label for="userEmail" id="mailTxt">이메일을 입력해주세요</label>
+          <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="Username" aria-label="email">
         </div>
         <div class="mail-check-box">
-          <label for="check-code-input" id="memailconfirmTxt">인증번호를 입력해주세요</label>
-          <input class="form-control mail-check-input" id="check-code-input" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
+          <label for="checkcodeinput" name="memailconfirmTxt" id="memailconfirmTxt">인증번호를 입력해주세요</label>
+          <input class="form-control mail-check-input" name="checkcodeinput" id="checkcodeinput" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
         </div>
         <div class="input-group-addon">
-          <button type="button" class="btn btn-primary" id="mail-Check-Btn">인증번호받기</button>
-          <button type="button" class="btn btn-primary" id="code-Check-Btn">인증하기</button>
+          <button type="button" class="btn btn-primary" name="mailCheckBtn" id="mailCheckBtn">인증하기</button>
         </div>
       </div>
         <div class="input-group mb-3">
@@ -103,30 +100,27 @@
     </div>
   </div>
 </form>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</html>
-<script type="text/javascript">
+<script>
   // 이메일 인증번호
-  $checkEmail.click(function() {
+  $mailCheckBtn.click(function() {
     $.ajax({
       type : "POST",
-      url : "login/mailConfirm",
+      url : "code/mailConfirm",
       data : {
-        "email" : $memail.val()
+        "email" : $userEmail.val()
       },
       success : function(data){
         alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
         console.log("data : "+data);
-        chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt);
+        chkEmailConfirm(data, $checkcodeinput, $memailconfirmTxt);
       }
     })
   })
 
   // 이메일 인증번호 체크 함수
-  function chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt){
-    $memailconfirm.on("keyup", function(){
-      if (data != $memailconfirm.val()) { //
+  function chkEmailConfirm(data, $checkcodeinput, $memailconfirmTxt){
+    $checkcodeinput.on("keyup", function(){
+      if (data != $checkcodeinput.val()) { //
         emconfirmchk = false;
         $memailconfirmTxt.html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
         $("#emconfirmchk").css({
@@ -150,3 +144,10 @@
     })
   }
 </script>
+<script
+        src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+        crossorigin="anonymous"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</html>

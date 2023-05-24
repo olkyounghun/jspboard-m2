@@ -13,7 +13,7 @@ public interface MemberMapper {
                                @Param("userPw") String userPw,
                                @Param("userName") String userName,
                                @Param("userGender") String userGender,
-                               @Param("userEmailComplet") String userEmailComplet,
+                               @Param("userEmail") String userEmail,
                                @Param("emailChk") String emailChk);
 
     Member checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw);

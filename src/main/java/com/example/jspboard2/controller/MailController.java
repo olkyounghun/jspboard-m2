@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value = "/api/mail")
+@RequestMapping(value = "/code")
 public class MailController {
 
     @Autowired
     MailService mailService;
 
     //127.0.0.1:8080/ROOT/api/mail/confirm.json?email
-    @PostMapping(value = "/confirm.json")
+    @PostMapping(value = "/mailConfirm")
     public String mailConfirm(@RequestParam(name = "email") String email) throws Exception{
         String code = mailService.sendSimpleMessage(email);
         System.out.println("사용자에게 발송한 인증코드 ==> " + code);

@@ -43,8 +43,7 @@ public class MemberController {
                                 @Param("userPw") String userPw,
                                 @Param("userName") String userName,
                                 @Param("userGender") String userGender,
-                                @Param("userEmail1") String userEmail1,
-                                @Param("userEmail2") String userEmail2,
+                                @Param("userEmail") String userEmail,
                                 @Param("emailChk") String emailChk,
                                 HttpServletRequest request) {
 
@@ -57,11 +56,10 @@ public class MemberController {
             session = request.getSession();
         }
 
-        String userEmailComplet = userEmail1 + "@" + userEmail2;
         List<Member> list;
-        list  = memberService.getMembership(userMember,userPw,userName,userGender,userEmailComplet,emailChk);
+        list  = memberService.getMembership(userMember,userPw,userName,userGender,userEmail,emailChk);
         Member member = new Member();
-        member.setMember(userMember,userPw,userName,userEmailComplet,userGender);
+        member.setMember(userMember,userPw,userName,userEmail,userGender);
         member.printValue();
 
         session.setAttribute("loginId",userMember);
