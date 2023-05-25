@@ -27,6 +27,14 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <head>
   <title>Model-2 게시판</title>
+  <script
+          src="https://code.jquery.com/jquery-3.7.0.min.js"
+          integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+          crossorigin="anonymous"></script>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+          crossorigin="anonymous"></script>
 </head>
 <body>
 <form method="post" action="signup" >
@@ -102,27 +110,27 @@
 </form>
 <script>
   // 이메일 인증번호
-  $mailCheckBtn.click(function() {
+  $("mailCheckBtn").click(function() {
     $.ajax({
       type : "POST",
       url : "code/mailConfirm",
       data : {
-        "email" : $userEmail.val()
+        "email" : $("userEmail").val()
       },
       success : function(data){
         alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
         console.log("data : "+data);
-        chkEmailConfirm(data, $checkcodeinput, $memailconfirmTxt);
+        chkEmailConfirm(data, $("checkcodeinput"), $("memailconfirmTxt"));
       }
     })
   })
 
   // 이메일 인증번호 체크 함수
-  function chkEmailConfirm(data, $checkcodeinput, $memailconfirmTxt){
-    $checkcodeinput.on("keyup", function(){
-      if (data != $checkcodeinput.val()) { //
+  function chkEmailConfirm(data, $checkcodeinput , $memailconfirmTxt){
+    $("checkcodeinput").on("keyup", function(){
+      if (data != $.checkcodeinput.val()) { //
         emconfirmchk = false;
-        $memailconfirmTxt.html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
+        $("memailconfirmTxt").html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
         $("#emconfirmchk").css({
           "color" : "#FA3E3E",
           "font-weight" : "bold",
@@ -132,7 +140,7 @@
         //console.log("중복아이디");
       } else { // 아니면 중복아님
         emconfirmchk = true;
-        $memailconfirmTxt.html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
+        $("memailconfirmTxt").html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
 
         $("#emconfirmchk").css({
           "color" : "#0D6EFD",
@@ -144,10 +152,5 @@
     })
   }
 </script>
-<script
-        src="https://code.jquery.com/jquery-3.7.0.min.js"
-        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
-        crossorigin="anonymous"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </html>
