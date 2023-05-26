@@ -111,6 +111,7 @@
 <script>
   // 이메일 인증번호
   $("mailCheckBtn").click(function() {
+    alert("AJAX checking Test please god tell me what's problem to button")
     $.ajax({
       type : "POST",
       url : "code/mailConfirm",
