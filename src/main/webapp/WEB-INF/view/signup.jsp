@@ -83,7 +83,7 @@
         </div>
         <div class="mail-check-box">
           <label for="checkcodeinput" name="memailconfirmTxt" id="memailconfirmTxt">인증번호를 입력해주세요</label>
-          <input class="form-control mail-check-input" name="checkcodeinput" id="checkcodeinput" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
+          <input class="form-control mail-check-input" name="checkcodeinput" id="checkcodeinput">
         </div>
         <div class="input-group-addon">
           <button type="button" class="btn btn-primary" name="mailCheckBtn" id="mailCheckBtn">인증하기</button>
@@ -110,29 +110,30 @@
 </form>
 <script>
   // 이메일 인증번호
-  $("mailCheckBtn").click(function() {
-    alert("AJAX checking Test please god tell me what's problem to button")
+  $(document).ready(function(){
+  $('#mailCheckBtn').click(function() {
+    //alert("AJAX checking Test please god tell me what's problem to button") // 정상작동 확인!
     $.ajax({
       type : "POST",
       url : "code/mailConfirm",
       data : {
-        "email" : $("userEmail").val()
+        "email" : $('#userEmail').val()
       },
       success : function(data){
         alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
         console.log("data : "+data);
-        chkEmailConfirm(data, $("checkcodeinput"), $("memailconfirmTxt"));
+        chkEmailConfirm(data);
       }
     })
   })
 
   // 이메일 인증번호 체크 함수
-  function chkEmailConfirm(data, $checkcodeinput , $memailconfirmTxt){
-    $("checkcodeinput").on("keyup", function(){
+  function chkEmailConfirm(data){
+    $('#checkcodeinput').on("keyup", function(){
       if (data != $.checkcodeinput.val()) { //
         emconfirmchk = false;
-        $("memailconfirmTxt").html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
-        $("#emconfirmchk").css({
+        $('#memailconfirmTxt').html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
+        $('#emconfirmchk').css({
           "color" : "#FA3E3E",
           "font-weight" : "bold",
           "font-size" : "10px"
@@ -141,9 +142,9 @@
         //console.log("중복아이디");
       } else { // 아니면 중복아님
         emconfirmchk = true;
-        $("memailconfirmTxt").html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
+        $('#memailconfirmTxt').html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
 
-        $("#emconfirmchk").css({
+        $('#emconfirmchk').css({
           "color" : "#0D6EFD",
           "font-weight" : "bold",
           "font-size" : "10px"
@@ -152,6 +153,7 @@
       }
     })
   }
+  });
 </script>
 </body>
 </html>
