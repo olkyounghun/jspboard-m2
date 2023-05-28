@@ -83,7 +83,7 @@
         </div>
         <div class="mail-check-box">
           <label for="checkcodeinput" name="memailconfirmTxt" id="memailconfirmTxt">인증번호를 입력해주세요</label>
-          <input class="form-control mail-check-input" name="checkcodeinput" id="checkcodeinput">
+          <input class="form-control mail-check-input" name="checkcodeinput" id="checkcodeinput" >
         </div>
         <div class="input-group-addon">
           <button type="button" class="btn btn-primary" name="mailCheckBtn" id="mailCheckBtn">인증하기</button>
@@ -130,7 +130,7 @@
   // 이메일 인증번호 체크 함수
   function chkEmailConfirm(data){
     $('#checkcodeinput').on("keyup", function(){
-      if (data != $.checkcodeinput.val()) { //
+      if (data != $('#checkcodeinput').val()) { //
         emconfirmchk = false;
         $('#memailconfirmTxt').html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
         $('#emconfirmchk').css({
@@ -143,7 +143,9 @@
       } else { // 아니면 중복아님
         emconfirmchk = true;
         $('#memailconfirmTxt').html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
-
+        $('#checkcodeinput').prop("disabled", true)
+        $('#userEmail').prop("disabled", true)
+        $('#mailCheckBtn').off("click")
         $('#emconfirmchk').css({
           "color" : "#0D6EFD",
           "font-weight" : "bold",
