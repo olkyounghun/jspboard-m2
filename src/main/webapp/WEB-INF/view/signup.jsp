@@ -52,8 +52,9 @@
           <input type="password" id="userPw" name="userPw" class="form-control" placeholder="비밀번호">
         </div>
         <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon3">재확인</span>
+          <span class="input-group-text" for="userPw2" id="basic-addon3" name="basic-addon3">재확인</span>
           <input type="password" id="userPw2" name="userPw2" class="form-control" placeholder="작성하신 비밀번호를 다시 한번 입력해주세요.">
+          <label name="pwchk" id="pwchk"></label>
         </div>
       </div>
       <div class="row">
@@ -84,6 +85,7 @@
         <div class="mail-check-box">
           <label for="checkcodeinput" name="memailconfirmTxt" id="memailconfirmTxt">인증번호를 입력해주세요</label>
           <input class="form-control mail-check-input" name="checkcodeinput" id="checkcodeinput" >
+          <label name="codechk" id="codechk"></label>
         </div>
         <div class="input-group-addon">
           <button type="button" class="btn btn-primary" name="mailCheckBtn" id="mailCheckBtn">인증하기</button>
@@ -111,9 +113,9 @@
 <script>
   // 이메일 인증번호
   $(document).ready(function(){
-    $('#userPw2').click(function(){
-      $('#userPw2').focusout(chkPWConfirm())
-    }),
+    $('#userPw2').keyup(function(){
+      $('#userPw2').keyup(chkPWConfirm())
+    })
     $('#mailCheckBtn').click(function() {
       //alert("AJAX checking Test please god tell me what's problem to button") // 정상작동 확인!
       $.ajax({
@@ -134,7 +136,7 @@
     function chkPWConfirm(){
       if($('#userPw').val() != $('#userPw2').val() ){
         pwconfirmchk = false;
-        $('#basic-addon3').html("<span id='pwconfimchk'>비밀번호가 일치하지않습니다.</span>")
+        $('#pwchk').html("<span id='pwconfimchk'>비밀번호가 일치하지않습니다.</span>")
         $('#pwconfimchk').css({
           "color" : "#FA3E3E",
           "font-weight" : "bold",
@@ -143,7 +145,7 @@
         })
       } else {
         pwconfirmchk = true;
-        $('#basic-addon3').html("<span id='pwconfimchk'>비밀번호가 일치합니다.</span>")
+        $('#pwchk').html("<span id='pwconfimchk'>비밀번호가 일치합니다.</span>")
         $('#pwconfimchk').css({
           "color" : "#0D6EFD",
           "font-weight" : "bold",
@@ -157,7 +159,7 @@
       $('#checkcodeinput').on("keyup", function(){
         if (data != $('#checkcodeinput').val()) { //
           emconfirmchk = false;
-          $('#memailconfirmTxt').html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
+          $('#codechk').html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
           $('#emconfirmchk').css({
             "color" : "#FA3E3E",
             "font-weight" : "bold",
@@ -167,7 +169,7 @@
           //console.log("중복아이디");
         } else { // 아니면 중복아님
           emconfirmchk = true;
-          $('#memailconfirmTxt').html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
+          $('#codechk').html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
           $('#checkcodeinput').prop("disabled", true)
           $('#userEmail').prop("disabled", true)
           $('#mailCheckBtn').off("click")
