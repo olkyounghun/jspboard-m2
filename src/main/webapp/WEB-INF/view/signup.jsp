@@ -102,7 +102,7 @@
       </div>
       <div class="row align-items-end">
         <div class="input mb-3" style="margin: auto;">
-          <button type="submit" class="btn btn-secondary">가입하기</button>
+          <button type="submit" class="btn btn-secondary" name="signup" id="signup">가입하기</button>
           &nbsp;
           <button type="button" class="btn btn-secondary" onclick="location='/'"> 뒤로가기 </button>
         </div>
@@ -113,6 +113,9 @@
 <script>
   // 이메일 인증번호
   $(document).ready(function(){
+
+    $('#signup').click(signupConfirm())
+
     $('#userPw2').keyup(function(){
       $('#userPw2').keyup(chkPWConfirm())
     })
@@ -136,6 +139,7 @@
     function signupConfirm(){
       if(pwconfirmchk = false, emconfirmchk = false){
         alert("확인이 필요한 부분이 남아있습니다. \n 확인부탁드립니다.")
+        $('#signup').off("click")
       }
     }
 
@@ -153,6 +157,7 @@
       } else {
         pwconfirmchk = true;
         $('#pwchk').html("<span id='pwconfimchk'>비밀번호가 일치합니다.</span>")
+        $('#signup').on("click")
         $('#pwconfimchk').css({
           "color" : "#0D6EFD",
           "font-weight" : "bold",
@@ -180,6 +185,7 @@
           $('#checkcodeinput').prop("disabled", true)
           $('#userEmail').prop("disabled", true)
           $('#mailCheckBtn').off("click")
+          $('#signup').on("click")
           $('#emconfirmchk').css({
             "color" : "#0D6EFD",
             "font-weight" : "bold",
