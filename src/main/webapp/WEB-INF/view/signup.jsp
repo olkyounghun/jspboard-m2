@@ -114,7 +114,7 @@
   // 이메일 인증번호
   $(document).ready(function(){
 
-    $('#signup').click(signupConfirm())
+    //$('#signup').click(signupConfirm())
 
     $('#userPw2').keyup(function(){
       $('#userPw2').keyup(chkPWConfirm())
@@ -136,12 +136,12 @@
     })
 
     // 비밀번호 일치여부 와 이메일인증에 통과하지않으면 가입이 안되도록
-    function signupConfirm(){
-      if(pwconfirmchk = false, emconfirmchk = false){
-        alert("확인이 필요한 부분이 남아있습니다. \n 확인부탁드립니다.")
-        $('#signup').off("click")
-      }
-    }
+    // function signupConfirm(){
+    //   if(pwconfirmchk = false, emconfirmchk = false){
+    //     alert("확인이 필요한 부분이 남아있습니다. \n 확인부탁드립니다.")
+    //     $('#signup').off("click")
+    //   }
+    // }
 
     // 비밀번호 재확인 체크 함수
     function chkPWConfirm(){
