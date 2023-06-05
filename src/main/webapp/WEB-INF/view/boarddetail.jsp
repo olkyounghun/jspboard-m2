@@ -62,8 +62,8 @@
         </div>
       </div>
       <div class="form-check" style="padding-top: 40px;">
-        <button type="button" class="btn btn-secondary" onclick="location.href='/boardmodify/${list.id_board}'">수정</button>
-        <button type="button" class="btn btn-secondary" onclick="location.href='/boarddelete/${list.id_board}'">삭제</button>
+        <button type="button" class="btn btn-secondary" name="modify" id="modify" onclick="location.href='/boardmodify/${list.id_board}'">수정</button>
+        <button type="button" class="btn btn-secondary" name="delete" id="delete" onclick="location.href='/boarddelete/${list.id_board}'">삭제</button>
         <button type="button" class="btn btn-secondary" onclick="location.href='/boardlist'">목록</button>
       </div>
     </div>
@@ -99,5 +99,17 @@
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script>
+
+  $(document).ready(function (){
+    $('#modify').click(function (){
+      // 수정버튼 시 무결성 검사
+    })
+    $('#delete').click(function(){
+      // 삭제버튼 시 무결성 검사
+    })
+  })
+
+</script>
 </body>
 </html>
