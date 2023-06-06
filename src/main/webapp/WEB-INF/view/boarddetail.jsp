@@ -104,9 +104,28 @@
   $(document).ready(function (){
     $('#modify').click(function (){
       // 수정버튼 시 무결성 검사
+      alert("해당 글의 작성자가 아니십니다. \n 확인부탁드립니다.")
+      $('#alert1').html("<span id='alert'>수정 불가</span>")
+      $('#alert').css({
+        "color" : "#FA3E3E",
+        "font-weight" : "bold",
+        "font-size" : "10px"
+
+      })
+
     })
     $('#delete').click(function(){
       // 삭제버튼 시 무결성 검사
+      alert("해당 글의 작성자가 아니십니다. \n 확인부탁드립니다.")
+      $('#alert1').html("<span id='alert'>삭제 불가</span>")
+
+      $('#alert').css({
+        "color" : "#FA3E3E",
+        "font-weight" : "bold",
+        "font-size" : "10px"
+
+      })
+
     })
   })
 
