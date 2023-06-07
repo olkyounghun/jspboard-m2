@@ -250,14 +250,15 @@ public class BoardController {
         Board boardInfo = boardService.getMatchPoint(id_board);
 
         if(loginMember.getId_member() != boardInfo.getId_member()){
-            bindingResult.reject("loginFail", "회원정보와 로그인정보가 일치하지않습니다.");
-            mv.setViewName("redirect:/login");
-            return mv;
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "회원정보와 로그인정보가 일치하지않습니다.");
+            mv.addObject("errorMove","/boardlist");
+            mv.setViewName("error");
         }else{
             mv.addObject("list", list);
             mv.setViewName("boardmodify");
-            return mv;
         }
+        return mv;
     }
 
     @RequestMapping(value = "/modifyAction", method = {RequestMethod.GET, RequestMethod.POST})
@@ -285,7 +286,7 @@ public class BoardController {
         if(loginMember.getId_member() != boardInfo.getId_member()){
             mv.addObject("error","loginFail");
             mv.addObject("errorMessage", "회원정보와 로그인정보가 일치하지않습니다.");
-            mv.addObject("errorMove","redirect:/login");
+            mv.addObject("errorMove","/login");
             mv.setViewName("error");
         }else{
             boardService.postModifyBoard(typeBoard,titleBoard,contentBoard,idBoard);
@@ -353,7 +354,7 @@ public class BoardController {
         if(loginMember.getId_member() != boardInfo.getId_member()){
             mv.addObject("error","login");
             mv.addObject("errorMessage","해당 글의 삭제권한이 없습니다.");
-            mv.addObject("errorMove","boardlist");
+            mv.addObject("errorMove","/boardlist");
             mv.setViewName("error");
         }else{
             boardService.boardDeleteAction(id_board);
