@@ -37,9 +37,10 @@ public class LoginController {
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
         Member loginMember = memberService.checkLogin(loginId,loginPw);
         if (loginId == "null" && loginPw == "null") {
-            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
-            mv.setViewName("login");
-            return mv;
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "로그인정보가 없습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
         }else{
             mv.addObject("id_member",loginMember.getId_member());
         }

@@ -240,8 +240,10 @@ public class BoardController {
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
         if ( loginId == null && loginPw == null) {
-            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
-            mv.setViewName("redirect:/login");
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "로그인정보가 없습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
             return mv;
         }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
@@ -275,9 +277,10 @@ public class BoardController {
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
         if ( loginId == null && loginPw == null) {
-            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
-            mv.setViewName("redirect:/login");
-            return mv;
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "로그인정보가 없습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
         }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
         List<Board> list;
@@ -344,9 +347,10 @@ public class BoardController {
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
         if ( loginId == null && loginPw == null) {
-            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
-            mv.setViewName("redirect:/login");
-            return mv;
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "로그인정보가 없습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
         }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
         Board boardInfo = boardService.getMatchPoint(id_board);

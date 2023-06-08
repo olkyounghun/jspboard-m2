@@ -81,9 +81,10 @@ public class MemberController {
         Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         if (loginId == "null") {
-            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
-            mv.setViewName("login");
-            return mv;
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "아이디 혹은 비밀번호가 맞지않습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
         }
 
         List<Member> list;
@@ -109,15 +110,17 @@ public class MemberController {
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
         if ( loginId == null && loginPw == null) {
-            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
-            mv.setViewName("redirect:/login");
-            return mv;
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "로그인정보가 없습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
         }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
         if(loginMember.getId_member() != Long.valueOf(idMember)){ // 무결성 검사
-            bindingResult.reject("loginFail", "회원정보와 로그인정보가 일치하지않습니다.");
-            mv.setViewName("redirect:/login");
-            return mv;
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "회원정보와 로그인정보가 일치하지않습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
         }else{
             memberService.modifyMemberDetail(idMember,emailMember,nameMember);
             mv.addObject("error","회원정보수정");
@@ -167,9 +170,10 @@ public class MemberController {
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
         if ( loginId == null && loginPw == null) {
-            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
-            mv.setViewName("redirect:/login");
-            return mv;
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "로그인정보가 없습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
         }
 
         Member userInfo = memberService.checkLogin(loginId,loginPw);
@@ -210,9 +214,10 @@ public class MemberController {
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
         if ( loginId == null && loginPw == null) {
-            bindingResult.reject("loginFail", "로그인 정보가 없습니다.");
-            mv.setViewName("redirect:/login");
-            return mv;
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "로그인정보가 없습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
         }
 
         Member userInfo = memberService.checkLogin(loginId,loginPw);
