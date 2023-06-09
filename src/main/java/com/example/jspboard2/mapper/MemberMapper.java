@@ -12,9 +12,9 @@ public interface MemberMapper {
     List<Member> getMembership(@Param("userMember") String userMember,
                                @Param("userPw") String userPw,
                                @Param("userName") String userName,
-                               @Param("userGender") String userGender,
                                @Param("userEmail") String userEmail,
-                               @Param("emailChk") String emailChk);
+                               @Param("emailChk") String emailChk,
+                               @Param("userGender") String userGender);
 
     Member checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw);
 

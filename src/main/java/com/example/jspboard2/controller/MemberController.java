@@ -40,12 +40,12 @@ public class MemberController {
     // 회원가입 정보 입력후 완료
     @RequestMapping(value = "/signup", method = {RequestMethod.POST})
     public ModelAndView getMembership(@Param("userMember") String userMember,
-                                @Param("userPw") String userPw,
-                                @Param("userName") String userName,
-                                @Param("userGender") String userGender,
-                                @Param("userEmail") String userEmail,
-                                @Param("emailChk") String emailChk,
-                                HttpServletRequest request) {
+                                      @Param("userPw") String userPw,
+                                      @Param("userName") String userName,
+                                      @Param("userEmail") String userEmail,
+                                      @Param("emailChk") String emailChk,
+                                      @Param("userGender") String userGender,
+                                      HttpServletRequest request) {
 
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession(false);
@@ -57,7 +57,7 @@ public class MemberController {
         }
 
         List<Member> list;
-        list  = memberService.getMembership(userMember,userPw,userName,userGender,userEmail,emailChk);
+        list  = memberService.getMembership(userMember,userPw,userName,userEmail,emailChk,userGender);
         Member member = new Member();
         member.setMember(userMember,userPw,userName,userEmail,userGender);
         member.printValue();

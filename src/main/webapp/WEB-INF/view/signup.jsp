@@ -80,7 +80,7 @@
       <div class="row">
         <div class="input-group mb-3">
           <label for="userEmail" id="mailTxt">이메일을 입력해주세요</label>
-          <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="Username" aria-label="email">
+          <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="Email">
         </div>
         <div class="mail-check-box">
           <label for="checkcodeinput" name="memailconfirmTxt" id="memailconfirmTxt">인증번호를 입력해주세요</label>
@@ -183,7 +183,7 @@
           emconfirmchk = true;
           $('#codechk').html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
           $('#checkcodeinput').prop("disabled", true)
-          $('#userEmail').prop("disabled", true)
+          $('#userEmail').prop("readonly", true)
           $('#mailCheckBtn').off("click")
           $('#signup').on("click")
           $('#emconfirmchk').css({

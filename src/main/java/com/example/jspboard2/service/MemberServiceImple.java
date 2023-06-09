@@ -17,9 +17,9 @@ public class MemberServiceImple implements MemberService {
     public List<Member> getMembership(@Param("userMember") String userMember,
                                       @Param("userPw") String userPw,
                                       @Param("userName") String userName,
-                                      @Param("userGender") String userGender,
                                       @Param("userEmail") String userEmail,
-                                      @Param("emailChk") String emailChk){return memberMapper.getMembership(userMember,userPw,userName,userGender,userEmail,emailChk);
+                                      @Param("emailChk") String emailChk,
+                                      @Param("userGender") String userGender){return memberMapper.getMembership(userMember,userPw,userName,userEmail,emailChk,userGender);
     }
 
     public Member checkLogin(@Param("loginId") String loginID, @Param("loginPw") String loginPw) {return memberMapper.checkLogin(loginID,loginPw);}
