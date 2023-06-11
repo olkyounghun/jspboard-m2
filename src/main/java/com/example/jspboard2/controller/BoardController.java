@@ -312,6 +312,7 @@ public class BoardController {
             return mv;
         }
         HttpSession session = request.getSession();
+        session.setAttribute("id_board",id_board);
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
         Member loginMember = memberService.checkLogin(loginId,loginPw);

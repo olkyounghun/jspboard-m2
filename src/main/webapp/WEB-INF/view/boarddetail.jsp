@@ -63,7 +63,7 @@
       </div>
       <div class="form-check" style="padding-top: 40px;">
         <button type="button" class="btn btn-secondary" name="modify" id="modify" onclick="location.href='/boardmodify/${list.id_board}'">수정</button>
-        <button type="button" class="btn btn-secondary" name="delete" id="delete" onclick="removeCheck()">삭제</button>
+        <button type="button" class="btn btn-secondary" name="delete" id="delete" onclick="removeCheck(${list.id_board})">삭제</button>
         <button type="button" class="btn btn-secondary" onclick="location.href='/boardlist'">목록</button>
       </div>
     </div>
@@ -100,6 +100,7 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script type="text/javascript">
+
   $(document).ready(function (){
     $('#modify').click(function (){
       // 수정버튼 시 무결성 검사
@@ -126,17 +127,13 @@
 
     })
   })
-  <%--function removeCheck() {--%>
-  <%--  if (confirm("정말 삭제하시겠습니까??") == true){    //확인--%>
-  <%--    if(${list.id_board} = null){--%>
-  <%--      alert("널");--%>
-  <%--    }else{--%>
-  <%--      location.href='/boarddelete/"${list.id_board}"';--%>
-  <%--    }--%>
-  <%--  }else{   //취소--%>
-  <%--    return false;--%>
-  <%--  }--%>
-  <%--}--%>
+  function removeCheck(num) {
+    if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+        location.href='/boarddelete/'+num;
+    }else{   //취소
+      return false;
+    }
+  }
 </script>
 </body>
 </html>
