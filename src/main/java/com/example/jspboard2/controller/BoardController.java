@@ -284,6 +284,8 @@ public class BoardController {
         }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
         List<Board> list;
+        List<Board> prev;
+        List<Board> next;
         Board boardInfo = boardService.getMatchPoint(idBoard);
 
         if(loginMember.getId_member() != boardInfo.getId_member()){
@@ -293,7 +295,16 @@ public class BoardController {
             mv.setViewName("error");
         }else{
             boardService.postModifyBoard(typeBoard,titleBoard,contentBoard,idBoard);
+            boardService.viewUpPoint(idBoard);
             list = boardService.getDetailBoard(idBoard);
+            next = boardService.getNextBoard(idBoard);
+            prev = boardService.getPrevBoard(idBoard);
+            if(next != null){
+                mv.addObject("next", next);
+            }
+            if(prev != null){
+                mv.addObject("prev", prev);
+            }
             mv.addObject("list",list);
             mv.setViewName("boarddetail");
         }
