@@ -51,7 +51,7 @@
           </div>
           <div class="form-check" style="padding-top: 40px;">
             <button type="submit" class="btn btn-secondary" >개인정보수정</button>
-            <button type="button" class="btn btn-secondary" onclick="location.href='/memberdelete/${list.id_member}'">탈퇴</button>
+            <button type="button" class="btn btn-secondary" onclick="deleteCheck(${list.id_member})">탈퇴</button>
             <button type="button" class="btn btn-secondary" onclick="location.href='/boardlist'">목록</button>
           </div>
         </div>
@@ -61,5 +61,14 @@
 </form>
 </c:forEach>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script>
+  function deleteCheck(num) {
+    if (confirm("정말 탈퇴하시겠습니까??") == true){    //확인
+      location.href='/memberdelete/'+num;
+    }else{   //취소
+      return false;
+    }
+  } // 로그인아이디가 작성한 글이 있기때문에 글은 아이디정보를 참조하고있어서 해당 아이디를 삭제시 삭제오류가 발생한다. 참조오류
+</script>
 </body>
 </html>
