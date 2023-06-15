@@ -305,6 +305,7 @@ public class BoardController {
             if(prev != null){
                 mv.addObject("prev", prev);
             }
+            mv.addObject("id_member",loginMember.getId_member());
             mv.addObject("list",list);
             mv.setViewName("boarddetail");
         }

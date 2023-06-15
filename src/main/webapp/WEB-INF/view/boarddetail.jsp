@@ -107,15 +107,15 @@
       return false;
     }
   }
-  function deleteCheck(loginnum,boardnum,num){
-    if(loginnum == boardnum){
+  function deleteCheck(loginnum,idnum,num){
+    if(loginnum == idnum){
       removeCheck(num);
     }else{
       alert("해당 글의 작성자가 아니십니다. \n 삭제권한이 없습니다.");
     }
   }
-  function modifyCheck(loginnum,boardnum,num){
-    if(loginnum == boardnum){
+  function modifyCheck(loginnum,idnum,num){
+    if(loginnum == idnum){
       location.href='/boardmodify/'+num;
     }else{
       alert("해당 글의 작성자가 아니십니다. \n 수정권한이 없습니다.");
