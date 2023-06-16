@@ -257,6 +257,7 @@ public class BoardController {
             mv.addObject("errorMove","/boardlist");
             mv.setViewName("error");
         }else{
+            mv.addObject("id_member", loginMember.getId_member());
             mv.addObject("list", list);
             mv.setViewName("boardmodify");
         }
