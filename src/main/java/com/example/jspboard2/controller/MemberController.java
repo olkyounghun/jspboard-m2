@@ -169,6 +169,7 @@ public class MemberController {
         HttpSession session = request.getSession();
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
         if ( loginId == null && loginPw == null) {
             mv.addObject("error","loginFail");
             mv.addObject("errorMessage", "로그인정보가 없습니다.");
@@ -190,6 +191,7 @@ public class MemberController {
 
             List<Member> list;
             list = memberService.getManagerMember(beginpage,endpage,page);
+            mv.addObject("id_member",loginMember.getId_member());
             mv.addObject("list",list);
             mv.addObject("paging", paging);
             mv.setViewName("/manager");
