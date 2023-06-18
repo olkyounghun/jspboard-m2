@@ -41,6 +41,13 @@ public interface MemberService {
                                       @Param("searchName") String searchName,
                                       @Param("pagelist") int pagelist);
 
+    List<Member> getMmodifyAction(@Param("idMember") int idMember,
+                                  @Param("userMember") String userMember,
+                                  @Param("regdateMember") String regdateMember,
+                                  @Param("nameMember") String nameMember,
+                                  @Param("genderMember") String genderMember,
+                                  @Param("emailMember") String emailMember);
+
     List<Member> getManagerMember(@Param("beginpage")int beginpage,
                                   @Param("endpage") int endpage,
                                   @Param("page") int page);

@@ -96,6 +96,13 @@
         </if>
         ORDER BY ID_MEMBER DESC LIMIT 10;
     </select>
+    <select id="getMmodifyAction" resultType="com.example.jspboard2.domain.Member" parameterType="map" >
+        UPDATE member_tb
+        SET USER_MEMBER = #{userMember},REGDATE_MEMBER=#{regdateMember},NAME_MEMBER=#{nameMember}, GENDER_MEMBER=#{genderMember}, EMAIL_MEMBER = #{emailMember}
+        <where>
+            ID_MEMBER = #{idMember}
+        </where>
+    </select>
     <select id="getSearchMember" resultType="com.example.jspboard2.domain.Member" parameterType="hashmap">
         SELECT *
         FROM member_tb

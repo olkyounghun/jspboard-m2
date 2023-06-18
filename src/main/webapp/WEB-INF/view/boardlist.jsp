@@ -92,7 +92,7 @@
             <button type="button" class="btn btn-outline-secondary" onclick="location.href='/home'">메인</button>
             <button type="button" class="btn btn-outline-secondary" onclick="location.href='/boardposting'">작성</button>
             <c:choose>
-                <c:when test="${sessionScope.loginId ne null}"><button type="button" class="btn btn-outline-secondary" onclick="location.href='logout'">로그아웃</button></c:when>
+                <c:when test="${sessionScope.loginId ne null}"><button type="button" class="btn btn-outline-secondary" onclick="location.href='/logout'">로그아웃</button></c:when>
                 <c:otherwise><button type="button" class="btn btn-outline-secondary" onclick="location.href='/login'">로그인</button></c:otherwise>
             </c:choose>
             <c:if test="${sessionScope.loginId eq 'admin'}">

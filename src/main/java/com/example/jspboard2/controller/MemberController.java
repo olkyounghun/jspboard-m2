@@ -368,6 +368,69 @@ public class MemberController {
         return mv;
     }
 
+    @GetMapping("managermodify/{id_member}")
+    public ModelAndView modifyMember(@PathVariable("id_member") Integer idMember,
+                                     @Valid @ModelAttribute Member member,
+                                     BindingResult bindingResult,
+                                     HttpServletRequest request){
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
+
+        if (loginId == "null") {
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "아이디 혹은 비밀번호가 맞지않습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
+        }
+
+        List<Member> list;
+        list = memberService.getMember(idMember);
+        mv.addObject("id_member",loginMember.getId_member());
+        mv.addObject("list", list);
+        mv.setViewName("managermodify");
+
+        return mv;
+    }
+
+    @PostMapping("mModifyAction/{id_member}")
+    public ModelAndView managerModifyAction(@PathVariable("id_member") Integer idMember,
+                                            @Param("userMember") String userMember,
+                                            @Param("regdateMember") String regdateMember,
+                                            @Param("nameMember") String nameMember,
+                                            @Param("genderMember") String genderMember,
+                                            @Param("emailMember") String emailMember,
+                                            @Valid @ModelAttribute Member member,
+                                            BindingResult bindingResult,
+                                            HttpServletRequest request){
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        if ( loginId == null && loginPw == null) {
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "로그인정보가 없습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
+        }
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
+        if(loginMember.getId_member() != Long.valueOf(idMember)){ // 무결성 검사
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "회원정보와 로그인정보가 일치하지않습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
+        }else{
+            memberService.getMmodifyAction(idMember,userMember,regdateMember,nameMember,genderMember,emailMember);
+            mv.addObject("error","회원정보수정");
+            mv.addObject("errorMessage", "회원정보가 올바르게 '수정' 되었습니다.");
+            mv.addObject("errorMove","/manager");
+            mv.setViewName("error");
+        }
+        return mv;
+    }
+
     // 매니저게시판 특정회원정보 삭제 // 세션 정보를 활용하여 아이디 비밀번호를 저장해야함
     @GetMapping ("managerdelete/{id_member}")
     public ModelAndView deleteMember(@PathVariable("id_member") Integer idMember,
