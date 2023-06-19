@@ -61,7 +61,7 @@ public class MemberServiceImple implements MemberService {
                                          @Param("nameMember") String nameMember,
                                          @Param("genderMember") String genderMember,
                                          @Param("emailMember") String emailMember){
-        return getMmodifyAction(idMember, userMember, regdateMember, nameMember,genderMember,emailMember);
+        return memberMapper.getMmodifyAction(idMember, userMember, regdateMember, nameMember,genderMember,emailMember);
     }
 
     public List<Member> getManagerMember(@Param("beginpage")int beginpage,

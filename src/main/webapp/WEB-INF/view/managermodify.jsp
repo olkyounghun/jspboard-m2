@@ -18,8 +18,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-<form method="post" name="frm" action="/mModifyAction/${list.id_member}" enctype="multipart/form-data">
-    <c:forEach items="${list}" var="list">
+<c:forEach items="${list}" var="list">
+    <form method="post" name="frm" action="/mModifyAction/${list.id_member}" enctype="multipart/form-data">
     <div>
         <table>
             <tr>
@@ -42,7 +42,7 @@
             <tr>
                 <td> 성별 </td>
                 <td>
-                    <label><input type="text" id="genderMemeber" name="genderMemeber" value="${list.gender_member}"></label>
+                    <label><input type="text" id="genderMember" name="genderMember" value="${list.gender_member}"></label>
                 </td>
             </tr>
             <tr>

@@ -96,9 +96,9 @@
         </if>
         ORDER BY ID_MEMBER DESC LIMIT 10;
     </select>
-    <select id="getMmodifyAction" resultType="com.example.jspboard2.domain.Member" parameterType="map" >
+    <select id="getMmodifyAction" resultType="com.example.jspboard2.domain.Member">
         UPDATE member_tb
-        SET USER_MEMBER = #{userMember},REGDATE_MEMBER=#{regdateMember},NAME_MEMBER=#{nameMember}, GENDER_MEMBER=#{genderMember}, EMAIL_MEMBER = #{emailMember}
+        SET USER_MEMBER = #{userMember}, REGDATE_MEMBER = #{regdateMember}, NAME_MEMBER=#{nameMember}, GENDER_MEMBER=#{genderMember}, EMAIL_MEMBER = #{emailMember}
         <where>
             ID_MEMBER = #{idMember}
         </where>

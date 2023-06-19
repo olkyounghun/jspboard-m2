@@ -416,9 +416,9 @@ public class MemberController {
             mv.setViewName("error");
         }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
-        if(loginMember.getId_member() != Long.valueOf(idMember)){ // 무결성 검사
+        if(loginMember.getId_member() != 1){ // 무결성 검사
             mv.addObject("error","loginFail");
-            mv.addObject("errorMessage", "회원정보와 로그인정보가 일치하지않습니다.");
+            mv.addObject("errorMessage", "회원정보를 수정할 권한이 없습니다.");
             mv.addObject("errorMove","/login");
             mv.setViewName("error");
         }else{
