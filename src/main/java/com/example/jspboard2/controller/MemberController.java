@@ -439,20 +439,29 @@ public class MemberController {
                                      HttpServletRequest request){
 
         ModelAndView mv = new ModelAndView();
-        if (bindingResult.hasErrors()) {
-            mv.setViewName("login");
-            return mv;
-        }
         HttpSession session = request.getSession();
-        Object sessionMember = session.getAttribute("userName");
-        Member loginMember = memberService.checkLogin((String) sessionMember,(String)sessionMember);
+        String loginId = String.valueOf(session.getAttribute("loginId"));
+        String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
+
+        if ( loginId == null && loginPw == null) {
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "로그인정보가 없습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
+        }
 
         if(loginMember.getRating_member() != 1 ){ // 둘다 아니라면 로그인
-            mv.setViewName("login");
-            return mv;
-        }else if(loginMember.getRating_member() == 1){ // 관리자가 개인 멤버 삭제시
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "회원정보를 수정할 권한이 없습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
+        }else{ // 관리자가 개인 멤버 삭제시
             memberService.deleteMember(idMember);
-            mv.setViewName("manager");
+            mv.addObject("error","회원정보삭제");
+            mv.addObject("errorMessage", "회원정보가 올바르게 '삭제' 되었습니다.");
+            mv.addObject("errorMove","/manager");
+            mv.setViewName("error");
         }
 
         return mv;

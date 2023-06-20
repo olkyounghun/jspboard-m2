@@ -56,13 +56,12 @@
                 <tbody>
                     <c:forEach items="${list}" var="list">
                         <tr>
-                            <td>${list.id_member}</td>
-                            <td><a href="/managerinfo/${list.id_member}">${list.user_member}</a></td>
-                            <td>${list.name_member}</td>
-                            <td>${list.email_member}</td>
-                            <td>${list.emailcheck_member}</td>
-                            <td><fmt:formatDate value="${list.regdate_member}" pattern="yyyy-MM-dd" type="date"/></td>
-                            <td>${list.rating_member}</td>
+                            <td>  ${list.id_member}  </td>
+                            <td>  <a href="/managerinfo/${list.id_member}">${list.user_member}</a>  </td>
+                            <td>  ${list.name_member}  </td>
+                            <td>  ${list.email_member}  </td>
+                            <td>  <fmt:formatDate value="${list.regdate_member}" pattern="yyyy-MM-dd" type="date"/>  </td>
+                            <td>[ ${list.rating_member} ]</td>
                         </tr>
                     </c:forEach>
                 </tbody>
