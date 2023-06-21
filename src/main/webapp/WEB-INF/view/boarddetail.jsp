@@ -108,7 +108,9 @@
     }
   }
   function deleteCheck(loginnum,idnum,num){
-    if(loginnum == idnum){
+    if(loginnum == idnum) {
+      removeCheck(num);
+    }else if(loginnum == 1){
       removeCheck(num);
     }else{
       alert("해당 글의 작성자가 아니십니다. \n 삭제권한이 없습니다.");
@@ -116,6 +118,8 @@
   }
   function modifyCheck(loginnum,idnum,num){
     if(loginnum == idnum){
+      location.href='/boardmodify/'+num;
+    }else if(loginnum == 1){
       location.href='/boardmodify/'+num;
     }else{
       alert("해당 글의 작성자가 아니십니다. \n 수정권한이 없습니다.");

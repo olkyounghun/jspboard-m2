@@ -251,10 +251,14 @@ public class BoardController {
         list = boardService.getDetailBoard(id_board);
         Board boardInfo = boardService.getMatchPoint(id_board);
 
-        if(loginMember.getId_member() != boardInfo.getId_member()){
-            mv.addObject("error","loginFail");
+        if(loginMember.getRating_member() == 1){ // 관리자계정이라도 수정이 가능하도록
+            mv.addObject("id_member", loginMember.getId_member());
+            mv.addObject("list", list);
+            mv.setViewName("boardmodify");
+        }else if(loginMember.getId_member() != boardInfo.getId_member()) {
+            mv.addObject("error", "loginFail");
             mv.addObject("errorMessage", "회원정보와 로그인정보가 일치하지않습니다.");
-            mv.addObject("errorMove","/boardlist");
+            mv.addObject("errorMove", "/boardlist");
             mv.setViewName("error");
         }else{
             mv.addObject("id_member", loginMember.getId_member());
@@ -289,12 +293,7 @@ public class BoardController {
         List<Board> next;
         Board boardInfo = boardService.getMatchPoint(idBoard);
 
-        if(loginMember.getId_member() != boardInfo.getId_member()){
-            mv.addObject("error","loginFail");
-            mv.addObject("errorMessage", "회원정보와 로그인정보가 일치하지않습니다.");
-            mv.addObject("errorMove","/login");
-            mv.setViewName("error");
-        }else{
+        if(loginMember.getRating_member() == 1){ // 관리자계정이라도 수정이 가능하도록
             boardService.postModifyBoard(typeBoard,titleBoard,contentBoard,idBoard);
             boardService.viewUpPoint(idBoard);
             list = boardService.getDetailBoard(idBoard);
@@ -309,6 +308,26 @@ public class BoardController {
             mv.addObject("id_member",loginMember.getId_member());
             mv.addObject("list",list);
             mv.setViewName("boarddetail");
+        }else if(loginMember.getId_member() == boardInfo.getId_member()){
+            boardService.postModifyBoard(typeBoard,titleBoard,contentBoard,idBoard);
+            boardService.viewUpPoint(idBoard);
+            list = boardService.getDetailBoard(idBoard);
+            next = boardService.getNextBoard(idBoard);
+            prev = boardService.getPrevBoard(idBoard);
+            if(next != null){
+                mv.addObject("next", next);
+            }
+            if(prev != null){
+                mv.addObject("prev", prev);
+            }
+            mv.addObject("id_member",loginMember.getId_member());
+            mv.addObject("list",list);
+            mv.setViewName("boarddetail");
+        }else{
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "회원정보와 로그인정보가 일치하지않습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
         }
         return mv;
     }
@@ -369,14 +388,23 @@ public class BoardController {
         Member loginMember = memberService.checkLogin(loginId,loginPw);
         Board boardInfo = boardService.getMatchPoint(id_board);
 
-        if(loginMember.getId_member() != boardInfo.getId_member()){
-            mv.addObject("error","login");
-            mv.addObject("errorMessage","해당 글의 삭제권한이 없습니다.");
+        if(loginMember.getRating_member() == 1){
+            boardService.boardDeleteAction(id_board);
+            mv.addObject("error","게시물삭제");
+            mv.addObject("errorMessage", "게시물이 올바르게 '삭제' 되었습니다.");
+            mv.addObject("errorMove","/boardlist");
+            mv.setViewName("error");
+        }else if(loginMember.getId_member() == boardInfo.getId_member()) {
+            boardService.boardDeleteAction(id_board);
+            mv.addObject("error","게시물삭제");
+            mv.addObject("errorMessage", "게시물이 올바르게 '삭제' 되었습니다.");
             mv.addObject("errorMove","/boardlist");
             mv.setViewName("error");
         }else{
-            boardService.boardDeleteAction(id_board);
-            mv.setViewName("redirect:/boardlist");
+            mv.addObject("error", "login");
+            mv.addObject("errorMessage", "해당 글의 삭제권한이 없습니다.");
+            mv.addObject("errorMove", "/boardlist");
+            mv.setViewName("error");
         }
         return mv;
     }
