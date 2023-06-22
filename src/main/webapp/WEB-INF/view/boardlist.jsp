@@ -13,6 +13,21 @@
         top: 50%;
         transform: translate(-50%,-50%);
     }
+    .btn {
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+    .submitbtn {
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
 </style>
 <script>
 
@@ -36,7 +51,7 @@
                     <option value="Database">Database</option>
                 </select>
                 <input type="text" id="searchName" name="searchName" placeholder="제목 + 작성자 + 내용">
-                <button type="submit" >검색</button>
+                <button type="submit" class="submitbtn" >검색</button>
             </div>
         </form>
         <div>
