@@ -15,6 +15,15 @@
   <meta charset="UTF-8">
   <title>Model-2 게시판</title>
 </head>
+<style>
+  .btn {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+</style>
 <body>
 <div>
   <c:if test="${sessionScope.loginId ne null}">

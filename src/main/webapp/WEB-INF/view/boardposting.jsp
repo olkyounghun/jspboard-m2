@@ -26,6 +26,13 @@
         left: 50%;
         transform: translate(-50%,-50%);
     }
+    .btn {
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 5px 10px;
+        font-size: 14px;
+    }
 </style>
 <body>
 <form method="post" name="frm" action="postingAction" enctype="multipart/form-data"  >
