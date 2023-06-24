@@ -89,6 +89,14 @@
           <label for="userEmail" id="mailTxt">이메일을 입력해주세요</label>
           <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="Email">
         </div>
+        <div class="input-group mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="emailChk" id="emailChk" value="False">
+            <label class="form-check-label" for="emailChk">
+              이메일 수신 거부
+            </label>
+          </div>
+        </div>
         <div class="mail-check-box">
           <label for="checkcodeinput" name="memailconfirmTxt" id="memailconfirmTxt">인증번호를 입력해주세요</label>
           <input class="form-control mail-check-input" name="checkcodeinput" id="checkcodeinput" >
@@ -98,21 +106,13 @@
           <button type="button" class="btn btn-primary" name="mailCheckBtn" id="mailCheckBtn">인증하기</button>
         </div>
       </div>
-        <div class="input-group mb-3">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="emailChk" id="emailChk" value="False">
-            <label class="form-check-label" for="emailChk">
-              이메일 수신 거부
-            </label>
-          </div>
-        </div>
-      </div>
       <div class="row align-items-end">
         <div class="input mb-3" style="margin: auto;">
           <button type="submit" class="btn btn-secondary" name="signup" id="signup">가입하기</button>
           &nbsp;
           <button type="button" class="btn btn-secondary" onclick="location='/'"> 뒤로가기 </button>
         </div>
+      </div>
       </div>
     </div>
   </div>
