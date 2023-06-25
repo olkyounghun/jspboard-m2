@@ -22,6 +22,7 @@
     border-radius: 10px;
     padding: 5px 10px;
     font-size: 14px;
+    color: black;
   }
 </style>
 <body>
