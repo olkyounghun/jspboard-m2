@@ -36,7 +36,15 @@
                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">start</button>
             </div>
         </form>
-
+        <div>
+            <c:choose>
+                <c:when test="${sessionScope.loginId ne null}"><button type="button" class="btn btn-outline-secondary" onclick="location.href='/logout'">로그아웃</button></c:when>
+                <c:otherwise><button type="button" class="btn btn-outline-secondary" onclick="location.href='/login'">로그인</button></c:otherwise>
+            </c:choose>
+            <c:if test="${sessionScope.loginId eq 'admin'}">
+                <button type="button" class="btn btn-outline-secondary" onclick="location.href='/manager'">회원관리</button>
+            </c:if>
+        </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

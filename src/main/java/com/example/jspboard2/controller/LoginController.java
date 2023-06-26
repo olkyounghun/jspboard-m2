@@ -76,9 +76,15 @@ public class LoginController {
             session.setAttribute("loginId", loginId);
             session.setAttribute("loginPw", loginPw);
             mv.addObject("id_member",loginMember.getId_member());
-            RedirectView redirectView = new RedirectView("/home");
-            redirectView.setExposeModelAttributes(false);
-            mv.setViewName("search");
+            if(loginMember.getRating_member() == 1){
+                RedirectView redirectView = new RedirectView("/home");
+                redirectView.setExposeModelAttributes(false);
+                mv.setViewName("manager");
+            }else{
+                RedirectView redirectView = new RedirectView("/home");
+                redirectView.setExposeModelAttributes(false);
+                mv.setViewName("search");
+            }
         }
 
         return mv;

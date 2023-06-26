@@ -95,6 +95,7 @@
         </c:if>
     </div>
     <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-outline-secondary" onclick="location='/search'">검색</button>
         <button type="button" class="btn btn-outline-secondary" onclick="location='/boardlist'">목록</button>
         <button type="button" class="btn btn-outline-secondary" onclick="location='/logout'">로그아웃</button>
     </div>
