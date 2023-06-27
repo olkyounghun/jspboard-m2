@@ -1,22 +1,21 @@
 package com.example.jspboard2.controller;
 
 import com.example.jspboard2.domain.Member;
+import com.example.jspboard2.domain.Paging;
 import com.example.jspboard2.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -52,16 +51,12 @@ public class LoginController {
     // 로그인시 세션에 정보 저장
     @PostMapping("/login")
     public ModelAndView StartLogin( @Param("loginId") String loginId,
-                                 @Param("loginPw") String loginPw,
-                                 @Valid Member member,
-                                 BindingResult bindingResult,
-                                 HttpServletRequest request) {
+                                    @Param("loginPw") String loginPw,
+                                    @Valid Member member,
+                                    BindingResult bindingResult,
+                                    HttpServletRequest request,
+                                    @RequestParam(value = "page", required = false,defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
-        if (bindingResult.hasErrors()) {
-            mv.setViewName("login");
-            return mv;
-        }
-
         Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         if (loginMember == null) {
@@ -76,7 +71,21 @@ public class LoginController {
             session.setAttribute("loginId", loginId);
             session.setAttribute("loginPw", loginPw);
             mv.addObject("id_member",loginMember.getId_member());
+
             if(loginMember.getRating_member() == 1){
+                Paging paging = new Paging();
+                int count = memberService.getAllManager();
+
+                paging.setPage(page);
+                paging.setTotalCount(count);
+                int beginpage = paging.getBeginPage();
+                int endpage = paging.getEndPage();
+
+                List<Member> list;
+                list = memberService.getManagerMember(beginpage,endpage,page);
+                mv.addObject("list",list);
+                mv.addObject("paging", paging);
+
                 RedirectView redirectView = new RedirectView("/home");
                 redirectView.setExposeModelAttributes(false);
                 mv.setViewName("manager");
