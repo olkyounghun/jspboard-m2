@@ -38,7 +38,7 @@
           </div>
           <div class="row">
             <div class="col-sm-6">
-             등급 : ${list.rating_member}
+             등급 : ${list.rating_member == 1 ? 'admin' : (list.rating_member == 2 ? 'member' : '')}
             </div>
             <div class="col-sm-6">
               <div class="row">
