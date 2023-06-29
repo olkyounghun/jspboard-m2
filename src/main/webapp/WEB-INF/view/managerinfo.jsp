@@ -38,27 +38,21 @@
       <div class="row" style="padding-top: 20px;" >
         <h1> ${list.user_member} </h1>
       </div>
-      <div class="row">
-        <div class="col-sm-6">
-         등급 : ${list.rating_member}
-        </div>
-        <div class="col-sm-6">
-          <div class="row">
-            <div class="col-sm-4">
-              <div>${list.email_member}</div>
-            </div>
-            <div class="col-sm-2">
-              <div>${list.name_member} </div>
-            </div>
-            <div class="col-sm-2">
-              <div>${list.gender_member} </div>
-            </div>
-            <div class="col-sm-4">
-              <div>
-                ${list.regdate_member}
-              </div>
-            </div>
-          </div>
+      <div class="col-sm-6">
+       등급 :  ${list.rating_member == 1 ? 'admin' : (list.rating_member == 2 ? 'member' : '')}
+      </div>
+      <div class="col-sm-4">
+        <div>${list.email_member}</div>
+      </div>
+      <div class="col-sm-2">
+        <div>${list.name_member} </div>
+      </div>
+      <div class="col-sm-2">
+        <div>${list.gender_member} </div>
+      </div>
+      <div class="col-sm-4">
+        <div>
+          ${list.regdate_member}
         </div>
       </div>
       <div class="form-check" style="padding-top: 40px;">
