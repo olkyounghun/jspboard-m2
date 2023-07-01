@@ -67,7 +67,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-12" style="padding-top: 10px;"> 수정중
+        <div class="col-sm-12" style="padding-top: 10px;">댓글
+          <input type="text">
+          <input type="text">
+          <input type="text">
         </div>
       </div>
       <div class="form-check" style="padding-top: 40px;">
