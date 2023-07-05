@@ -72,9 +72,8 @@
             ${sessionScope.loginId} 님
           </div>
           <div>
-            작성날짜
+            내용 : <input type="text">
           </div>
-          내용 : <input type="text">
         </div>
       </div>
       <div class="form-check" style="padding-top: 40px;">
