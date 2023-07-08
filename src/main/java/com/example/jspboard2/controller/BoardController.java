@@ -210,13 +210,16 @@ public class BoardController {
                                      HttpSession session){
 
         ModelAndView mv = new ModelAndView();
-        if (bindingResult.hasErrors()) {
-            mv.setViewName("login");
-            return mv;
-        }
 
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        if ( loginId == null && loginPw == null) {
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "로그인정보가 없습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
+        }
+
         Member postMember = memberService.checkLogin(loginId,loginPw);
         String userBoard = postMember.getUser_member();
         Long idMember = postMember.getId_member();
@@ -339,14 +342,16 @@ public class BoardController {
                                     HttpServletRequest request){
 
         ModelAndView mv = new ModelAndView();
-        if (bindingResult.hasErrors()) {
-            mv.setViewName("login");
-            return mv;
-        }
         HttpSession session = request.getSession();
         session.setAttribute("id_board",id_board);
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
+        if ( loginId == null && loginPw == null) {
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "로그인정보가 없습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
+        }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         List<Board> list;
