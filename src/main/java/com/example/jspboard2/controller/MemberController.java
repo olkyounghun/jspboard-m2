@@ -334,17 +334,17 @@ public class MemberController {
 
         ModelAndView mv = new ModelAndView();
 
-        if (bindingResult.hasErrors()) {
-            RedirectView redirectView = new RedirectView("/login");
-            redirectView.setExposeModelAttributes(false);
-            mv.setViewName("login");
-            return mv;
-        }
-
         HttpSession session = request.getSession();
         session.getAttribute("userName");
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
+
+        if (loginId == "null" && loginPw == "null") {
+            mv.addObject("error","loginFail");
+            mv.addObject("errorMessage", "로그인정보가 없습니다.");
+            mv.addObject("errorMove","/login");
+            mv.setViewName("error");
+        }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         List<Member> prev;
