@@ -37,9 +37,9 @@
         </div>
         <form id="form" name="form" method="post" action="searchworld">
             <div class="input-group">
-                <span class="input-group-text" id="basic-addon1">Let's</span>
+                <span class="input-group-text" id="basic-addon1">도착지</span>
                 <input type="text" id="startword" name="startword" class="form-control" placeholder="Where We Go?">
-                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">start</button>
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">이동</button>
             </div>
         </form>
         <div>
