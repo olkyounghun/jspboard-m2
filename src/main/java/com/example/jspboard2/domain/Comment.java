@@ -1,7 +1,10 @@
 package com.example.jspboard2.domain;
 
+import lombok.Data;
+
 import java.sql.Date;
 
+@Data
 public class Comment {
 
     private Integer id_comment;
