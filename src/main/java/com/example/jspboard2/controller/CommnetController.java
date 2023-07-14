@@ -12,6 +12,18 @@ public class CommnetController {
         return mv;
     }
 
+    public ModelAndView modifyComment(){
+        ModelAndView mv = new ModelAndView();
+        return mv;
+    }
+
+    public ModelAndView deleteComment(){
+        ModelAndView mv = new ModelAndView();
+        return mv;
+    }
+
+
+
 
 
 }
