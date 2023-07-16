@@ -1,5 +1,7 @@
 package com.example.jspboard2.controller;
 
+import com.example.jspboard2.domain.Member;
+import com.example.jspboard2.service.MemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class CommnetController {
 
+    public MemberService memberService;
 
     public ModelAndView getComment(HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
@@ -21,7 +24,7 @@ public class CommnetController {
             mv.addObject("errorMove","/login");
             mv.setViewName("error");
         }
-
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
         return mv;
     }
 
@@ -36,6 +39,7 @@ public class CommnetController {
             mv.addObject("errorMove","/login");
             mv.setViewName("error");
         }
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         return mv;
     }
@@ -51,6 +55,7 @@ public class CommnetController {
             mv.addObject("errorMove","/login");
             mv.setViewName("error");
         }
+        Member loginMember = memberService.checkLogin(loginId,loginPw);
 
         return mv;
     }
