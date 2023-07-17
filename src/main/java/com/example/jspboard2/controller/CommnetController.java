@@ -1,19 +1,26 @@
 package com.example.jspboard2.controller;
 
+import com.example.jspboard2.domain.Board;
 import com.example.jspboard2.domain.Member;
+import com.example.jspboard2.service.BoardService;
 import com.example.jspboard2.service.MemberService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class CommnetController {
 
     public MemberService memberService;
 
-    public ModelAndView getComment(HttpServletRequest request){
+    public BoardService boardService;
+
+    public ModelAndView getComment(@Param("id_board") int id_board,
+                                   HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
         String loginId = String.valueOf(session.getAttribute("loginId"));
@@ -25,10 +32,13 @@ public class CommnetController {
             mv.setViewName("error");
         }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
+        List<Board> boardDetail;
+        boardDetail = boardService.getDetailBoard(id_board);
         return mv;
     }
 
-    public ModelAndView modifyComment(HttpServletRequest request){
+    public ModelAndView modifyComment(@Param("id_board") int id_board,
+                                      HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
         String loginId = String.valueOf(session.getAttribute("loginId"));
@@ -40,11 +50,14 @@ public class CommnetController {
             mv.setViewName("error");
         }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
+        List<Board> boardDetail;
+        boardDetail = boardService.getDetailBoard(id_board);
 
         return mv;
     }
 
-    public ModelAndView deleteComment(HttpServletRequest request){
+    public ModelAndView deleteComment(@Param("id_board") int id_board,
+                                      HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
         String loginId = String.valueOf(session.getAttribute("loginId"));
@@ -56,6 +69,8 @@ public class CommnetController {
             mv.setViewName("error");
         }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
+        List<Board> boardDetail;
+        boardDetail = boardService.getDetailBoard(id_board);
 
         return mv;
     }
