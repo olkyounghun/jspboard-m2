@@ -34,6 +34,7 @@ public class CommnetController {
         Member loginMember = memberService.checkLogin(loginId,loginPw);
         List<Board> boardDetail;
         boardDetail = boardService.getDetailBoard(id_board);
+        mv.addObject("list", boardDetail);
         return mv;
     }
 
@@ -52,6 +53,7 @@ public class CommnetController {
         Member loginMember = memberService.checkLogin(loginId,loginPw);
         List<Board> boardDetail;
         boardDetail = boardService.getDetailBoard(id_board);
+        mv.addObject("list", boardDetail);
 
         return mv;
     }
@@ -71,6 +73,8 @@ public class CommnetController {
         Member loginMember = memberService.checkLogin(loginId,loginPw);
         List<Board> boardDetail;
         boardDetail = boardService.getDetailBoard(id_board);
+
+        mv.addObject("list", boardDetail);
 
         return mv;
     }
