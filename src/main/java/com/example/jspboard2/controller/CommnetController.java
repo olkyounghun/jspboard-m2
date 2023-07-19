@@ -25,16 +25,17 @@ public class CommnetController {
         HttpSession session = request.getSession();
         String loginId = String.valueOf(session.getAttribute("loginId"));
         String loginPw = String.valueOf(session.getAttribute("loginPw"));
-        if ( loginId == null && loginPw == null) {
-            mv.addObject("error","loginFail");
-            mv.addObject("errorMessage", "로그인정보가 없습니다.");
-            mv.addObject("errorMove","/login");
-            mv.setViewName("error");
-        }
+//        if ( loginId == null && loginPw == null) {
+//            mv.addObject("error","loginFail");
+//            mv.addObject("errorMessage", "로그인정보가 없습니다.");
+//            mv.addObject("errorMove","/login");
+//            mv.setViewName("error");
+//        }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
         List<Board> boardDetail;
         boardDetail = boardService.getDetailBoard(id_board);
         mv.addObject("list", boardDetail);
+        mv.addObject("loginMember", loginMember);
         return mv;
     }
 
