@@ -55,7 +55,7 @@ public class CommnetController {
         List<Board> boardDetail;
         boardDetail = boardService.getDetailBoard(id_board);
         mv.addObject("list", boardDetail);
-
+        mv.addObject("loginMember", loginMember);
         return mv;
     }
 
@@ -76,7 +76,7 @@ public class CommnetController {
         boardDetail = boardService.getDetailBoard(id_board);
 
         mv.addObject("list", boardDetail);
-
+        mv.addObject("loginMember", loginMember);
         return mv;
     }
 
