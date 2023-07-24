@@ -43,6 +43,7 @@ public class CommnetController {
         boardDetail = boardService.getDetailBoard(id_board);
         mv.addObject("list", boardDetail);
         mv.addObject("loginMember", loginMember);
+        mv.addObject("writeComment",writeComment);
         return mv;
     }
 
