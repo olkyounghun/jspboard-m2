@@ -48,6 +48,8 @@ public class CommnetController {
     }
 
     public ModelAndView modifyComment(@Param("id_board") int id_board,
+                                      @Param("title_comment") String title_comment,
+                                      @Param("content_comment") String content_comment,
                                       HttpServletRequest request){
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
@@ -62,8 +64,10 @@ public class CommnetController {
         Member loginMember = memberService.checkLogin(loginId,loginPw);
         List<Board> boardDetail;
         boardDetail = boardService.getDetailBoard(id_board);
+        Comment modifyComment = commentService.getComment(title_comment,content_comment);
         mv.addObject("list", boardDetail);
         mv.addObject("loginMember", loginMember);
+        mv.addObject("modifyComment",modifyComment);
         return mv;
     }
 
