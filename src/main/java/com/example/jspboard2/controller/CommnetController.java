@@ -84,11 +84,16 @@ public class CommnetController {
             mv.setViewName("error");
         }
         Member loginMember = memberService.checkLogin(loginId,loginPw);
-        List<Board> boardDetail;
-        boardDetail = boardService.getDetailBoard(id_board);
+        Comment CommentDetail = commentService.getCommentDetail(id_board);
 
-        mv.addObject("list", boardDetail);
-        mv.addObject("loginMember", loginMember);
+        if(loginMember.getUser_member() == CommentDetail.getUser_comment()){
+            boardService.boardDeleteAction(id_board);
+            mv.addObject("error","댓글삭제");
+            mv.addObject("errorMessage", "댓글이 올바르게 '삭제' 되었습니다.");
+            mv.addObject("errorMove","/boardlist");
+            mv.setViewName("error");
+        }
+
         return mv;
     }
 
